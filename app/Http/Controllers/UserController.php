@@ -13,11 +13,35 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request["email"] ?? "";
+        if(!empty($search)){
+            $users = User::where("email" , "LIKE" , "%$search%")->get();
+        }else{
+            $users = User::all();
+        }
+        return view("dashboard.users.users", compact("users"));
+    }
+
+    public function createPage(){
         $roles = Role::all();
-        $users = User::all();
-        return view("dashboard.users.users", compact("roles", "users"));
+        return view("dashboard.users.addUser" , compact("roles"));
+    }
+
+    public function editPage($id){
+        if($id){
+            $roles = Role::all();
+            $user = User::find($id);
+            return view("dashboard.users.editUser" , compact("roles" , "user"));
+        }
+    }
+
+    public function singlePage($id){
+        if($id){
+            $user = User::with("role")->find($id);
+            return view("dashboard.users.singleUser" , compact("user"));
+        }
     }
 
     /**
@@ -33,32 +57,35 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        try {
 
-            $request->validate([
-                "role_id" => "required",
-                "first_name" => "required",
-                "last_name" => "required",
-                "email" => "required|email|unique:users",
-                "password" => "required|min:4",
-                "phone" => "required"
-            ]);
+        $request->validate([
+            "role_id" => "required",
+            "first_name" => "required",
+            "last_name" => "required",
+            "email" => "required|email|unique:users",
+            "password" => "required|min:4",
+            "phone" => "required"
+        ]);
 
-            $user = new User();
+        $user = new User();
 
-            $user->role_id = $request->role_id;
-            $user->first_name = $request->first_name;
-            $user->last_name = $request->last_name;
-            $user->email = $request->email;
-            $user->password = Hash::make($request->password);
-            $user->phone = $request->phone;
+        $user->role_id = $request->role_id;
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->phone = $request->phone;
 
-            $user->save();
+        $user->save();
 
-            return redirect("/dashboard/users")->with("success", "User Created SuccessFully!");
-        } catch (Throwable $e) {
-            return redirect("/dashboard/users")->with("fail", $e->getMessage());
+        if($user){
+            return redirect("/dashboard/users")->with("success" , "User Created SuccessFully!");
+        }else{
+            return redirect("/dashboard/users")->with("fail" , "Something Went Wrong!");
         }
+
+        return redirect("/dashboard/users/add");
+
     }
 
     /**
@@ -80,9 +107,43 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+        $user = User::find($request->id);
+
+        if(!$user){
+            return redirect("/dashboard/users")->with("fail" , "User Not Found!");
+        }
+
+        $request->validate([
+            "role_id" => "required",
+            "first_name" => "required",
+            "last_name" => "required",
+            "phone" => "required"
+        ]);
+
+        if(isset($request->email) && !empty($request->email)){
+            $user->email = $request->email;
+        }
+
+        if(isset($request->password) && !empty($request->password)){
+            $user->password = Hash::make($request->password);
+        }
+
+        $user->role_id = $request->role_id;
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->phone = $request->phone;
+
+        $user->save();
+
+        if($user){
+            return redirect("/dashboard/users")->with("success" , "User Updated SuccessFully!");
+        }else{
+            return redirect("/dashboard/users")->with("fail" , "Something Went Wrong!");
+        }
+
+        return redirect("/dashboard/users/edit/" , $request->id);
     }
 
     /**
