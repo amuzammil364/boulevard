@@ -3,14 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Flat;
+use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class FlatController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $search = $request["flat_number"] ?? "";
         if(!empty($search)){
@@ -23,7 +25,7 @@ class FlatController extends Controller
     }
 
     public function createPage(){
-        return view("dashboard.flast.add" , compact("roles"));
+        return view("dashboard.flats.add");
     }
 
     public function editPage($id){
@@ -46,7 +48,27 @@ class FlatController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            "flat_number" => "required",
+            "phase_number" => "required",
+            "occupancy" => "required",
+        ]);
+
+        $flat = new Flat();
+
+        $flat->flat_number = $request->flat_number;
+        $flat->phase_number = $request->phase_number;
+        $flat->occupancy = $request->occupancy;
+
+        $flat->save();
+
+        if($flat){
+            return redirect("/dashboard/flats")->with("success" , "Flat Created SuccessFully!");
+        }else{
+            return redirect("/dashboard/flats")->with("fail" , "Something Went Wrong!");
+        }
+
+        return redirect("/dashboard/flats/add");
     }
 
     /**
@@ -60,16 +82,45 @@ class FlatController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+        $flat = Flat::find($request->id);
+
+        if(!$flat){
+            return redirect("/dashboard/flat")->with("fail" , "Flat Not Found!");
+        }
+
+        $request->validate([
+            "flat_number" => "required",
+            "phase_number" => "required",
+            "occupancy" => "required",
+        ]);
+
+        $flat->flat_number = $request->flat_number;
+        $flat->phase_number = $request->phase_number;
+        $flat->occupancy = $request->occupancy;
+
+        $flat->save();
+
+        if($flat){
+            return redirect("/dashboard/flats")->with("success" , "Flat Updated SuccessFully!");
+        }else{
+            return redirect("/dashboard/flats")->with("fail" , "Something Went Wrong!");
+        }
+
+        return redirect("/dashboard/flats/edit/" , $request->id);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        //
+        $flat = Flat::find($request->id);
+
+        if ($flat) {
+            $flat->delete();
+            return redirect("/dashboard/flats")->with("success", "Flat Deleted SuccessFully!");
+        }
     }
 }

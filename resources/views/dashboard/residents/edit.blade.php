@@ -3,59 +3,98 @@
 @section("dashboard/dashboard")
 
 <main class="p-4 sm:ml-64 md:ml-64 h-auto pt-20">
-    <h1 class="font-bold text-3xl mb-8">Edit User</h1>
+    <h1 class="font-bold text-3xl mb-8">Edit Resident</h1>
 
     <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 rounded-md">
             <div class="overflow-x-auto">
-                <form action="{{ route("edit_user") }}" method="POST" class="space-y-4">
+                <form action="{{ route("edit_resident") }}" method="POST" class="space-y-4">
                     @csrf
                     @method("PUT")
-                    <input type="hidden" name="id" value="{{ $user->id }}">
+                    <input type="hidden" name="id" value="{{ $resident->id }}">
                     <div class="grid gap-4 mb-4 grid-cols-2">
                         <div class="col-span-2 sm:col-span-1">
-                            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name</label>
-                            <input type="text" name="first_name" id="first_name" value="{{ old("first_name" , $user->first_name) }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="First Name...">
-                            @error("first_name")
-                                <span class="text-red-700 text-sm">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="col-span-2 sm:col-span-1">
-                            <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last Name</label>
-                            <input type="text" name="last_name" id="last_name" value="{{ old("last_name" , $user->last_name) }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Last Name...">
-                            @error("last_name")
-                                <span class="text-red-700 text-sm">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="col-span-2 sm:col-span-1">
-                            <label for="role_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role</label>
-                            <select id="role_id" name="role_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                <option>Select Role</option>
-                                @foreach ($roles as $role)
-                                <option value="{{ $role->id }}" {{ $role->id == $user->role_id ? 'selected' : '' }}>{{ $role->name }}</option>
+                            <label for="flat" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Flat</label>
+                            <select id="flat" name="flat_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                <option value="">Select Flat</option>
+                                @foreach ($flats as $flat)
+                                <option value="{{ $flat->id }}" {{ $flat->id == $resident->flat_id ? 'selected' : '' }}>{{ $flat->flat_number }}</option>
                                 @endforeach
                             </select>
-                            @error("role_id")
+                            @error("flat_id")
+                                <span class="text-red-700 text-sm">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="col-span-2 sm:col-span-1">
+                            <label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type</label>
+                            <select id="type" name="type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                <option value="" >Select Type</option>
+                                <option value="Owner" {{ "Owner" == $resident->type ? 'selected' : '' }}>Owner</option>
+                                <option value="Tenant" {{ "Tenant" == $resident->type ? 'selected' : '' }}>Tenant</option>
+                            </select>
+                            @error("type")
+                                <span class="text-red-700 text-sm">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="col-span-2 sm:col-span-1">
+                            <label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
+                            <select id="status" name="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                <option value="">Select Status</option>
+                                <option value="Active" {{ "Active" == $resident->status ? 'selected' : '' }}>Active</option>
+                                <option value="Vacant (Paid)" {{ "Vacant (Paid)" == $resident->status ? 'selected' : '' }}>Vacant (Paid)</option>
+                                <option value="Vacant (Arrears)" {{ "Vacant (Arrears)" == $resident->status ? 'selected' : '' }}>Vacant (Arrears)</option>
+                                <option value="Active (Arrears)" {{ "Active (Arrears)" == $resident->status ? 'selected' : '' }}>Active (Arrears)</option>
+                                <option value="TBC" {{ "TBC" == $resident->status ? 'selected' : '' }}>TBC</option>
+                            </select>
+                            @error("status")
+                                <span class="text-red-700 text-sm">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="col-span-2 sm:col-span-1">
+                            <label for="full_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Full Name</label>
+                            <input type="text" name="full_name" id="full_name" value="{{ old("full_name" , $resident->full_name) }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Full Name...">
+                            @error("full_name")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="col-span-2 sm:col-span-1">
                             <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                            <input type="text" name="email" id="email" value="{{ old("email" , $user->email) }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Email...">
+                            <input type="text" name="email" id="email" value="{{ old("email" , $resident->email) }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Email...">
                              @error("email")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="col-span-2 sm:col-span-1">
-                            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                            <input type="password" name="password" id="password" value="{{ old("password") }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Password...">
-                             @error("password")
+                            <label for="mobile" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mobile Number</label>
+                            <input type="number" name="mobile" id="mobile" value="{{ old("mobile" , $resident->mobile) }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Mobile Number...">
+                             @error("mobile")
+                                <span class="text-red-700 text-sm">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="col-span-2 sm:col-span-1">
+                            <label for="intercom" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Intercom</label>
+                            <input type="number" name="intercom" id="intercom" value="{{ old("intercom" , $resident->intercom) }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Intercom...">
+                             @error("intercom")
+                                <span class="text-red-700 text-sm">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="col-span-2 sm:col-span-1">
+                            <label for="cnic" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cnic Number</label>
+                            <input type="number" name="cnic" id="cnic" value="{{ old("cnic" , $resident->cnic) }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Cnic Number...">
+                             @error("cnic")
+                                <span class="text-red-700 text-sm">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="col-span-2 sm:col-span-1">
+                            <label for="in_date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">In Date</label>
+                            <input type="date" name="in_date" id="in_date" value="{{ $resident->in_date }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                             @error("in_date")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="col-span-2 sm:col-span-1 mb-8">
-                            <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone Number</label>
-                            <input type="number" name="phone" id="phone" value="{{ old("phone" , $user->phone) }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Phone Number...">
-                             @error("phone")
+                            <label for="out_date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Out Date</label>
+                            <input type="date" name="out_date" id="out_date" value="{{ $resident->out_date }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                             @error("out_date")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
