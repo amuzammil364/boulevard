@@ -10,6 +10,8 @@
 
 <body>
 
+    @include("dashboard.layout.header")
+
     @include("dashboard.layout.sidebar")
 
     @yield("dashboard/dashboard")

@@ -21,7 +21,7 @@ class UserController extends Controller
         }else{
             $users = User::all();
         }
-        return view("dashboard.users.users", compact("users"));
+        return view("dashboard.users.users", compact("users" , "search"));
     }
 
     public function createPage(){
