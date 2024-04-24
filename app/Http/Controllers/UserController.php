@@ -21,26 +21,26 @@ class UserController extends Controller
         }else{
             $users = User::all();
         }
-        return view("dashboard.users.users", compact("users" , "search"));
+        return view("dashboard.users.listing", compact("users" , "search"));
     }
 
     public function createPage(){
         $roles = Role::all();
-        return view("dashboard.users.addUser" , compact("roles"));
+        return view("dashboard.users.add" , compact("roles"));
     }
 
     public function editPage($id){
         if($id){
             $roles = Role::all();
             $user = User::find($id);
-            return view("dashboard.users.editUser" , compact("roles" , "user"));
+            return view("dashboard.users.edit" , compact("roles" , "user"));
         }
     }
 
     public function singlePage($id){
         if($id){
             $user = User::with("role")->find($id);
-            return view("dashboard.users.singleUser" , compact("user"));
+            return view("dashboard.users.single" , compact("user"));
         }
     }
 
