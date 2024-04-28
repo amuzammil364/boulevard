@@ -19,7 +19,7 @@ class ResidentsController extends Controller
         if(!empty($search)){
             $residents = Resident::where("email" , "LIKE" , "%$search%")->get();
         }else{
-            $residents = Resident::all();
+            $residents = Resident::with('flat')->get();
         }
         return view("dashboard.residents.listing", compact("residents" , "search"));
     }
