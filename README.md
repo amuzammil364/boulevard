@@ -4,12 +4,20 @@ composer install
 
 npm install
 
+php artisan migrate
+
+php artisan db:seed
+
 php artisan cache:clear
 
 php artisan config:clear
 
 php artisan key:generate
 
+--------------------------
+
+User : alpha@divistack.com
+Pass : Dev@2020!
 
 ## Project Start Commands
 
