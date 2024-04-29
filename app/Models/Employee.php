@@ -22,4 +22,10 @@ class Employee extends Model
         'start_date',
     ];
 
+
+    public function expenses()
+    {
+        return $this->hasMany(Expense::class , "employee_id" , "id");
+    }
+
 }

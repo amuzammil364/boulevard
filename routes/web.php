@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\EmployeesController;
+use App\Http\Controllers\ExpensesController;
 use App\Http\Controllers\FlatController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\ResidentsController;
@@ -83,6 +84,20 @@ Route::middleware(["loggedIn"])->group(function() {
     Route::post("/dashboard/payments/add", [PaymentsController::class, "store"])->name("add_payment");
     Route::delete("/dashboard/payments/delete", [PaymentsController::class, "destroy"])->name("delete_payment");
     Route::put("/dashboard/payments/edit", [PaymentsController::class, "update"])->name("edit_payment");
+
+
+    // ====== Expenses Routes ======
+    // ==========================
+    //-- Page View Routes
+    Route::get('/dashboard/expenses', [ExpensesController::class, "index"]);
+    Route::get('/dashboard/expenses/add', [ExpensesController::class, "createPage"]);
+    Route::get('/dashboard/expenses/edit/{id}', [ExpensesController::class, "editPage"]);
+    Route::get('/dashboard/expenses/{id}', [ExpensesController::class, "singlePage"]);
+    //-- Data Management Routes
+    Route::post("/dashboard/expenses/add", [ExpensesController::class, "store"])->name("add_expense");
+    Route::delete("/dashboard/expenses/delete", [ExpensesController::class, "destroy"])->name("delete_expense");
+    Route::put("/dashboard/expenses/edit", [ExpensesController::class, "update"])->name("edit_expense");
+
 
     // ====== Employees Routes ======
     // ==========================
