@@ -61,19 +61,18 @@ class ExpensesController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            "flat_id" => "required",
+            "employee_id" => "required",
             "type" => "required",
             "status" => "required",
             "payment_id" => "required",
-            "amount" => "required",
             "mode_of_payment" => "required",
+            "amount" => "required",
             "due_date" => "required",
             "paid_date" => "required",
         ]);
 
         
         $expense = new Expense();
-        dd($expense);
 
         $expense->employee_id = $request->employee_id;
         $expense->type = $request->type;
@@ -85,6 +84,7 @@ class ExpensesController extends Controller
         $expense->paid_date = $request->paid_date;
 
         $expense->save();
+
         if($expense){
             return redirect("/dashboard/expenses")->with("success" , "Expense Created SuccessFully!");
         }else{
@@ -92,6 +92,7 @@ class ExpensesController extends Controller
         }
 
         return redirect("/dashboard/expenses/add");
+
     }
 
     /**
@@ -133,7 +134,7 @@ class ExpensesController extends Controller
             "paid_date" => "required",
         ]);
 
-        $expense->flat_id = $request->flat_id;
+        $expense->employee_id = $request->employee_id;
         $expense->type = $request->type;
         $expense->status = $request->status;
         $expense->payment_id = $request->payment_id;
