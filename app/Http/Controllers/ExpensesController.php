@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use App\Models\Expense;
+use App\Models\Transaction;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -16,34 +17,36 @@ class ExpensesController extends Controller
     public function index(Request $request)
     {
         $search = $request["payment_id"] ?? "";
-        if(!empty($search)){
-            $expenses = Expense::where("payment_id" , "LIKE" , "%$search%")->get();
-        }else{
+        if (!empty($search)) {
+            $expenses = Expense::where("payment_id", "LIKE", "%$search%")->get();
+        } else {
             $expenses = Expense::all();
         }
-        return view("dashboard.expenses.listing", compact("expenses" , "search"));
+        return view("dashboard.expenses.listing", compact("expenses", "search"));
     }
 
     public function createPage()
     {
         $employees = Employee::all();
-        return view("dashboard.expenses.add" , compact("employees"));
+        return view("dashboard.expenses.add", compact("employees"));
     }
 
-    public function editPage($id){
-        if($id){
+    public function editPage($id)
+    {
+        if ($id) {
             $employees = Employee::all();
             $expense = Expense::find($id);
-            return view("dashboard.expenses.edit" , compact("employees" , "expense"));
+            return view("dashboard.expenses.edit", compact("employees", "expense"));
         }
     }
 
-    public function singlePage($id){
-        if($id){
+    public function singlePage($id)
+    {
+        if ($id) {
             $payment = Expense::with("employee")->find($id);
             $payment->due_date = Carbon::parse($payment->due_date);
             $payment->paid_date = Carbon::parse($payment->paid_date);
-            return view("dashboard.expenses.single" , compact("payment"));
+            return view("dashboard.expenses.single", compact("payment"));
         }
     }
 
@@ -61,7 +64,7 @@ class ExpensesController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            "flat_id" => "required",
+            "employee_id" => "required",
             "type" => "required",
             "status" => "required",
             "payment_id" => "required",
@@ -71,9 +74,8 @@ class ExpensesController extends Controller
             "paid_date" => "required",
         ]);
 
-        
+
         $expense = new Expense();
-        dd($expense);
 
         $expense->employee_id = $request->employee_id;
         $expense->type = $request->type;
@@ -85,10 +87,20 @@ class ExpensesController extends Controller
         $expense->paid_date = $request->paid_date;
 
         $expense->save();
-        if($expense){
-            return redirect("/dashboard/expenses")->with("success" , "Expense Created SuccessFully!");
-        }else{
-            return redirect("/dashboard/expenses")->with("fail" , "Something Went Wrong!");
+
+        $transaction = new Transaction();
+
+        $transaction->payment_id = null;
+        $transaction->expense_id = $expense->id;
+        $transaction->type = $expense->type;
+        $transaction->amount = $expense->amount;
+
+        $transaction->save();
+
+        if ($expense && $transaction) {
+            return redirect("/dashboard/expenses")->with("success", "Expense Created SuccessFully!");
+        } else {
+            return redirect("/dashboard/expenses")->with("fail", "Something Went Wrong!");
         }
 
         return redirect("/dashboard/expenses/add");
@@ -117,9 +129,10 @@ class ExpensesController extends Controller
     {
 
         $expense = Expense::find($request->id);
+        $transaction = Transaction::where("expense_id", $expense->id)->first();
 
-        if(!$expense){
-            return redirect("/dashboard/expenses")->with("fail" , "Expense Not Found!");
+        if (!$expense && !$transaction) {
+            return redirect("/dashboard/expenses")->with("fail", "Expense Not Found!");
         }
 
         $request->validate([
@@ -133,7 +146,7 @@ class ExpensesController extends Controller
             "paid_date" => "required",
         ]);
 
-        $expense->flat_id = $request->flat_id;
+        $expense->employee_id = $request->employee_id;
         $expense->type = $request->type;
         $expense->status = $request->status;
         $expense->payment_id = $request->payment_id;
@@ -144,13 +157,20 @@ class ExpensesController extends Controller
 
         $expense->save();
 
-        if($expense){
-            return redirect("/dashboard/expenses")->with("success" , "Expense Updated SuccessFully!");
-        }else{
-            return redirect("/dashboard/expenses")->with("fail" , "Something Went Wrong!");
+        $transaction->payment_id = null;
+        $transaction->expense_id = $expense->id;
+        $transaction->type = $expense->type;
+        $transaction->amount = $expense->amount;
+
+        $transaction->save();
+
+        if ($expense && $transaction) {
+            return redirect("/dashboard/expenses")->with("success", "Expense Updated SuccessFully!");
+        } else {
+            return redirect("/dashboard/expenses")->with("fail", "Something Went Wrong!");
         }
 
-        return redirect("/dashboard/expenses/edit/" , $request->id);
+        return redirect("/dashboard/expenses/edit/", $request->id);
     }
 
     /**
@@ -159,11 +179,12 @@ class ExpensesController extends Controller
     public function destroy(Request $request)
     {
         $expense = Expense::find($request->id);
+        $transaction = Transaction::where("expense_id", $request->id)->first();
 
-        if ($expense) {
+        if ($expense && $transaction) {
+            $transaction->delete();
             $expense->delete();
             return redirect("/dashboard/expenses")->with("success", "Expense Deleted SuccessFully!");
         }
     }
-
 }

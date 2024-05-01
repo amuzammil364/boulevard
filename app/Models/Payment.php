@@ -23,10 +23,8 @@ class Payment extends Model
         'paid_date',
     ];
 
-    public function flat() : BelongsTo
+    public function flat(): BelongsTo
     {
         return $this->belongsTo(Flat::class);
     }
-
-
 }

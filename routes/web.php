@@ -7,6 +7,7 @@ use App\Http\Controllers\ExpensesController;
 use App\Http\Controllers\FlatController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\ResidentsController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -110,6 +111,11 @@ Route::middleware(["loggedIn"])->group(function () {
     Route::post("/dashboard/employees/add", [EmployeesController::class, "store"])->name("add_employee")->middleware(["role:1,2"]);
     Route::delete("/dashboard/employees/delete", [EmployeesController::class, "destroy"])->name("delete_employee")->middleware(["role:1,2"]);
     Route::put("/dashboard/employees/edit", [EmployeesController::class, "update"])->name("edit_employee")->middleware(["role:1,2"]);
+
+    // ====== Transaction Routes ======
+    // ==========================
+    //-- Page View Routes
+    Route::get('/dashboard/transactions', [TransactionController::class, "index"])->middleware(["role:1"]);
 
 
     Route::get("/logout", [AuthenticationController::class, "logout"]);
