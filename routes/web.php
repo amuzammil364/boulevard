@@ -25,95 +25,92 @@ use Illuminate\Support\Facades\Route;
 // ====== Public Routes ======
 
 // Login Routes
-Route::get('/', [AuthenticationController::class , 'index'])->middleware("isLoggedIn");
-Route::post("/login" , [AuthenticationController::class, "login"])->name("login")->middleware("isLoggedIn");
+Route::get('/', [AuthenticationController::class, 'index'])->middleware("isLoggedIn");
+Route::post("/login", [AuthenticationController::class, "login"])->name("login")->middleware("isLoggedIn");
 
 
 // ====== Private Routes ======
 
-Route::middleware(["loggedIn"])->group(function() {
+Route::middleware(["loggedIn"])->group(function () {
 
     // ====== Dashboard Routes ======
-    Route::get('/dashboard', [DashboardController::class  , 'index']);
+
+    Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(["role:1,2"]);
 
 
     // ====== Users Routes ======
     // ==========================
     //-- Page View Routes
-    Route::get('/dashboard/users', [UserController::class, "index"]);
-    Route::get('/dashboard/users/add', [UserController::class, "createPage"]);
-    Route::get('/dashboard/users/edit/{id}', [UserController::class, "editPage"]);
-    Route::get('/dashboard/users/{id}', [UserController::class, "singlePage"]);
+    Route::get('/dashboard/users', [UserController::class, "index"])->middleware(["role:1"]);
+    Route::get('/dashboard/users/add', [UserController::class, "createPage"])->middleware(["role:1"]);
+    Route::get('/dashboard/users/edit/{id}', [UserController::class, "editPage"])->middleware(["role:1"]);
+    Route::get('/dashboard/users/{id}', [UserController::class, "singlePage"])->middleware(["role:1"]);
     //-- Data Management Routes
-    Route::post("/dashboard/users/add", [UserController::class, "store"])->name("add_user");
-    Route::put("/dashboard/users/edit", [UserController::class, "update"])->name("edit_user");
-    Route::delete("/dashboard/users/delete", [UserController::class, "destroy"])->name("delete_user");
+    Route::post("/dashboard/users/add", [UserController::class, "store"])->name("add_user")->middleware(["role:1"]);
+    Route::put("/dashboard/users/edit", [UserController::class, "update"])->name("edit_user")->middleware(["role:1"]);
+    Route::delete("/dashboard/users/delete", [UserController::class, "destroy"])->name("delete_user")->middleware(["role:1"]);
 
     // ====== Flat Routes ======
     // ==========================
     //-- Page View Routes
-    Route::get('/dashboard/flats', [FlatController::class, "index"]);
-    Route::get('/dashboard/flats/add', [FlatController::class, "createPage"]);
-    Route::get('/dashboard/flats/edit/{id}', [FlatController::class, "editPage"]);
-    Route::get('/dashboard/flats/{id}', [FlatController::class, "singlePage"]);
+    Route::get('/dashboard/flats', [FlatController::class, "index"])->middleware(["role:1"]);
+    Route::get('/dashboard/flats/add', [FlatController::class, "createPage"])->middleware(["role:1"]);
+    Route::get('/dashboard/flats/edit/{id}', [FlatController::class, "editPage"])->middleware(["role:1"]);
+    Route::get('/dashboard/flats/{id}', [FlatController::class, "singlePage"])->middleware(["role:1"]);
     //-- Data Management Routes
-    Route::post("/dashboard/flats/add", [FlatController::class, "store"])->name("add_flat");
-    Route::delete("/dashboard/flats/delete", [FlatController::class, "destroy"])->name("delete_flat");
-    Route::put("/dashboard/flats/edit", [FlatController::class, "update"])->name("edit_flat");
+    Route::post("/dashboard/flats/add", [FlatController::class, "store"])->name("add_flat")->middleware(["role:1"]);
+    Route::delete("/dashboard/flats/delete", [FlatController::class, "destroy"])->name("delete_flat")->middleware(["role:1"]);
+    Route::put("/dashboard/flats/edit", [FlatController::class, "update"])->name("edit_flat")->middleware(["role:1"]);
 
     // ====== Residents Routes ======
     // ==========================
     //-- Page View Routes
-    Route::get('/dashboard/residents', [ResidentsController::class, "index"]);
-    Route::get('/dashboard/residents/add', [ResidentsController::class, "createPage"]);
-    Route::get('/dashboard/residents/edit/{id}', [ResidentsController::class, "editPage"]);
-    Route::get('/dashboard/residents/{id}', [ResidentsController::class, "singlePage"]);
+    Route::get('/dashboard/residents', [ResidentsController::class, "index"])->middleware(["role:1,2"]);
+    Route::get('/dashboard/residents/add', [ResidentsController::class, "createPage"])->middleware(["role:1,2"]);
+    Route::get('/dashboard/residents/edit/{id}', [ResidentsController::class, "editPage"])->middleware(["role:1,2"]);
+    Route::get('/dashboard/residents/{id}', [ResidentsController::class, "singlePage"])->middleware(["role:1,2"]);
     //-- Data Management Routes
-    Route::post("/dashboard/residents/add", [ResidentsController::class, "store"])->name("add_resident");
-    Route::delete("/dashboard/residents/delete", [ResidentsController::class, "destroy"])->name("delete_resident");
-    Route::put("/dashboard/residents/edit", [ResidentsController::class, "update"])->name("edit_resident");
+    Route::post("/dashboard/residents/add", [ResidentsController::class, "store"])->name("add_resident")->middleware(["role:1,2"]);
+    Route::delete("/dashboard/residents/delete", [ResidentsController::class, "destroy"])->name("delete_resident")->middleware(["role:1,2"]);
+    Route::put("/dashboard/residents/edit", [ResidentsController::class, "update"])->name("edit_resident")->middleware(["role:1,2"]);
 
     // ====== Payments Routes ======
     // ==========================
     //-- Page View Routes
-    Route::get('/dashboard/payments', [PaymentsController::class, "index"]);
-    Route::get('/dashboard/payments/add', [PaymentsController::class, "createPage"]);
-    Route::get('/dashboard/payments/edit/{id}', [PaymentsController::class, "editPage"]);
-    Route::get('/dashboard/payments/{id}', [PaymentsController::class, "singlePage"]);
+    Route::get('/dashboard/payments', [PaymentsController::class, "index"])->middleware(["role:1"]);
+    Route::get('/dashboard/payments/add', [PaymentsController::class, "createPage"])->middleware(["role:1"]);
+    Route::get('/dashboard/payments/edit/{id}', [PaymentsController::class, "editPage"])->middleware(["role:1"]);
+    Route::get('/dashboard/payments/{id}', [PaymentsController::class, "singlePage"])->middleware(["role:1"]);
     //-- Data Management Routes
-    Route::post("/dashboard/payments/add", [PaymentsController::class, "store"])->name("add_payment");
-    Route::delete("/dashboard/payments/delete", [PaymentsController::class, "destroy"])->name("delete_payment");
-    Route::put("/dashboard/payments/edit", [PaymentsController::class, "update"])->name("edit_payment");
+    Route::post("/dashboard/payments/add", [PaymentsController::class, "store"])->name("add_payment")->middleware(["role:1"]);
+    Route::delete("/dashboard/payments/delete", [PaymentsController::class, "destroy"])->name("delete_payment")->middleware(["role:1"]);
+    Route::put("/dashboard/payments/edit", [PaymentsController::class, "update"])->name("edit_payment")->middleware(["role:1"]);
 
 
     // ====== Expenses Routes ======
     // ==========================
     //-- Page View Routes
-    Route::get('/dashboard/expenses', [ExpensesController::class, "index"]);
-    Route::get('/dashboard/expenses/add', [ExpensesController::class, "createPage"]);
-    Route::get('/dashboard/expenses/edit/{id}', [ExpensesController::class, "editPage"]);
-    Route::get('/dashboard/expenses/{id}', [ExpensesController::class, "singlePage"]);
+    Route::get('/dashboard/expenses', [ExpensesController::class, "index"])->middleware(["role:1"]);
+    Route::get('/dashboard/expenses/add', [ExpensesController::class, "createPage"])->middleware(["role:1"]);
+    Route::get('/dashboard/expenses/edit/{id}', [ExpensesController::class, "editPage"])->middleware(["role:1"]);
+    Route::get('/dashboard/expenses/{id}', [ExpensesController::class, "singlePage"])->middleware(["role:1"]);
     //-- Data Management Routes
-    Route::post("/dashboard/expenses/add", [ExpensesController::class, "store"])->name("add_expense");
-    Route::delete("/dashboard/expenses/delete", [ExpensesController::class, "destroy"])->name("delete_expense");
-    Route::put("/dashboard/expenses/edit", [ExpensesController::class, "update"])->name("edit_expense");
-
+    Route::post("/dashboard/expenses/add", [ExpensesController::class, "store"])->name("add_expense")->middleware(["role:1"]);
+    Route::delete("/dashboard/expenses/delete", [ExpensesController::class, "destroy"])->name("delete_expense")->middleware(["role:1"]);
+    Route::put("/dashboard/expenses/edit", [ExpensesController::class, "update"])->name("edit_expense")->middleware(["role:1"]);
 
     // ====== Employees Routes ======
     // ==========================
     //-- Page View Routes
-    Route::get('/dashboard/employees', [EmployeesController::class, "index"]);
-    Route::get('/dashboard/employees/add', [EmployeesController::class, "createPage"]);
-    Route::get('/dashboard/employees/edit/{id}', [EmployeesController::class, "editPage"]);
-    Route::get('/dashboard/employees/{id}', [EmployeesController::class, "singlePage"]);
+    Route::get('/dashboard/employees', [EmployeesController::class, "index"])->middleware(["role:1,2"]);
+    Route::get('/dashboard/employees/add', [EmployeesController::class, "createPage"])->middleware(["role:1,2"]);
+    Route::get('/dashboard/employees/edit/{id}', [EmployeesController::class, "editPage"])->middleware(["role:1,2"]);
+    Route::get('/dashboard/employees/{id}', [EmployeesController::class, "singlePage"])->middleware(["role:1,2"]);
     //-- Data Management Routes
-    Route::post("/dashboard/employees/add", [EmployeesController::class, "store"])->name("add_employee");
-    Route::delete("/dashboard/employees/delete", [EmployeesController::class, "destroy"])->name("delete_employee");
-    Route::put("/dashboard/employees/edit", [EmployeesController::class, "update"])->name("edit_employee");
+    Route::post("/dashboard/employees/add", [EmployeesController::class, "store"])->name("add_employee")->middleware(["role:1,2"]);
+    Route::delete("/dashboard/employees/delete", [EmployeesController::class, "destroy"])->name("delete_employee")->middleware(["role:1,2"]);
+    Route::put("/dashboard/employees/edit", [EmployeesController::class, "update"])->name("edit_employee")->middleware(["role:1,2"]);
 
 
-
-
-    Route::get("/logout" , [AuthenticationController::class, "logout"]);
-
+    Route::get("/logout", [AuthenticationController::class, "logout"]);
 });
