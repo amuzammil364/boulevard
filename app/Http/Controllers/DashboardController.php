@@ -17,7 +17,7 @@ class DashboardController extends Controller
         $users = User::count();
         $flats = Flat::count();
         $payments = Payment::count();
-        return view('dashboard.dashboard' , compact("users" , "flats" , "payments"));
+        return view('dashboard.dashboard', compact("users", "flats", "payments"));
     }
 
     /**
