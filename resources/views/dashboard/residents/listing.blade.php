@@ -72,7 +72,7 @@
 
                         <tr class="border-b dark:border-gray-700">
                             <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $resident->full_name }}</th>
-                            <td class="px-4 py-3">{{ $resident->flat->flat_number }}</td>
+                            <td class="px-4 py-3">{{ $resident->flat->flat_number }} {{ "" }} ({{ $resident->flat->phase_number }})</td>
                             <td class="px-4 py-3">{{ $resident->type }}</td>
                             <td class="px-4 py-3">{{ $resident->mobile }}</td>
                             <td class="px-4 py-3">{{ $resident->status }}</td>
