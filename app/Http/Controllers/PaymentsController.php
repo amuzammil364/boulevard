@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Flat;
 use App\Models\Payment;
+use App\Models\Transaction;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -15,34 +16,37 @@ class PaymentsController extends Controller
     public function index(Request $request)
     {
         $search = $request["payment_id"] ?? "";
-        if(!empty($search)){
-            $payments = Payment::where("payment_id" , "LIKE" , "%$search%")->get();
-        }else{
+        if (!empty($search)) {
+            $payments = Payment::where("payment_id", "LIKE", "%$search%")->get();
+        } else {
             $payments = Payment::all();
         }
-        return view("dashboard.payments.listing", compact("payments" , "search"));
+        return view("dashboard.payments.listing", compact("payments", "search"));
     }
 
     public function createPage()
     {
         $flats = Flat::all();
-        return view("dashboard.payments.add" , compact("flats"));
+        $payment_id = uniqid();
+        return view("dashboard.payments.add", compact("flats" , "payment_id"));
     }
 
-    public function editPage($id){
-        if($id){
+    public function editPage($id)
+    {
+        if ($id) {
             $flats = Flat::all();
             $payment = Payment::find($id);
-            return view("dashboard.payments.edit" , compact("flats" , "payment"));
+            return view("dashboard.payments.edit", compact("flats", "payment"));
         }
     }
 
-    public function singlePage($id){
-        if($id){
+    public function singlePage($id)
+    {
+        if ($id) {
             $payment = Payment::with("flat")->find($id);
             $payment->due_date = Carbon::parse($payment->due_date);
             $payment->paid_date = Carbon::parse($payment->paid_date);
-            return view("dashboard.payments.single" , compact("payment"));
+            return view("dashboard.payments.single", compact("payment"));
         }
     }
 
@@ -83,10 +87,19 @@ class PaymentsController extends Controller
 
         $payment->save();
 
-        if($payment){
-            return redirect("/dashboard/payments")->with("success" , "Payment Created SuccessFully!");
-        }else{
-            return redirect("/dashboard/payments")->with("fail" , "Something Went Wrong!");
+        $transaction = new Transaction();
+
+        $transaction->payment_id = $payment->id;
+        $transaction->expense_id = null;
+        $transaction->type = "Debit";
+        $transaction->amount = $payment->amount;
+
+        $transaction->save();
+
+        if ($payment && $transaction) {
+            return redirect("/dashboard/payments")->with("success", "Payment Created SuccessFully!");
+        } else {
+            return redirect("/dashboard/payments")->with("fail", "Something Went Wrong!");
         }
 
         return redirect("/dashboard/payments/add");
@@ -115,9 +128,10 @@ class PaymentsController extends Controller
     {
 
         $payment = Payment::find($request->id);
+        $transaction = Transaction::where("payment_id", $payment->id)->first();
 
-        if(!$payment){
-            return redirect("/dashboard/payments")->with("fail" , "Payment Not Found!");
+        if (!$payment && !$transaction) {
+            return redirect("/dashboard/payments")->with("fail", "Payment Not Found!");
         }
 
         $request->validate([
@@ -142,13 +156,21 @@ class PaymentsController extends Controller
 
         $payment->save();
 
-        if($payment){
-            return redirect("/dashboard/payments")->with("success" , "Payment Updated SuccessFully!");
-        }else{
-            return redirect("/dashboard/payments")->with("fail" , "Something Went Wrong!");
+
+        $transaction->payment_id = $payment->id;
+        $transaction->expense_id = null;
+        $transaction->type = "Debit";
+        $transaction->amount = $payment->amount;
+
+        $transaction->save();
+
+        if ($payment && $transaction) {
+            return redirect("/dashboard/payments")->with("success", "Payment Updated SuccessFully!");
+        } else {
+            return redirect("/dashboard/payments")->with("fail", "Something Went Wrong!");
         }
 
-        return redirect("/dashboard/payments/edit/" , $request->id);
+        return redirect("/dashboard/payments/edit/", $request->id);
     }
 
     /**
@@ -157,8 +179,10 @@ class PaymentsController extends Controller
     public function destroy(Request $request)
     {
         $payment = Payment::find($request->id);
+        $transaction = Transaction::where("payment_id", $request->id)->first();
 
-        if ($payment) {
+        if ($payment && $transaction) {
+            $transaction->delete();
             $payment->delete();
             return redirect("/dashboard/payments")->with("success", "Payment Deleted SuccessFully!");
         }

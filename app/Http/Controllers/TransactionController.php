@@ -2,22 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Flat;
-use App\Models\Payment;
-use App\Models\User;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class TransactionController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::count();
-        $flats = Flat::count();
-        $payments = Payment::count();
-        return view('dashboard.dashboard', compact("users", "flats", "payments"));
+        $search = $request["search"] ?? "";
+
+        if (!empty($search)) {
+            $transactions = Transaction::where("payment_id", "LIKE", "%$search%")->get();
+        } else {
+            $transactions = Transaction::all();
+        }
+        return view("dashboard.transactions.listing", compact("transactions", "search"));
     }
 
     /**

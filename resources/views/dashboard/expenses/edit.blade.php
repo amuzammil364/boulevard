@@ -14,7 +14,7 @@
                     <div class="grid gap-4 mb-4 grid-cols-2">
                         <div class="col-span-2 sm:col-span-1">
                             <label for="employee" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Flat</label>
-                            <select id="employee" name="employee_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                            <select id="employee_id" name="employee_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                 <option value="">Select Employee</option>
                                 @foreach ($employees as $employee)
                                 <option value="{{ $employee->id }}" {{ $employee->id == $expense->employee_id ? "selected" : "" }}>{{ $employee->name }}</option>
@@ -26,8 +26,11 @@
                         </div>
                         <div class="col-span-2 sm:col-span-1">
                             <label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type</label>
-                            <input type="text" name="type" id="type" value="{{ old("type" , $expense->type) }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type...">
-                            @error("type")
+                            <select id="type" name="type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                <option value="">Select Type</option>
+                                <option value="Maintenance" {{ $expense->type == "Maintenance" ? "selected" : "" }}>Maintenance</option>
+                            </select>
+                            @error("status")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
@@ -44,7 +47,7 @@
                         </div>
                         <div class="col-span-2 sm:col-span-1">
                             <label for="payment" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Payment Id</label>
-                            <input type="text" name="payment_id" id="payment" value="{{ old("payment_id" , $expense->payment_id) }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Payment Id...">
+                            <input type="text" name="payment_id" id="payment" value="{{ old("payment_id" , $expense->payment_id) }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Payment Id..." readonly />
                             @error("payment_id")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>
                             @enderror

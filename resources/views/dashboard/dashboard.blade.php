@@ -25,7 +25,8 @@
                 </svg>
             </a>
         </div>
-        <div class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        @if (Session::has("role_id") && Session::get("role_id") == 1)
+            <div class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Payments</h5>
             <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ $payments }}</p>
             <a href="{{ url("/dashboard/payments") }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -35,6 +36,7 @@
                 </svg>
             </a>
         </div>
+        @endif
     </div>
     <div class="rounded bg-gray-50 p-8 mt-14">
     <div class="flex items-center justify-between mb-6">
