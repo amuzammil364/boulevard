@@ -16,9 +16,6 @@ php artisan key:generate
 
 --------------------------
 
-User : alpha@divistack.com
-Pass : Dev@2020!
-
 ## Project Start Commands
 
 php artisan serve
