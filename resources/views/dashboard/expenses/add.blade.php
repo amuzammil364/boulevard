@@ -10,6 +10,22 @@
                 <form action="{{ route("add_expense") }}" method="POST" class="space-y-4">
                     @csrf
                     <div class="grid gap-4 mb-4 grid-cols-2">
+                    <div class="col-span-2 sm:col-span-1">
+                            <label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type</label>
+                            <select id="type" name="type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                <option value="">Select Type</option>
+                                <option value="Salary">Salary</option>
+                                <option value="Utility">Utility</option>
+                                <option value="Repairs">Repairs</option>
+                                <option value="Welfare">Welfare</option>
+                                <option value="Misc">Misc</option>
+                                
+                            </select>
+                            @error("status")
+                                <span class="text-red-700 text-sm">{{ $message }}</span>
+                            @enderror
+                        </div>
+
                         <div class="col-span-2 sm:col-span-1">
                             <label for="employee" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Employee</label>
                             <select id="employee" name="employee_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
@@ -22,16 +38,15 @@
                                 <span class="text-red-700 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
+                        
                         <div class="col-span-2 sm:col-span-1">
-                            <label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type</label>
-                            <select id="type" name="type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                <option value="">Select Type</option>
-                                <option value="Maintenance">Maintenance</option>
-                            </select>
-                            @error("status")
+                            <label for="reference" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Reference</label>
+                            <input type="text" name="reference" id="reference" value="{{ old("reference") }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Payment Id..." readonly>
+                            @error("reference")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
+
                         <div class="col-span-2 sm:col-span-1">
                             <label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
                             <select id="status" name="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">

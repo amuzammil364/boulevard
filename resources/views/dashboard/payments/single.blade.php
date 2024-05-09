@@ -33,6 +33,11 @@
                         <p class="mt-2 font-bold">{{ $payment->status }}</p>
                     </div>
                     <div>
+                        <h3>Mayment Month</h3>
+                        <p class="mt-2 font-bold">{{ date("F Y", strtotime($payment->payment_month)) }}</p>
+                    </div>
+
+                    <div>
                         <h3>Due Date</h3>
                         <p class="mt-2 font-bold">{{ $payment->due_date->format('F j, Y') }}</p>
                     </div>

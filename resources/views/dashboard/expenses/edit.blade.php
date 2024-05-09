@@ -12,6 +12,17 @@
                     @method("PUT")
                     <input type="hidden" name="id" value="{{ $expense->id }}" />
                     <div class="grid gap-4 mb-4 grid-cols-2">
+                    <div class="col-span-2 sm:col-span-1">
+                            <label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type</label>
+                            <select id="type" name="type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                <option value="">Select Type</option>
+                                <option value="Maintenance" {{ $expense->type == "Maintenance" ? "selected" : "" }}>Maintenance</option>
+                            </select>
+                            @error("status")
+                                <span class="text-red-700 text-sm">{{ $message }}</span>
+                            @enderror
+                        </div>
+
                         <div class="col-span-2 sm:col-span-1">
                             <label for="employee" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Flat</label>
                             <select id="employee_id" name="employee_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
@@ -25,12 +36,9 @@
                             @enderror
                         </div>
                         <div class="col-span-2 sm:col-span-1">
-                            <label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type</label>
-                            <select id="type" name="type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                <option value="">Select Type</option>
-                                <option value="Maintenance" {{ $expense->type == "Maintenance" ? "selected" : "" }}>Maintenance</option>
-                            </select>
-                            @error("status")
+                            <label for="reference" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Reference</label>
+                            <input type="text" name="reference" id="reference" value="{{ old("reference", $expense->reference) }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Payment Id..." readonly>
+                            @error("reference")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>
                             @enderror
                         </div>

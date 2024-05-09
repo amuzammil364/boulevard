@@ -19,7 +19,7 @@ class PaymentsController extends Controller
         if (!empty($search)) {
             $payments = Payment::where("payment_id", "LIKE", "%$search%")->get();
         } else {
-            $payments = Payment::all();
+            $payments = Payment::with('flat')->get();
         }
         return view("dashboard.payments.listing", compact("payments", "search"));
     }
@@ -70,9 +70,14 @@ class PaymentsController extends Controller
             "payment_id" => "required",
             "amount" => "required",
             "mode_of_payment" => "required",
-            "due_date" => "required",
-            "paid_date" => "required",
         ]);
+
+        if($request->type == "Maintenance"){
+            $request->validate([
+                "payment_month" => "required",
+            ]);
+    
+        }
 
         $payment = new Payment();
 
@@ -84,6 +89,7 @@ class PaymentsController extends Controller
         $payment->mode_of_payment = $request->mode_of_payment;
         $payment->due_date = $request->due_date;
         $payment->paid_date = $request->paid_date;
+        $payment->payment_month = date('Y-m-d', strtotime($request->payment_month));
 
         $payment->save();
 
@@ -91,7 +97,7 @@ class PaymentsController extends Controller
 
         $transaction->payment_id = $payment->id;
         $transaction->expense_id = null;
-        $transaction->type = "Debit";
+        $transaction->type = "Credit";
         $transaction->amount = $payment->amount;
 
         $transaction->save();
@@ -141,9 +147,14 @@ class PaymentsController extends Controller
             "payment_id" => "required",
             "amount" => "required",
             "mode_of_payment" => "required",
-            "due_date" => "required",
-            "paid_date" => "required",
         ]);
+
+        if($request->type == "Maintenance"){
+            $request->validate([
+                "payment_month" => "required",
+            ]);    
+        }
+
 
         $payment->flat_id = $request->flat_id;
         $payment->type = $request->type;
@@ -153,13 +164,14 @@ class PaymentsController extends Controller
         $payment->mode_of_payment = $request->mode_of_payment;
         $payment->due_date = $request->due_date;
         $payment->paid_date = $request->paid_date;
+        $payment->payment_month = date('Y-m-d', strtotime($request->payment_month));
 
         $payment->save();
 
 
         $transaction->payment_id = $payment->id;
         $transaction->expense_id = null;
-        $transaction->type = "Debit";
+        $transaction->type = "Credit";
         $transaction->amount = $payment->amount;
 
         $transaction->save();
@@ -181,8 +193,10 @@ class PaymentsController extends Controller
         $payment = Payment::find($request->id);
         $transaction = Transaction::where("payment_id", $request->id)->first();
 
-        if ($payment && $transaction) {
-            $transaction->delete();
+        if ($payment) {
+            if($transaction){
+                $transaction->delete();
+            }
             $payment->delete();
             return redirect("/dashboard/payments")->with("success", "Payment Deleted SuccessFully!");
         }

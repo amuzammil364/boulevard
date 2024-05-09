@@ -29,6 +29,8 @@
                             <select id="type" name="type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                 <option value="">Select Type</option>
                                 <option value="Maintenance" {{ $payment->type == "Maintenance" ? "selected" : "" }}>Maintenance</option>
+                                <option value="Welfare" {{ $payment->type == "Welfare" ? "selected" : "" }}>Welfare</option>
+                                <option value="Misc" {{ $payment->type == "Misc" ? "selected" : "" }}>Misc</option>
                             </select>
                             @error("status")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>
@@ -70,6 +72,13 @@
                             <label for="amount" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Amount</label>
                             <input type="number" name="amount" id="amount" value="{{ old("amount" , $payment->amount) }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Amount...">
                             @error("amount")
+                                <span class="text-red-700 text-sm">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="col-span-2 sm:col-span-1">
+                            <label for="payment_month" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Payment Month</label>
+                            <input type="month" name="payment_month" id="payment_month" value="{{ old("payment_month",date('Y-m', strtotime($payment->payment_month)) ) }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                             @error("payment_month")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>
                             @enderror
                         </div>

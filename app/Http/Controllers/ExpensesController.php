@@ -65,16 +65,18 @@ class ExpensesController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            "employee_id" => "required",
             "type" => "required",
             "status" => "required",
             "payment_id" => "required",
             "mode_of_payment" => "required",
             "amount" => "required",
-            "due_date" => "required",
-            "paid_date" => "required",
         ]);
 
+        if($request->type == "Salary"){
+            $request->validate([
+                "employee_id" => "required",
+            ]);                
+        }
 
         $expense = new Expense();
 
@@ -86,6 +88,7 @@ class ExpensesController extends Controller
         $expense->mode_of_payment = $request->mode_of_payment;
         $expense->due_date = $request->due_date;
         $expense->paid_date = $request->paid_date;
+        $expense->reference = $request->reference;
 
         $expense->save();
 
@@ -93,7 +96,7 @@ class ExpensesController extends Controller
 
         $transaction->payment_id = null;
         $transaction->expense_id = $expense->id;
-        $transaction->type = "Credit";
+        $transaction->type = "Debit";
         $transaction->amount = $expense->amount;
 
         $transaction->save();
@@ -144,8 +147,6 @@ class ExpensesController extends Controller
             "payment_id" => "required",
             "amount" => "required",
             "mode_of_payment" => "required",
-            "due_date" => "required",
-            "paid_date" => "required",
         ]);
 
         $expense->employee_id = $request->employee_id;
@@ -156,12 +157,13 @@ class ExpensesController extends Controller
         $expense->mode_of_payment = $request->mode_of_payment;
         $expense->due_date = $request->due_date;
         $expense->paid_date = $request->paid_date;
+        $expense->reference = $request->reference;
 
         $expense->save();
 
         $transaction->payment_id = null;
         $transaction->expense_id = $expense->id;
-        $transaction->type = "Credit";
+        $transaction->type = "Debit";
         $transaction->amount = $expense->amount;
 
         $transaction->save();
@@ -183,8 +185,10 @@ class ExpensesController extends Controller
         $expense = Expense::find($request->id);
         $transaction = Transaction::where("expense_id", $request->id)->first();
 
-        if ($expense && $transaction) {
-            $transaction->delete();
+        if ($expense) {
+            if($transaction){
+                $transaction->delete();
+            }
             $expense->delete();
             return redirect("/dashboard/expenses")->with("success", "Expense Deleted SuccessFully!");
         }
