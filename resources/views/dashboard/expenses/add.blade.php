@@ -18,8 +18,7 @@
                                 <option value="Utility">Utility</option>
                                 <option value="Repairs">Repairs</option>
                                 <option value="Welfare">Welfare</option>
-                                <option value="Misc">Misc</option>
-                                
+                                <option value="Misc">Misc</option>                                
                             </select>
                             @error("status")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>

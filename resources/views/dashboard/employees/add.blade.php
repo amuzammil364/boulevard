@@ -20,7 +20,19 @@
 
                         <div class="col-span-2 sm:col-span-1">
                             <label for="role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role</label>
-                            <input type="text" name="role" id="role" value="{{ old("role") }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Role...">
+                            <select id="role" name="role" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                <option value="">Select role</option>
+                                <option value="Watchman">Watchman</option>
+                                <option value="Accountant">Accountant</option>
+                                <option value="Administrator">Administrator</option>
+                                <option value="Manager">Manager</option>
+                                <option value="Sweeper">Sweeper</option>                                
+                                <option value="Gardener">Gardener</option>                                
+                                <option value="Electrician">Electrician</option>                                
+                                <option value="Plumber">Plumber</option>                                
+                                <option value="Vendor">Vendor</option>                                
+                                <option value="Other">Other</option>                                
+                            </select>
                             @error("role")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>
                             @enderror
@@ -47,15 +59,21 @@
                             @enderror
                         </div>
                         <div class="col-span-2 sm:col-span-1">
-                            <label for="comps" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Comps</label>
-                            <input type="text" name="comps" id="comps" value="{{ old("comps") }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Comps...">
+                            <label for="comps" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Reference</label>
+                            <input type="text" name="comps" id="comps" value="{{ old("comps") }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Reference...">
                             @error("comps")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="col-span-2 sm:col-span-1">
                             <label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
-                            <input type="text" name="status" id="status" value="{{ old("status") }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Status...">
+                            
+                            <select id="status" name="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                <option value="">Select Status</option>
+                                <option value="Active">Active</option>
+                                <option value="InActive">InActive</option>
+                            </select>
+
                             @error("status")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>
                             @enderror

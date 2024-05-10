@@ -25,7 +25,7 @@ class DashboardController extends Controller
         $payments_data = Payment::with('flat')->whereMonth('payment_month', $currentMonth)
         ->whereYear('payment_month', $currentYear)
         ->get();
-        $payments = Payment::with('flat')->whereMonth('payment_month', $currentMonth)
+        $payments = Payment::with('flat')->where('status','Paid')->whereMonth('payment_month', $currentMonth)
         ->whereYear('payment_month', $currentYear)
         ->sum('amount');
 
@@ -34,7 +34,7 @@ class DashboardController extends Controller
         $expenses_data = Expense::whereMonth('created_at', $currentMonth)
         ->whereYear('created_at', $currentYear)
         ->get();
-        $expenses = Expense::whereMonth('created_at', $currentMonth)
+        $expenses = Expense::where('status','Paid')->whereMonth('created_at', $currentMonth)
         ->whereYear('created_at', $currentYear)
         ->sum('amount');
 

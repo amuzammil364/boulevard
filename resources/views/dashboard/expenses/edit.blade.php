@@ -16,7 +16,12 @@
                             <label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type</label>
                             <select id="type" name="type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                 <option value="">Select Type</option>
-                                <option value="Maintenance" {{ $expense->type == "Maintenance" ? "selected" : "" }}>Maintenance</option>
+                                <option value="Salary" {{ $expense->type == "Salary" ? "selected" : "" }}>Salary</option>
+                                <option value="Utility" {{ $expense->type == "Utility" ? "selected" : "" }}>Utility</option>
+                                <option value="Repairs" {{ $expense->type == "Repairs" ? "selected" : "" }}>Repairs</option>
+                                <option value="Welfare" {{ $expense->type == "Welfare" ? "selected" : "" }}>Welfare</option>
+                                <option value="Misc" {{ $expense->type == "Misc" ? "selected" : "" }}>Misc</option>                                
+
                             </select>
                             @error("status")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>
@@ -24,7 +29,7 @@
                         </div>
 
                         <div class="col-span-2 sm:col-span-1">
-                            <label for="employee" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Flat</label>
+                            <label for="employee" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Employee</label>
                             <select id="employee_id" name="employee_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                 <option value="">Select Employee</option>
                                 @foreach ($employees as $employee)

@@ -3,7 +3,7 @@
 @section("dashboard/dashboard")
 
 <main class="p-4 sm:ml-64 md:ml-64 h-auto pt-20">
-    <h1 class="font-bold text-3xl mb-8">Payments</h1>
+    <h1 class="font-bold text-3xl mb-8">Collections</h1>
 
     <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 py-4">
         <div class="w-full md:w-1/2">
@@ -25,7 +25,7 @@
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
                 </svg>
 
-                Add Payment
+                Add Collection
             </a>
         </div>
     </div>

@@ -3,7 +3,7 @@
 @section("dashboard/dashboard")
 
 <main class="p-4 sm:ml-64 md:ml-64 h-auto pt-20">
-    <h1 class="font-bold text-3xl mb-8">Edit Payment</h1>
+    <h1 class="font-bold text-3xl mb-8">Edit Collection</h1>
 
     <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 rounded-md">
             <div class="overflow-x-auto">

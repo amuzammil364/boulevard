@@ -62,10 +62,6 @@ class EmployeesController extends Controller
         $request->validate([
             "role" => "required",
             "name" => "required",
-            "address" => "required",
-            "cnic" => "required",
-            "salary" => "required",
-            "comps" => "required",
             "status" => "required",
             "start_date" => "required",
         ]);
@@ -123,10 +119,6 @@ class EmployeesController extends Controller
         $request->validate([
             "role" => "required",
             "name" => "required",
-            "address" => "required",
-            "cnic" => "required",
-            "salary" => "required",
-            "comps" => "required",
             "status" => "required",
             "start_date" => "required",
         ]);

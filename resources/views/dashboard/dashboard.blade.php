@@ -17,9 +17,9 @@
             </a> -->
         </div>
         <div class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Payments</h5>
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Collections</h5>
             <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">PKR {{ $payments }}</p>
-            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Total current month payments</p>
+            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Total current month collections</p>
             <!-- <a href="{{ url("/dashboard/payments") }}" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 View more
                 <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
@@ -43,8 +43,8 @@
     <div class="rounded bg-gray-50 p-8 mt-5">
         <div class="flex items-center justify-between mb-6">
             <div>
-                <h3 class="font-bold text-3xl mb-2">Payments</h3>
-                <p class="">This is a list of Current Moth Payments</p>
+                <h3 class="font-bold text-3xl mb-2">Collections</h3>
+                <p class="">This is a list of Current Month Collections</p>
             </div>
         </div>
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -92,7 +92,7 @@
         <div class="flex items-center justify-between mb-6">
             <div>
                 <h3 class="font-bold text-3xl mb-2">Expenses</h3>
-                <p class="">This is a list of Current Moth Expenses</p>
+                <p class="">This is a list of Current Month Expenses</p>
             </div>
         </div>
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
