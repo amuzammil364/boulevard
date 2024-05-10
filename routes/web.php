@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\ExpensesController;
 use App\Http\Controllers\FlatController;
+use App\Http\Controllers\OptionsController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\ResidentsController;
 use App\Http\Controllers\TransactionController;
@@ -116,6 +117,13 @@ Route::middleware(["loggedIn"])->group(function () {
     // ==========================
     //-- Page View Routes
     Route::get('/dashboard/transactions', [TransactionController::class, "index"])->middleware(["role:1"]);
+
+
+    // ====== Settings/options Routes ======
+    //-- Page View Routes
+    Route::get('/dashboard/settings', [OptionsController::class, "index"])->middleware(["role:1"]);
+    //-- Data Management Routes
+    Route::post("/dashboard/settings/add", [OptionsController::class, "store"])->name("add_options")->middleware(["role:1"]);
 
 
     Route::get("/logout", [AuthenticationController::class, "logout"]);

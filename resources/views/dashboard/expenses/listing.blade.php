@@ -51,7 +51,7 @@
                             <th scope="col" class="px-4 py-3">Id</th>
                             <th scope="col" class="px-4 py-3">Payment Id</th>
                             <th scope="col" class="px-4 py-3">Status</th>
-                            <th scope="col" class="px-4 py-3">Created At</th>
+                            <th scope="col" class="px-4 py-3">Amount</th>
                             <th scope="col" class="px-4 py-3">
                                 <span class="sr-only">Actions</span>
                             </th>
@@ -73,7 +73,7 @@
                             <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $index + 1 }}</th>
                             <td class="px-4 py-3">{{ $expense->payment_id }}</td>
                             <td class="px-4 py-3">{{ $expense->status }}</td>
-                            <td class="px-4 py-3">{{ $expense->created_at->format('F j, Y') }}</td>
+                            <td class="px-4 py-3">{{ $expense->amount }}</td>
                             <td class="px-4 py-3 flex items-center justify-end">
                                 <span>
                                     <a href="{{ url("/dashboard/expenses/$expense->id") }}" class="px-3 py-2 text-xs font-medium text-center inline-flex items-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">

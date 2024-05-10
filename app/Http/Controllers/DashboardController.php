@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Expense;
 use App\Models\Flat;
 use App\Models\Payment;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -14,10 +16,29 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $users = User::count();
         $flats = Flat::count();
-        $payments = Payment::count();
-        return view('dashboard.dashboard', compact("users", "flats", "payments"));
+        
+        $currentMonth = Carbon::now()->month;
+        $currentYear = Carbon::now()->year;
+        
+        // current month payments
+        $payments_data = Payment::with('flat')->whereMonth('payment_month', $currentMonth)
+        ->whereYear('payment_month', $currentYear)
+        ->get();
+        $payments = Payment::with('flat')->whereMonth('payment_month', $currentMonth)
+        ->whereYear('payment_month', $currentYear)
+        ->sum('amount');
+
+
+        // current month Expenses
+        $expenses_data = Expense::whereMonth('created_at', $currentMonth)
+        ->whereYear('created_at', $currentYear)
+        ->get();
+        $expenses = Expense::whereMonth('created_at', $currentMonth)
+        ->whereYear('created_at', $currentYear)
+        ->sum('amount');
+
+        return view('dashboard.dashboard', compact("flats", "payments", "expenses", "payments_data", "expenses_data"));
     }
 
     /**

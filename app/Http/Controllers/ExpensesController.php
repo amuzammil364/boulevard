@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use App\Models\Expense;
+use App\Models\Resident;
 use App\Models\Transaction;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -28,16 +29,18 @@ class ExpensesController extends Controller
     public function createPage()
     {
         $employees = Employee::all();
+        $residents = Resident::all();
         $payment_id = uniqid();
-        return view("dashboard.expenses.add", compact("employees" , "payment_id"));
+        return view("dashboard.expenses.add", compact("employees" , "residents", "payment_id"));
     }
 
     public function editPage($id)
     {
         if ($id) {
             $employees = Employee::all();
+            $residents = Resident::all();
             $expense = Expense::find($id);
-            return view("dashboard.expenses.edit", compact("employees", "expense"));
+            return view("dashboard.expenses.edit", compact("employees", "residents", "expense"));
         }
     }
 
@@ -72,11 +75,39 @@ class ExpensesController extends Controller
             "amount" => "required",
         ]);
 
+        // Validations on conditions
         if($request->type == "Salary"){
             $request->validate([
                 "employee_id" => "required",
             ]);                
         }
+
+        if($request->type == "Utility" || $request->type == "Misc"){
+            $request->validate([
+                "reference" => "required",
+            ]);                
+        }
+
+        if($request->type == "Repairs"){
+            if($request->reference == "" && $request->employee_id == ""){
+                $request->validate([
+                    "reference" => "required",
+                    "employee_id" => "required",
+                ]);                
+            }
+            
+        }
+
+        if($request->type == "Welfare"){
+            if($request->reference == "" && $request->resident_id == ""){
+                $request->validate([
+                    "reference" => "required",
+                    "resident_id" => "required",
+                ]);                
+            }
+            
+        }
+
 
         $expense = new Expense();
 
@@ -89,6 +120,7 @@ class ExpensesController extends Controller
         $expense->due_date = $request->due_date;
         $expense->paid_date = $request->paid_date;
         $expense->reference = $request->reference;
+        $expense->resident_id = $request->resident_id;
 
         $expense->save();
 
@@ -141,13 +173,47 @@ class ExpensesController extends Controller
         }
 
         $request->validate([
-            "employee_id" => "required",
             "type" => "required",
             "status" => "required",
             "payment_id" => "required",
             "amount" => "required",
             "mode_of_payment" => "required",
         ]);
+
+
+        // Validations on conditions
+        if($request->type == "Salary"){
+            $request->validate([
+                "employee_id" => "required",
+            ]);                
+        }
+
+        if($request->type == "Utility" || $request->type == "Misc"){
+            $request->validate([
+                "reference" => "required",
+            ]);                
+        }
+
+        if($request->type == "Repairs"){
+            if($request->reference == "" && $request->employee_id == ""){
+                $request->validate([
+                    "reference" => "required",
+                    "employee_id" => "required",
+                ]);                
+            }
+            
+        }
+
+        if($request->type == "Welfare"){
+            if($request->reference == "" && $request->resident_id == ""){
+                $request->validate([
+                    "reference" => "required",
+                    "resident_id" => "required",
+                ]);                
+            }
+            
+        }
+
 
         $expense->employee_id = $request->employee_id;
         $expense->type = $request->type;
@@ -158,6 +224,7 @@ class ExpensesController extends Controller
         $expense->due_date = $request->due_date;
         $expense->paid_date = $request->paid_date;
         $expense->reference = $request->reference;
+        $expense->resident_id = $request->resident_id;
 
         $expense->save();
 

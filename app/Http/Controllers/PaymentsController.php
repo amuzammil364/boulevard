@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Flat;
+use App\Models\Option;
 use App\Models\Payment;
 use App\Models\Transaction;
 use Carbon\Carbon;
@@ -26,9 +27,18 @@ class PaymentsController extends Controller
 
     public function createPage()
     {
+
+        $global_maintenance = Option::where('key','maintenance_amount')->first();
+        if($global_maintenance){
+            $global_maintenance = $global_maintenance->value;
+        }else{
+            $global_maintenance = "";
+        }
+
+
         $flats = Flat::all();
         $payment_id = uniqid();
-        return view("dashboard.payments.add", compact("flats" , "payment_id"));
+        return view("dashboard.payments.add", compact("flats" , "payment_id", "global_maintenance"));
     }
 
     public function editPage($id)

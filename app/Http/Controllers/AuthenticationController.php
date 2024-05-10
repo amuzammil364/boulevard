@@ -27,6 +27,8 @@ class AuthenticationController extends Controller
         if ($user && Hash::check($request->password, $user->password)) {
             $request->session()->put("user_id", $user->id);
             $request->session()->put("role_id", $user->role_id);
+            $request->session()->put("user_email", $user->email);
+            $request->session()->put("user_name", $user->first_name." ".$user->last_name);
             return redirect("/dashboard");
         } else {
             return redirect("/")->with("fail", "User Not Found!");

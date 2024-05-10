@@ -70,8 +70,6 @@ class ResidentsController extends Controller
             "mobile" => "required",
             "intercom" => "required",
             "cnic" => "required",
-            "in_date" => "required",
-            "out_date" => "required",
         ]);
 
         $resident = new Resident();
@@ -133,8 +131,6 @@ class ResidentsController extends Controller
             "mobile" => "required",
             "intercom" => "required",
             "cnic" => "required",
-            "in_date" => "required",
-            "out_date" => "required",
         ]);
 
         if(isset($request->email) && !empty($request->email)){

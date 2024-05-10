@@ -30,6 +30,7 @@
                                 <option value="Welfare">Welfare</option>
                                 <option value="Misc">Misc</option>
                             </select>
+                            <input type="hidden" id="global_maintenance_amount" value="{{$global_maintenance}}">
                             @error("status")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>
                             @enderror
