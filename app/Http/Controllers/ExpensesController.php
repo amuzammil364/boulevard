@@ -30,7 +30,15 @@ class ExpensesController extends Controller
     {
         $employees = Employee::all();
         $residents = Resident::all();
-        $payment_id = uniqid();
+
+
+        $expenses = Expense::orderby('id','DESC')->get();
+        $payment_id = 1;
+        if(sizeof($expenses)>0){
+            $payment_id = $expenses[0]->id + 1;
+        }
+        $payment_id = str_pad($payment_id, 4, '0', STR_PAD_LEFT);
+        // $payment_id = uniqid();
         return view("dashboard.expenses.add", compact("employees" , "residents", "payment_id"));
     }
 

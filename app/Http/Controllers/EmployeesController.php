@@ -76,6 +76,7 @@ class EmployeesController extends Controller
         $employee->comps = $request->comps;
         $employee->status = $request->status;
         $employee->start_date = $request->start_date;
+        $employee->phone = $request->phone;
 
         $employee->save();
 
@@ -131,6 +132,7 @@ class EmployeesController extends Controller
         $employee->comps = $request->comps;
         $employee->status = $request->status;
         $employee->start_date = $request->start_date;
+        $employee->phone = $request->phone;
 
         $employee->save();
 

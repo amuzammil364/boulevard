@@ -101,14 +101,14 @@
                         </div>
                         <div class="col-span-2 sm:col-span-1">
                             <label for="due_date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Due Date</label>
-                            <input type="date" name="due_date" id="due_date" value="{{ old("due_date") }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                            <input type="date" name="due_date" id="due_date" value="{{ date('Y-m-d') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                              @error("due_date")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="col-span-2 sm:col-span-1 mb-8">
                             <label for="paid_date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Paid Date</label>
-                            <input type="date" name="paid_date" id="paid_date" value="{{ old("paid_date") }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                            <input type="date" name="paid_date" id="paid_date" value="{{ date('Y-m-d') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                              @error("paid_date")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>
                             @enderror

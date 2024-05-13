@@ -51,7 +51,6 @@ class FlatController extends Controller
         $request->validate([
             "flat_number" => "required",
             "phase_number" => "required",
-            "occupancy" => "required",
         ]);
 
         $flat = new Flat();
@@ -93,7 +92,6 @@ class FlatController extends Controller
         $request->validate([
             "flat_number" => "required",
             "phase_number" => "required",
-            "occupancy" => "required",
         ]);
 
         $flat->flat_number = $request->flat_number;

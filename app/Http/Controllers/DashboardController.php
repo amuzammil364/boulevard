@@ -14,12 +14,21 @@ class DashboardController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $flats = Flat::count();
         
         $currentMonth = Carbon::now()->month;
         $currentYear = Carbon::now()->year;
+        $date = date('Y-m');
+
+        if( isset($request->dashboard_month) && $request->dashboard_month != ""){
+            $currentMonth = date('m', strtotime($request->dashboard_month));
+            $currentYear = date('Y', strtotime($request->dashboard_month));
+            $date = $request->dashboard_month;
+        }
+
+
         
         // current month payments
         $payments_data = Payment::with('flat')->whereMonth('payment_month', $currentMonth)
@@ -38,7 +47,7 @@ class DashboardController extends Controller
         ->whereYear('created_at', $currentYear)
         ->sum('amount');
 
-        return view('dashboard.dashboard', compact("flats", "payments", "expenses", "payments_data", "expenses_data"));
+        return view('dashboard.dashboard', compact("date", "flats", "payments", "expenses", "payments_data", "expenses_data"));
     }
 
     /**

@@ -37,7 +37,7 @@ Route::middleware(["loggedIn"])->group(function () {
 
     // ====== Dashboard Routes ======
 
-    Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(["role:1,2"]);
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware(["role:1,2"]);
 
 
     // ====== Users Routes ======

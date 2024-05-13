@@ -26,8 +26,14 @@ class OptionsController extends Controller
             $currency = "";
         }
 
+        $collection_due_day = Option::where('key','collection_due_day')->first();
+        if($collection_due_day){
+            $collection_due_day = $collection_due_day->value;
+        }else{
+            $collection_due_day = "";
+        }
 
-        return view("dashboard.settings.settings", compact("maintenance_amount","currency"));
+        return view("dashboard.settings.settings", compact("collection_due_day" ,"maintenance_amount","currency"));
 
     }
 

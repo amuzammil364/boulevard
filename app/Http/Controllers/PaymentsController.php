@@ -34,11 +34,24 @@ class PaymentsController extends Controller
         }else{
             $global_maintenance = "";
         }
-
+        $collection_due_day = Option::where('key','collection_due_day')->first();
+        if($collection_due_day){
+            $collection_due_day = $collection_due_day->value;
+        }else{
+            $collection_due_day = '01';
+        }
+        $due_date = date('Y-m-'.$collection_due_day);
 
         $flats = Flat::all();
-        $payment_id = uniqid();
-        return view("dashboard.payments.add", compact("flats" , "payment_id", "global_maintenance"));
+
+        $payments = Payment::orderby('id','DESC')->get();
+        $payment_id = 1;
+        if(sizeof($payments)>0){
+            $payment_id = $payments[0]->id + 1;
+        }
+        $payment_id = str_pad($payment_id, 4, '0', STR_PAD_LEFT);
+        // $payment_id = uniqid();
+        return view("dashboard.payments.add", compact("flats" , "payment_id", "global_maintenance", "due_date"));
     }
 
     public function editPage($id)
