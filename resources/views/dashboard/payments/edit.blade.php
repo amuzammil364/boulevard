@@ -17,7 +17,7 @@
                             <select id="flat" name="flat_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                 <option value="">Select Flat</option>
                                 @foreach ($flats as $flat)
-                                <option value="{{ $flat->id }}" {{ $flat->id == $payment->flat_id ? "selected" : "" }}>{{ $flat->flat_number }}</option>
+                                <option value="{{ $flat->id }}" {{ $flat->id == $payment->flat_id ? "selected" : "" }}>{{ $flat->flat_number }} ({{ $flat->phase_number }})</option>
                                 @endforeach
                             </select>
                             @error("flat_id")

@@ -8,6 +8,7 @@ use App\Models\Payment;
 use App\Models\Transaction;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use stdClass;
 
 class PaymentsController extends Controller
 {
@@ -15,14 +16,46 @@ class PaymentsController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request)
-    {
-        $search = $request["payment_id"] ?? "";
-        if (!empty($search)) {
-            $payments = Payment::where("payment_id", "LIKE", "%$search%")->get();
-        } else {
-            $payments = Payment::with('flat')->get();
+    {        
+        $filters = new stdClass();
+        $filters->date = "";
+        $filters->status = "";
+        $filters->type = "";
+        $filters->flat_id = "";
+        $currentMonth = Carbon::now()->month;
+        $currentYear = Carbon::now()->year;
+        $flats = Flat::all();
+
+
+        
+        $payments = Payment::with('flat');
+        
+        if( isset($request->payment_month) && !empty($request->payment_month) ){
+            $currentMonth = date('m', strtotime($request->payment_month));
+            $currentYear = date('Y', strtotime($request->payment_month));
+            $payments = $payments->whereMonth('payment_month', $currentMonth)->whereYear('payment_month', $currentYear);
+            $filters->date = $request->payment_month;
         }
-        return view("dashboard.payments.listing", compact("payments", "search"));
+
+        if(isset($request->status) && !empty($request->status)){
+            $payments = $payments->where('status',$request->status);
+            $filters->status = $request->status;
+        }
+
+        if(isset($request->type) && !empty($request->type)){
+            $payments = $payments->where('type',$request->type);
+            $filters->type = $request->type;
+        }
+
+        if(isset($request->flat_id) && !empty($request->flat_id)){
+            $payments = $payments->where('flat_id',$request->flat_id);
+            $filters->flat_id = $request->flat_id;
+        }
+
+        $payments = $payments->orderby('id', 'DESC')->get();
+
+        $total_amount = $payments->sum('amount');
+        return view("dashboard.payments.listing", compact("payments", "filters", "flats", "total_amount"));
     }
 
     public function createPage()

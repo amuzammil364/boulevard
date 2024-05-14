@@ -79,7 +79,7 @@ Route::middleware(["loggedIn"])->group(function () {
     // ====== Payments Routes ======
     // ==========================
     //-- Page View Routes
-    Route::get('/dashboard/payments', [PaymentsController::class, "index"])->middleware(["role:1"]);
+    Route::get('/dashboard/payments', [PaymentsController::class, "index"])->name("payments")->middleware(["role:1"]);
     Route::get('/dashboard/payments/add', [PaymentsController::class, "createPage"])->middleware(["role:1"]);
     Route::get('/dashboard/payments/edit/{id}', [PaymentsController::class, "editPage"])->middleware(["role:1"]);
     Route::get('/dashboard/payments/{id}', [PaymentsController::class, "singlePage"])->middleware(["role:1"]);
