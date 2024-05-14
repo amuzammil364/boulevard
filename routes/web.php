@@ -92,7 +92,7 @@ Route::middleware(["loggedIn"])->group(function () {
     // ====== Expenses Routes ======
     // ==========================
     //-- Page View Routes
-    Route::get('/dashboard/expenses', [ExpensesController::class, "index"])->middleware(["role:1"]);
+    Route::get('/dashboard/expenses', [ExpensesController::class, "index"])->name('expenses')->middleware(["role:1"]);
     Route::get('/dashboard/expenses/add', [ExpensesController::class, "createPage"])->middleware(["role:1"]);
     Route::get('/dashboard/expenses/edit/{id}', [ExpensesController::class, "editPage"])->middleware(["role:1"]);
     Route::get('/dashboard/expenses/{id}', [ExpensesController::class, "singlePage"])->middleware(["role:1"]);

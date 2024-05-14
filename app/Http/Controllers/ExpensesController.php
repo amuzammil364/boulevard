@@ -8,6 +8,7 @@ use App\Models\Resident;
 use App\Models\Transaction;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use stdClass;
 
 class ExpensesController extends Controller
 {
@@ -17,13 +18,37 @@ class ExpensesController extends Controller
      */
     public function index(Request $request)
     {
-        $search = $request["payment_id"] ?? "";
-        if (!empty($search)) {
-            $expenses = Expense::where("payment_id", "LIKE", "%$search%")->get();
-        } else {
-            $expenses = Expense::all();
+
+        $filters = new stdClass();
+        $filters->date = "";
+        $filters->status = "";
+        $filters->type = "";
+        $filters->employee_id = "";
+        $employees = Employee::all();
+
+
+        $expenses = Expense::with('employee');
+
+        if(isset($request->status) && !empty($request->status)){
+            $expenses = $expenses->where('status',$request->status);
+            $filters->status = $request->status;
         }
-        return view("dashboard.expenses.listing", compact("expenses", "search"));
+
+        if(isset($request->type) && !empty($request->type)){
+            $expenses = $expenses->where('type',$request->type);
+            $filters->type = $request->type;
+        }
+
+        if(isset($request->employee_id) && !empty($request->employee_id)){
+            $expenses = $expenses->where('employee_id',$request->employee_id);
+            $filters->employee_id = $request->employee_id;
+        }
+
+        $expenses = $expenses->orderby('id','DESC')->get();
+
+        $total_amount = $expenses->sum('amount');
+
+        return view("dashboard.expenses.listing", compact("expenses", "filters", "employees", "total_amount"));
     }
 
     public function createPage()

@@ -41,48 +41,44 @@
         
     
             <div class="filters">
-            <form action="{{ route("payments") }}" method="GET" class="space-y-4 mb-5">
-                @csrf
-                <div class="grid gap-4 mb-4 grid-cols-2 md:grid-cols-2">
-                    <div class="col-span-1 sm:col-span-1">
-                        <input type="month" name="payment_month" id="payment_month" value="{{ $filters->date }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                    </div>
-                    <div class="col-span-1 sm:col-span-1">
-                        <select id="status" name="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                            <option value="">Select Status</option>
-                            <option value="Paid" {{ $filters->status == "Paid"  ? "selected" : "" }}>Paid</option>
-                            <option value="Pending" {{ $filters->status == "Pending"  ? "selected" : ""}}>Pending</option>
-                        </select>
-                    </div>
-                    <div class="col-span-1 sm:col-span-1">
-                        <select id="type" name="type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                            <option value="">Select Type</option>
-                            <option value="Maintenance" {{ $filters->type == "Maintenance"  ? "selected" : ""}}>Maintenance</option>
-                            <option value="Welfare" {{ $filters->type == "Welfare"  ? "selected" : ""}}>Welfare</option>
-                            <option value="Misc" {{ $filters->type == "Misc"  ? "selected" : ""}}>Misc</option>
-                        </select>
-                    </div>
-
-                    <div class="col-span-1 sm:col-span-1">
-                        <select id="flat" name="flat_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                <option value="">Select Flat</option>
-                                @foreach ($flats as $flat)
-                                <option value="{{ $flat->id }}" {{ $filters->flat_id == $flat->id  ? "selected" : "" }}>{{ $flat->flat_number }} ({{ $flat->phase_number }})</option>
-                                @endforeach
+                <form action="{{ route("payments") }}" method="GET" class="space-y-4 mb-5">
+                    @csrf
+                    <div class="grid gap-4 mb-4 grid-cols-2 md:grid-cols-2">
+                        <div class="col-span-1 sm:col-span-1">
+                            <input type="month" name="payment_month" id="payment_month" value="{{ $filters->date }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                        </div>
+                        <div class="col-span-1 sm:col-span-1">
+                            <select id="status" name="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                <option value="">Select Status</option>
+                                <option value="Paid" {{ $filters->status == "Paid"  ? "selected" : "" }}>Paid</option>
+                                <option value="Pending" {{ $filters->status == "Pending"  ? "selected" : ""}}>Pending</option>
                             </select>
+                        </div>
+                        <div class="col-span-1 sm:col-span-1">
+                            <select id="type" name="type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                <option value="">Select Type</option>
+                                <option value="Maintenance" {{ $filters->type == "Maintenance"  ? "selected" : ""}}>Maintenance</option>
+                                <option value="Welfare" {{ $filters->type == "Welfare"  ? "selected" : ""}}>Welfare</option>
+                                <option value="Misc" {{ $filters->type == "Misc"  ? "selected" : ""}}>Misc</option>
+                            </select>
+                        </div>
+
+                        <div class="col-span-1 sm:col-span-1">
+                            <select id="flat" name="flat_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                    <option value="">Select Flat</option>
+                                    @foreach ($flats as $flat)
+                                    <option value="{{ $flat->id }}" {{ $filters->flat_id == $flat->id  ? "selected" : "" }}>{{ $flat->flat_number }} ({{ $flat->phase_number }})</option>
+                                    @endforeach
+                                </select>
+                        </div>
+
+                        <div class="col-span-1 sm:col-span-1">
+                            <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                Filter
+                            </button>
+                        </div>
                     </div>
-
-
-
-
-                    <div class="col-span-1 sm:col-span-1">
-                        <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            Filter
-                        </button>
-                    </div>
-                </div>
-            </form>
-
+                </form>
             </div>
     
             <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">

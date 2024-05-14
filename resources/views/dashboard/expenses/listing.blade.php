@@ -7,17 +7,11 @@
 
     <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 py-4">
         <div class="w-full md:w-1/2">
-            <form action="" class="flex items-center">
-                <label for="simple-search" class="sr-only">Search</label>
-                <div class="relative w-full">
-                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                        <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
-                        </svg>
-                    </div>
-                    <input type="text" id="simple-search" name="payment_id" value="{{ $search }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search">
-                </div>
-            </form>
+            <div class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Total Expenses</h5>
+                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">PKR {{ $total_amount }}</p>
+            </div>
+
         </div>
         <div class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
             <a href="{{ url("/dashboard/expenses/add") }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -43,13 +37,59 @@
     @endif
 
     <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 rounded-md">
+
+    <div class="filters">
+                <form action="{{ route("expenses") }}" method="GET" class="space-y-4 mb-5">
+                    @csrf
+                    <div class="grid gap-4 mb-4 grid-cols-2 md:grid-cols-2">
+                        <!-- <div class="col-span-1 sm:col-span-1">
+                            <input type="month" name="payment_month" id="payment_month" value="{{ $filters->date }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                        </div> -->
+                        <div class="col-span-1 sm:col-span-1">
+                            <select id="status" name="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                <option value="">Select Status</option>
+                                <option value="Paid" {{ $filters->status == "Paid"  ? "selected" : "" }}>Paid</option>
+                                <option value="Pending" {{ $filters->status == "Pending"  ? "selected" : ""}}>Pending</option>
+                            </select>
+                        </div>
+                        <div class="col-span-1 sm:col-span-1">
+                            <select id="type" name="type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                <option value="">Select Type</option>
+                                <option value="Salary" {{ $filters->type == "Salary"  ? "selected" : ""}}>Salary</option>
+                                <option value="Utility" {{ $filters->type == "Utility"  ? "selected" : ""}}>Utility</option>
+                                <option value="Repairs" {{ $filters->type == "Repairs"  ? "selected" : ""}}>Repairs</option>
+                                <option value="Welfare" {{ $filters->type == "Welfare"  ? "selected" : ""}}>Welfare</option>
+                                <option value="Misc" {{ $filters->type == "Misc"  ? "selected" : ""}}>Misc</option>
+                            </select>
+                        </div>
+
+                        <div class="col-span-1 sm:col-span-1">
+                            <select id="employee_id" name="employee_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                    <option value="">Select Employee</option>
+                                    @foreach ($employees as $employee)
+                                    <option value="{{ $employee->id }}" {{ $filters->employee_id == $employee->id  ? "selected" : "" }}>{{ $employee->name }}</option>
+                                    @endforeach
+                                </select>
+                        </div>
+
+                        <div class="col-span-1 sm:col-span-1">
+                            <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                Filter
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
         <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" class="px-4 py-3">Id</th>
-                            <th scope="col" class="px-4 py-3">Payment Id</th>
+                            <th scope="col" class="px-4 py-3">Employee</th>
+                            <th scope="col" class="px-4 py-3">Type</th>
                             <th scope="col" class="px-4 py-3">Status</th>
                             <th scope="col" class="px-4 py-3">Amount</th>
                             <th scope="col" class="px-4 py-3">
@@ -71,7 +111,8 @@
 
                         <tr class="border-b dark:border-gray-700">
                             <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $index + 1 }}</th>
-                            <td class="px-4 py-3">{{ $expense->payment_id }}</td>
+                            <td class="px-4 py-3">{{ $expense->employee?$expense->employee->name:"" }}</td>
+                            <td class="px-4 py-3">{{ $expense->type }}</td>
                             <td class="px-4 py-3">{{ $expense->status }}</td>
                             <td class="px-4 py-3">{{ $expense->amount }}</td>
                             <td class="px-4 py-3 flex items-center justify-end">
