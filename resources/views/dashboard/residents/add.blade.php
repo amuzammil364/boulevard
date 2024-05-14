@@ -66,8 +66,15 @@
                         </div>
                         <div class="col-span-2 sm:col-span-1">
                             <label for="mobile" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mobile Number</label>
-                            <input type="number" name="mobile" id="mobile" value="{{ old("mobile") }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Mobile Number...">
+                            <input type="text" name="mobile" id="mobile" value="{{ old("mobile") }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Mobile Number...">
                              @error("mobile")
+                                <span class="text-red-700 text-sm">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="col-span-2 sm:col-span-1">
+                            <label for="whatsapp_number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Whatsapp Number</label>
+                            <input type="text" name="whatsapp_number" id="whatsapp_number"  pattern="^\+92\d{2,3}\d{7}$" value="{{ old("whatsapp_number") }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="+923032157357">
+                             @error("whatsapp_number")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
@@ -79,7 +86,7 @@
                             @enderror
                         </div>
                         <div class="col-span-2 sm:col-span-1">
-                            <label for="cnic" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cnic Number</label>
+                            <label for="cnic" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cnic</label>
                             <input type="number" name="cnic" id="cnic" value="{{ old("cnic") }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Cnic Number...">
                              @error("cnic")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>

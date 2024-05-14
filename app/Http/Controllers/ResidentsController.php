@@ -68,7 +68,6 @@ class ResidentsController extends Controller
             "full_name" => "required",
             "email" => "required|email|unique:residents",
             "mobile" => "required",
-            "intercom" => "required",
             "cnic" => "required",
         ]);
 
@@ -84,6 +83,7 @@ class ResidentsController extends Controller
         $resident->cnic = $request->cnic;
         $resident->in_date = $request->in_date;
         $resident->out_date = $request->out_date;
+        $resident->whatsapp_number = $request->whatsapp_number;
 
         $resident->save();
 
@@ -129,7 +129,6 @@ class ResidentsController extends Controller
             "status" => "required",
             "full_name" => "required",
             "mobile" => "required",
-            "intercom" => "required",
             "cnic" => "required",
         ]);
 
@@ -147,6 +146,7 @@ class ResidentsController extends Controller
         $resident->cnic = $request->cnic;
         $resident->in_date = $request->in_date;
         $resident->out_date = $request->out_date;
+        $resident->whatsapp_number = $request->whatsapp_number;
 
         $resident->save();
 

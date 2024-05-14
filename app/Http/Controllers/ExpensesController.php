@@ -32,13 +32,13 @@ class ExpensesController extends Controller
         $residents = Resident::all();
 
 
-        $expenses = Expense::orderby('id','DESC')->get();
-        $payment_id = 1;
-        if(sizeof($expenses)>0){
-            $payment_id = $expenses[0]->id + 1;
-        }
-        $payment_id = str_pad($payment_id, 4, '0', STR_PAD_LEFT);
-        // $payment_id = uniqid();
+        // $expenses = Expense::orderby('id','DESC')->get();
+        // $payment_id = 1;
+        // if(sizeof($expenses)>0){
+        //     $payment_id = $expenses[0]->id + 1;
+        // }
+        // $payment_id = str_pad($payment_id, 4, '0', STR_PAD_LEFT);
+        $payment_id = uniqid();
         return view("dashboard.expenses.add", compact("employees" , "residents", "payment_id"));
     }
 
@@ -88,34 +88,11 @@ class ExpensesController extends Controller
             $request->validate([
                 "employee_id" => "required",
             ]);                
-        }
-
-        if($request->type == "Utility" || $request->type == "Misc"){
+        }else{
             $request->validate([
                 "reference" => "required",
             ]);                
         }
-
-        if($request->type == "Repairs"){
-            if($request->reference == "" && $request->employee_id == ""){
-                $request->validate([
-                    "reference" => "required",
-                    "employee_id" => "required",
-                ]);                
-            }
-            
-        }
-
-        if($request->type == "Welfare"){
-            if($request->reference == "" && $request->resident_id == ""){
-                $request->validate([
-                    "reference" => "required",
-                    "resident_id" => "required",
-                ]);                
-            }
-            
-        }
-
 
         $expense = new Expense();
 
@@ -194,34 +171,11 @@ class ExpensesController extends Controller
             $request->validate([
                 "employee_id" => "required",
             ]);                
-        }
-
-        if($request->type == "Utility" || $request->type == "Misc"){
+        }else{
             $request->validate([
                 "reference" => "required",
             ]);                
         }
-
-        if($request->type == "Repairs"){
-            if($request->reference == "" && $request->employee_id == ""){
-                $request->validate([
-                    "reference" => "required",
-                    "employee_id" => "required",
-                ]);                
-            }
-            
-        }
-
-        if($request->type == "Welfare"){
-            if($request->reference == "" && $request->resident_id == ""){
-                $request->validate([
-                    "reference" => "required",
-                    "resident_id" => "required",
-                ]);                
-            }
-            
-        }
-
 
         $expense->employee_id = $request->employee_id;
         $expense->type = $request->type;

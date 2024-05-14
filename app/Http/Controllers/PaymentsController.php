@@ -45,13 +45,13 @@ class PaymentsController extends Controller
         $flats = Flat::all();
 
         $payments = Payment::orderby('id','DESC')->get();
-        $payment_id = 1;
+        $receipt_id = 1;
         if(sizeof($payments)>0){
-            $payment_id = $payments[0]->id + 1;
+            $receipt_id = $payments[0]->id + 1;
         }
-        $payment_id = str_pad($payment_id, 4, '0', STR_PAD_LEFT);
-        // $payment_id = uniqid();
-        return view("dashboard.payments.add", compact("flats" , "payment_id", "global_maintenance", "due_date"));
+        $receipt_id = str_pad($receipt_id, 4, '0', STR_PAD_LEFT);
+        $payment_id = uniqid();
+        return view("dashboard.payments.add", compact("flats" , "payment_id", "global_maintenance", "due_date", "receipt_id"));
     }
 
     public function editPage($id)
@@ -113,6 +113,8 @@ class PaymentsController extends Controller
         $payment->due_date = $request->due_date;
         $payment->paid_date = $request->paid_date;
         $payment->payment_month = date('Y-m-d', strtotime($request->payment_month));
+        $payment->reference = $request->reference;
+        $payment->receipt_id = $request->receipt_id;
 
         $payment->save();
 
@@ -188,6 +190,8 @@ class PaymentsController extends Controller
         $payment->due_date = $request->due_date;
         $payment->paid_date = $request->paid_date;
         $payment->payment_month = date('Y-m-d', strtotime($request->payment_month));
+        $payment->reference = $request->reference;
+        $payment->receipt_id = $request->receipt_id;
 
         $payment->save();
 
