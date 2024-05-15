@@ -38,6 +38,8 @@
                                 <option value="">Select Type</option>
                                 <option value="Owner">Owner</option>
                                 <option value="Tenant">Tenant</option>
+                                <option value="Former Owner">Former Owner</option>
+                                <option value="Former Tenant">Former Tenant</option>
                             </select>
                             @error("type")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>
@@ -52,6 +54,7 @@
                                 <option value="Vacant (Arrears)">Vacant (Arrears)</option>
                                 <option value="Active (Arrears)">Active (Arrears)</option>
                                 <option value="TBC">TBC</option>
+                                <option value="Inactive">Inactive</option>
                             </select>
                             @error("status")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>

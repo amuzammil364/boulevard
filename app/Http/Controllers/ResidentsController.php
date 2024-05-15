@@ -7,6 +7,7 @@ use App\Models\Resident;
 use App\Models\Residents;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use stdClass;
 
 class ResidentsController extends Controller
 {
@@ -15,13 +16,27 @@ class ResidentsController extends Controller
      */
     public function index(Request $request)
     {
-        $search = $request["email"] ?? "";
-        if(!empty($search)){
-            $residents = Resident::where("email" , "LIKE" , "%$search%")->get();
-        }else{
-            $residents = Resident::with('flat')->get();
+
+        $filters = new stdClass();
+        $filters->date = "";
+        $filters->status = "";
+        $filters->type = "";
+
+        $residents = Resident::with('flat');
+
+
+        if(isset($request->status) && !empty($request->status)){
+            $residents = $residents->where('status',$request->status);
+            $filters->status = $request->status;
         }
-        return view("dashboard.residents.listing", compact("residents" , "search"));
+
+        if(isset($request->type) && !empty($request->type)){
+            $residents = $residents->where('type',$request->type);
+            $filters->type = $request->type;
+        }
+
+        $residents = $residents->get();
+        return view("dashboard.residents.listing", compact("residents" , "filters"));
     }
 
     public function createPage()
@@ -66,9 +81,6 @@ class ResidentsController extends Controller
             "type" => "required",
             "status" => "required",
             "full_name" => "required",
-            "email" => "required|email|unique:residents",
-            "mobile" => "required",
-            "cnic" => "required",
         ]);
 
         $resident = new Resident();
@@ -128,8 +140,6 @@ class ResidentsController extends Controller
             "type" => "required",
             "status" => "required",
             "full_name" => "required",
-            "mobile" => "required",
-            "cnic" => "required",
         ]);
 
         if(isset($request->email) && !empty($request->email)){

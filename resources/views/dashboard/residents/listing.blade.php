@@ -7,17 +7,6 @@
 
     <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 py-4">
         <div class="w-full md:w-1/2">
-            <form action="" class="flex items-center">
-                <label for="simple-search" class="sr-only">Search</label>
-                <div class="relative w-full">
-                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                        <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
-                        </svg>
-                    </div>
-                    <input type="text" id="simple-search" name="email" value="{{ $search }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search">
-                </div>
-            </form>
         </div>
         <div class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
             <a href="{{ url("/dashboard/residents/add") }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -43,6 +32,42 @@
     @endif
 
     <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 rounded-md">
+       
+    <div class="filters">
+                <form action="{{ route("residents") }}" method="GET" class="space-y-4 mb-5">
+                    @csrf
+                    <div class="grid gap-4 mb-4 grid-cols-2 md:grid-cols-2">
+                        <div class="col-span-1 sm:col-span-1">
+                            <select id="status" name="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                <option value="">Select Status</option>
+                                <option value="Active" {{ $filters->status == "Active"  ? "selected" : "" }}>Active</option>
+                                <option value="Vacant (Paid)" {{ $filters->status == "Vacant (Paid)"  ? "selected" : ""}}>Vacant (Paid)</option>
+                                <option value="Vacant (Arrears)" {{ $filters->status == "Vacant (Arrears)"  ? "selected" : ""}}>Vacant (Arrears)</option>
+                                <option value="Active (Arrears)" {{ $filters->status == "Active (Arrears)"  ? "selected" : ""}}>Active (Arrears)</option>
+                                <option value="TBC" {{ $filters->status == "TBC"  ? "selected" : ""}}>TBC</option>
+                                <option value="Inactive" {{ $filters->status == "Inactive"  ? "selected" : ""}}>Inactive</option>
+                            </select>
+                        </div>
+                        <div class="col-span-1 sm:col-span-1">
+                            <select id="type" name="type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                <option value="">Select Type</option>
+                                <option value="Owner" {{ $filters->type == "Owner"  ? "selected" : ""}}>Owner</option>
+                                <option value="Tenant" {{ $filters->type == "Tenant"  ? "selected" : ""}}>Tenant</option>
+                                <option value="Former Owner" {{ $filters->type == "Former Owner"  ? "selected" : ""}}>Former Owner</option>
+                                <option value="Former Tenant" {{ $filters->type == "Former Tenant"  ? "selected" : ""}}>Former Tenant</option>
+                            </select>
+                        </div>
+
+                        <div class="col-span-1 sm:col-span-1">
+                            <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                Filter
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+    
+    
         <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">

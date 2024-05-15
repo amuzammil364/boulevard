@@ -42,9 +42,9 @@
                 <form action="{{ route("expenses") }}" method="GET" class="space-y-4 mb-5">
                     @csrf
                     <div class="grid gap-4 mb-4 grid-cols-2 md:grid-cols-2">
-                        <!-- <div class="col-span-1 sm:col-span-1">
+                        <div class="col-span-1 sm:col-span-1">
                             <input type="month" name="payment_month" id="payment_month" value="{{ $filters->date }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                        </div> -->
+                        </div>
                         <div class="col-span-1 sm:col-span-1">
                             <select id="status" name="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                 <option value="">Select Status</option>

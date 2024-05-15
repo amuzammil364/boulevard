@@ -38,6 +38,8 @@
                                 <option value="" >Select Type</option>
                                 <option value="Owner" {{ "Owner" == $resident->type ? 'selected' : '' }}>Owner</option>
                                 <option value="Tenant" {{ "Tenant" == $resident->type ? 'selected' : '' }}>Tenant</option>
+                                <option value="Former Owner" {{ "Former Owner" == $resident->type ? 'selected' : '' }}>Former Owner</option>
+                                <option value="Former Tenant" {{ "Former Tenant" == $resident->type ? 'selected' : '' }}>Former Tenant</option>
                             </select>
                             @error("type")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>
@@ -52,6 +54,7 @@
                                 <option value="Vacant (Arrears)" {{ "Vacant (Arrears)" == $resident->status ? 'selected' : '' }}>Vacant (Arrears)</option>
                                 <option value="Active (Arrears)" {{ "Active (Arrears)" == $resident->status ? 'selected' : '' }}>Active (Arrears)</option>
                                 <option value="TBC" {{ "TBC" == $resident->status ? 'selected' : '' }}>TBC</option>
+                                <option value="Inactive" {{ "Inactive" == $resident->status ? 'selected' : '' }}>Inactive</option>
                             </select>
                             @error("status")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>

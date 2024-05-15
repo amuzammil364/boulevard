@@ -67,7 +67,7 @@ Route::middleware(["loggedIn"])->group(function () {
     // ====== Residents Routes ======
     // ==========================
     //-- Page View Routes
-    Route::get('/dashboard/residents', [ResidentsController::class, "index"])->middleware(["role:1,2"]);
+    Route::get('/dashboard/residents', [ResidentsController::class, "index"])->name('residents')->middleware(["role:1,2"]);
     Route::get('/dashboard/residents/add', [ResidentsController::class, "createPage"])->middleware(["role:1,2"]);
     Route::get('/dashboard/residents/edit/{id}', [ResidentsController::class, "editPage"])->middleware(["role:1,2"]);
     Route::get('/dashboard/residents/{id}', [ResidentsController::class, "singlePage"])->middleware(["role:1,2"]);
