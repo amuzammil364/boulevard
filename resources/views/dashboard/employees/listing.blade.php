@@ -43,6 +43,7 @@
     @endif
 
     <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 rounded-md">
+        <p class="w-full text-right mb-3">Total : {{ $employees_count }}</p>
         <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -51,7 +52,8 @@
                             <th scope="col" class="px-4 py-3">Id</th>
                             <th scope="col" class="px-4 py-3">Name</th>
                             <th scope="col" class="px-4 py-3">Role</th>
-                            <th scope="col" class="px-4 py-3">Created At</th>
+                            <th scope="col" class="px-4 py-3">Status</th>
+                            <th scope="col" class="px-4 py-3">Phone</th>
                             <th scope="col" class="px-4 py-3">
                                 <span class="sr-only">Actions</span>
                             </th>
@@ -73,7 +75,8 @@
                             <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $index + 1 }}</th>
                             <td class="px-4 py-3">{{ $employee->name }}</td>
                             <td class="px-4 py-3">{{ $employee->role }}</td>
-                            <td class="px-4 py-3">{{ $employee->created_at->format('F j, Y') }}</td>
+                            <td class="px-4 py-3">{{ $employee->status }}</td>
+                            <td class="px-4 py-3">{{ $employee->phone }}</td>
                             <td class="px-4 py-3 flex items-center justify-end">
                                 <span>
                                     <a href="{{ url("/dashboard/employees/$employee->id") }}" class="px-3 py-2 text-xs font-medium text-center inline-flex items-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">

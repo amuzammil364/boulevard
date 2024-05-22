@@ -25,6 +25,7 @@ class PaymentsController extends Controller
         $currentMonth = Carbon::now()->month;
         $currentYear = Carbon::now()->year;
         $flats = Flat::all();
+        $filters_is_empty = true;
 
 
         
@@ -52,10 +53,19 @@ class PaymentsController extends Controller
             $filters->flat_id = $request->flat_id;
         }
 
+        if(isset($request->payment_month) && !empty($request->payment_month) 
+        || isset($request->status) && !empty($request->status)
+    || isset($request->type) && !empty($request->type)
+    || isset($request->flat_id) && !empty($request->flat_id)
+        ){
+            $filters_is_empty = false;
+        }
+
         $payments = $payments->orderby('id', 'DESC')->get();
 
         $total_amount = $payments->sum('amount');
-        return view("dashboard.payments.listing", compact("payments", "filters", "flats", "total_amount"));
+        $payments_count = $payments->count();
+        return view("dashboard.payments.listing", compact("payments", "filters", "filters_is_empty", "flats", "total_amount" , "payments_count"));
     }
 
     public function createPage()

@@ -19,6 +19,8 @@ class Expense extends Model
         'payment_id',
         'amount',
         'mode_of_payment',
+        'expense_month',
+        'receipt_id',
         'due_date',
         'paid_date',
     ];

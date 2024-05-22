@@ -32,11 +32,15 @@
     @endif
 
     <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 rounded-md">
+        <p class="w-full text-right mb-3">Total : {{ $residents_count }}</p>
        
     <div class="filters">
                 <form action="{{ route("residents") }}" method="GET" class="space-y-4 mb-5">
                     @csrf
                     <div class="grid gap-4 mb-4 grid-cols-2 md:grid-cols-2">
+                        <div class="col-span-1 sm:col-span-1">
+                            <input id="full_name" name="full_name" value="{{ $filters->full_name }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Name..." />
+                        </div>
                         <div class="col-span-1 sm:col-span-1">
                             <select id="status" name="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                 <option value="">Select Status</option>
@@ -55,6 +59,14 @@
                                 <option value="Tenant" {{ $filters->type == "Tenant"  ? "selected" : ""}}>Tenant</option>
                                 <option value="Former Owner" {{ $filters->type == "Former Owner"  ? "selected" : ""}}>Former Owner</option>
                                 <option value="Former Tenant" {{ $filters->type == "Former Tenant"  ? "selected" : ""}}>Former Tenant</option>
+                            </select>
+                        </div>
+                        <div class="col-span-1 sm:col-span-1">
+                            <select id="flat" name="flat_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                <option value="">Select Flat</option>
+                                @foreach ($flats as $flat)
+                                <option value="{{ $flat->id }}" {{ $filters->flat_id == $flat->id  ? "selected" : "" }}>{{ $flat->flat_number }} ({{ $flat->phase_number }})</option>
+                                @endforeach
                             </select>
                         </div>
 

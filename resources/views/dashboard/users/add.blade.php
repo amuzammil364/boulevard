@@ -11,25 +11,25 @@
                     @csrf
                     <div class="grid gap-4 mb-4 grid-cols-2">
                         <div class="col-span-2 sm:col-span-1">
-                            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name</label>
+                            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name <span class="text-red-600">*</span></label>
                             <input type="text" name="first_name" id="first_name" value="{{ old("first_name") }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="First Name...">
                             @error("first_name")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="col-span-2 sm:col-span-1">
-                            <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last Name</label>
+                            <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last Name <span class="text-red-600">*</span></label>
                             <input type="text" name="last_name" id="last_name" value="{{ old("last_name") }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Last Name...">
                             @error("last_name")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="col-span-2 sm:col-span-1">
-                            <label for="role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role</label>
+                            <label for="role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role <span class="text-red-600">*</span></label>
                             <select id="role" name="role_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                 <option value="">Select Role</option>
                                 @foreach ($roles as $role)
-                                <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                <option value="{{ $role->id }}" {{ (old("role_id") == $role->id ? "selected" : "") }}>{{ $role->name }}</option>
                                 @endforeach
                             </select>
                             @error("role_id")
@@ -37,21 +37,21 @@
                             @enderror
                         </div>
                         <div class="col-span-2 sm:col-span-1">
-                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email <span class="text-red-600">*</span></label>
                             <input type="text" name="email" id="email" value="{{ old("email") }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Email...">
                              @error("email")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="col-span-2 sm:col-span-1">
-                            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password <span class="text-red-600">*</span></label>
                             <input type="password" name="password" id="password" value="{{ old("password") }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Password...">
                              @error("password")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="col-span-2 sm:col-span-1 mb-8">
-                            <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone Number</label>
+                            <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone Number <span class="text-red-600">*</span></label>
                             <input type="number" name="phone" id="phone" value="{{ old("phone") }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Phone Number...">
                              @error("phone")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>

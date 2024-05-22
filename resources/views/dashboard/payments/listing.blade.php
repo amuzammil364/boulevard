@@ -10,7 +10,11 @@
        
         <div class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Total Collections</h5>
-            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">PKR {{ $total_amount }}</p>
+            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"> 
+                @if (!$filters_is_empty)
+                    Filter > 
+                @endif
+                PKR {{ $total_amount }}</p>
         </div>
 
         </div>
@@ -39,6 +43,7 @@
 
     <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 rounded-md">
         
+        <p class="w-full text-right mb-3">Total : {{ $payments_count }}</p>
     
             <div class="filters">
                 <form action="{{ route("payments") }}" method="GET" class="space-y-4 mb-5">
@@ -91,6 +96,7 @@
                             <th scope="col" class="px-4 py-3">Status</th>
                             <th scope="col" class="px-4 py-3">Type</th>
                             <th scope="col" class="px-4 py-3">Amount</th>
+                            <th scope="col" class="px-4 py-3">Payment Month</th>
                             <th scope="col" class="px-4 py-3">
                                 <span class="sr-only">Actions</span>
                             </th>
@@ -114,6 +120,7 @@
                             <td class="px-4 py-3">{{ $payment->status }}</td>
                             <td class="px-4 py-3">{{ $payment->type }}</td>
                             <td class="px-4 py-3">{{ $payment->amount }}</td>
+                            <td class="px-4 py-3">{{ date("M , Y" , strtotime($payment->payment_month)) }}</td>
                             <td class="px-4 py-3 flex items-center justify-end">
                                 <span>
                                     <a href="{{ url("/dashboard/payments/$payment->id") }}" class="px-3 py-2 text-xs font-medium text-center inline-flex items-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">

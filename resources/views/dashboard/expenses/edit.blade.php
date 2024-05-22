@@ -13,14 +13,22 @@
                     <input type="hidden" name="id" value="{{ $expense->id }}" />
                     <div class="grid gap-4 mb-4 grid-cols-2">
                     <div class="col-span-2 sm:col-span-1">
-                            <label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type</label>
+                            <label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type <span class="text-red-600">*</span></label>
                             <select id="type" name="type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                 <option value="">Select Type</option>
                                 <option value="Salary" {{ $expense->type == "Salary" ? "selected" : "" }}>Salary</option>
                                 <option value="Utility" {{ $expense->type == "Utility" ? "selected" : "" }}>Utility</option>
                                 <option value="Repairs" {{ $expense->type == "Repairs" ? "selected" : "" }}>Repairs</option>
                                 <option value="Welfare" {{ $expense->type == "Welfare" ? "selected" : "" }}>Welfare</option>
-                                <option value="Misc" {{ $expense->type == "Misc" ? "selected" : "" }}>Misc</option>                                
+                                <option value="Misc" {{ $expense->type == "Misc" ? "selected" : "" }}>Misc</option>   
+                                <option value="KElectric" {{ ($expense->type == "KElectric" ? "selected" : "") }}>KElectric</option>                                
+                                <option value="KWSB" {{ ($expense->type == "KWSB" ? "selected" : "") }}>KWSB</option>                                
+                                <option value="SSGC" {{ ($expense->type == "SSGC" ? "selected" : "") }}>SSGC</option>                                
+                                <option value="Cleaning Supplies" {{ ($expense->type == "Cleaning Supplies" ? "selected" : "") }}>Cleaning Supplies</option>                                
+                                <option value="Office Supplies" {{ ($expense->type == "Office Supplies" ? "selected" : "") }}>Office Supplies</option>                                
+                                <option value="Electrical Supplies" {{ ($expense->type == "Electrical Supplies" ? "selected" : "") }}>Electrical Supplies</option>                                
+                                <option value="Plumbing Supplies" {{ ($expense->type == "Plumbing Supplies" ? "selected" : "") }}>Plumbing Supplies</option>                                
+                                <option value="Goods Material" {{ ($expense->type == "Goods Material" ? "selected" : "") }}>Goods Material</option>                             
 
                             </select>
                             @error("status")
@@ -62,8 +70,17 @@
                                 <span class="text-red-700 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
+
                         <div class="col-span-2 sm:col-span-1">
-                            <label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
+                            <label for="receipt_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Receipt Id</label>
+                            <input type="number" name="receipt_id" id="receipt_id" value="{{ old("receipt_id", $expense->receipt_id) }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Receipt Id...">
+                            @error("receipt_id")
+                                <span class="text-red-700 text-sm">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="col-span-2 sm:col-span-1">
+                            <label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status <span class="text-red-600">*</span></label>
                             <select id="status" name="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                 <option value="">Select Status</option>
                                 <option value="Paid" {{ "Paid" == $expense->status ? "selected" : "" }} >Paid</option>
@@ -74,14 +91,14 @@
                             @enderror
                         </div>
                         <div class="col-span-2 sm:col-span-1">
-                            <label for="payment" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Payment Id</label>
+                            <label for="payment" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Payment Id <span class="text-red-600">*</span></label>
                             <input type="text" name="payment_id" id="payment" value="{{ old("payment_id" , $expense->payment_id) }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Payment Id..." readonly />
                             @error("payment_id")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="col-span-2 sm:col-span-1">
-                            <label for="mode_of_payment" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mode of Payment</label>
+                            <label for="mode_of_payment" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mode of Payment <span class="text-red-600">*</span></label>
                             <select id="mode_of_payment" name="mode_of_payment" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                 <option value="">Select Mode Payment</option>
                                 <option value="Cash" {{ "Cash" == $expense->mode_of_payment ? "selected" : "" }} >Cash</option>
@@ -95,9 +112,16 @@
                             @enderror
                         </div>
                         <div class="col-span-2 sm:col-span-1">
-                            <label for="amount" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Amount</label>
+                            <label for="amount" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Amount <span class="text-red-600">*</span></label>
                             <input type="number" name="amount" id="amount" value="{{ old("amount" , $expense->amount) }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Amount...">
                             @error("amount")
+                                <span class="text-red-700 text-sm">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="col-span-2 sm:col-span-1">
+                            <label for="expense_month" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Expense Month</label>
+                            <input type="month" name="expense_month" id="expense_month" value="{{ old("expense_month",date('Y-m', strtotime($expense->expense_month))) }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                             @error("expense_month")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>
                             @enderror
                         </div>

@@ -16,12 +16,13 @@ class EmployeesController extends Controller
     public function index(Request $request)
     {
         $search = $request["name"] ?? "";
+        $employees_count = Employee::count();
         if(!empty($search)){
             $employees = Employee::where("name" , "LIKE" , "%$search%")->get();
         }else{
             $employees = Employee::all();
         }
-        return view("dashboard.employees.listing", compact("employees" , "search"));
+        return view("dashboard.employees.listing", compact("employees" , "search" , "employees_count"));
     }
 
     public function createPage()
@@ -63,7 +64,6 @@ class EmployeesController extends Controller
             "role" => "required",
             "name" => "required",
             "status" => "required",
-            "start_date" => "required",
         ]);
 
         $employee = new Employee();
@@ -121,7 +121,6 @@ class EmployeesController extends Controller
             "role" => "required",
             "name" => "required",
             "status" => "required",
-            "start_date" => "required",
         ]);
 
         $employee->role = $request->role;

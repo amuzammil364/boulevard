@@ -15,12 +15,13 @@ class FlatController extends Controller
     public function index(Request $request)
     {
         $search = $request["flat_number"] ?? "";
+        $flats_count = Flat::count();
         if(!empty($search)){
             $flats = Flat::where("flat_number" , "LIKE" , "%$search%")->get();
         }else{
             $flats = Flat::all();
         }
-        return view("dashboard.flats.listing", compact("flats" , "search"));
+        return view("dashboard.flats.listing", compact("flats" , "search" , "flats_count"));
 
     }
 

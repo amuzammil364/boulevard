@@ -20,19 +20,22 @@
 
     <div class="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 gap-4">
         <div class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Residents</h5>
-            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ $residents }}</p>
-            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Total number of Active Residents</p>
+            <h5 class="mb-3 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Residents</h5>
+            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"> <strong>Active</strong> {{ $resident_actives }} </p>
+            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"> <strong>Vacant</strong> {{ $resident_vacants }} </p>
+            {{-- <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Total number of Active Residents</p> --}}
         </div>
         <div class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Collections</h5>
-            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">PKR {{ $payments }}</p>
-            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Total current month collections</p>
+            <h5 class="mb-3 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Collections</h5>
+            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"><strong>Paid</strong>  PKR {{ $payments_paid }}</p>
+            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"><strong>Pending</strong> PKR {{ $payments_pending }}</p>
+            {{-- <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Total current month collections</p> --}}
         </div>
         <div class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Expenses</h5>
-            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">PKR {{ $expenses }}</p>
-            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Total current month expenses</p>
+            <h5 class="mb-3 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Expenses</h5>
+            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"><strong>Paid</strong> : PKR {{ $expenses_paid }}</p>
+            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"><strong>Pending</strong> : PKR {{ $expenses_pending }}</p>
+            {{-- <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Total current month expenses</p> --}}
         </div>
 
     </div>

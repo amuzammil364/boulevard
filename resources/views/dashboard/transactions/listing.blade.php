@@ -34,6 +34,7 @@
     @endif
 
         <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 rounded-md">
+        <p class="w-full text-right mb-3">Total : {{ $transactions_count }}</p>
         <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">

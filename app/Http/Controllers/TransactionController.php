@@ -13,13 +13,13 @@ class TransactionController extends Controller
     public function index(Request $request)
     {
         $search = $request["search"] ?? "";
-
+        $transactions_count = Transaction::count();
         if (!empty($search)) {
             $transactions = Transaction::where("payment_id", "LIKE", "%$search%")->get();
         } else {
             $transactions = Transaction::all();
         }
-        return view("dashboard.transactions.listing", compact("transactions", "search"));
+        return view("dashboard.transactions.listing", compact("transactions", "search" , "transactions_count"));
     }
 
     /**

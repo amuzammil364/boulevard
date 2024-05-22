@@ -11,7 +11,7 @@
                     @csrf
                     <div class="grid gap-4 mb-4 grid-cols-2">
                         <div class="col-span-2 sm:col-span-1">
-                            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+                            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name <span class="text-red-600">*</span></label>
                             <input type="text" name="name" id="name" value="{{ old("name") }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Name...">
                             @error("name")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>
@@ -19,19 +19,26 @@
                         </div>
 
                         <div class="col-span-2 sm:col-span-1">
-                            <label for="role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role</label>
+                            <label for="role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role <span class="text-red-600">*</span></label>
                             <select id="role" name="role" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                 <option value="">Select role</option>
-                                <option value="Watchman">Watchman</option>
-                                <option value="Accountant">Accountant</option>
-                                <option value="Administrator">Administrator</option>
-                                <option value="Manager">Manager</option>
-                                <option value="Sweeper">Sweeper</option>                                
-                                <option value="Gardener">Gardener</option>                                
-                                <option value="Electrician">Electrician</option>                                
-                                <option value="Plumber">Plumber</option>                                
-                                <option value="Vendor">Vendor</option>                                
-                                <option value="Other">Other</option>                                
+                                <option value="Watchman" {{ old("role") == "Watchman" ? "selected" : "" }}>Watchman</option>
+                                <option value="Accountant" {{ old("role") == "Accountant" ? "selected" : "" }}>Accountant</option>
+                                <option value="Administrator" {{ old("role") == "Administrator" ? "selected" : "" }}>Administrator</option>
+                                <option value="Manager" {{ old("role") == "Manager" ? "selected" : "" }}>Manager</option>
+                                <option value="Sweeper" {{ old("role") == "Sweeper" ? "selected" : "" }}>Sweeper</option>                                
+                                <option value="Gardener" {{ old("role") == "Gardener" ? "selected" : "" }}>Gardener</option>                                
+                                <option value="Electrician" {{ old("role") == "Electrician" ? "selected" : "" }}>Electrician</option>                                
+                                <option value="Plumber" {{ old("role") == "Plumber" ? "selected" : "" }}>Plumber</option>                                
+                                <option value="Vendor" {{ old("role") == "Vendor" ? "selected" : "" }}>Vendor</option>                                
+                                <option value="CCTV Technitian" {{ old("role") == "CCTV Technitian" ? "selected" : "" }}>CCTV Technitian</option>                                
+                                <option value="Intercom" {{ old("role") == "Intercom" ? "selected" : "" }}>Intercom</option>                                
+                                <option value="TV Cable" {{ old("role") == "TV Cable" ? "selected" : "" }}>TV Cable</option>                                
+                                <option value="Carpenter" {{ old("role") == "Carpenter" ? "selected" : "" }}>Carpenter</option>                                
+                                <option value="Goods Supplier" {{ old("role") == "Goods Supplier" ? "selected" : "" }}>Goods Supplier</option>                                
+                                <option value="Water Supplier" {{ old("role") == "Water Supplier" ? "selected" : "" }}>Water Supplier</option>                                
+                                <option value="Mason" {{ old("role") == "Mason" ? "selected" : "" }}>Mason</option>                                
+                                <option value="Other" {{ old("role") == "Other" ? "selected" : "" }}>Other</option>                                
                             </select>
                             @error("role")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>
@@ -46,7 +53,7 @@
                         </div>
                         <div class="col-span-2 sm:col-span-1">
                             <label for="cnic" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cnic</label>
-                            <input type="number" name="cnic" id="cnic" value="{{ old("cnic") }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Cnic Number...">
+                            <input type="text" name="cnic" id="cnic" value="{{ old("cnic") }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Cnic Number...">
                             @error("cnic")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>
                             @enderror
@@ -74,12 +81,13 @@
                             @enderror
                         </div>
                         <div class="col-span-2 sm:col-span-1">
-                            <label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
+                            <label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status <span class="text-red-600">*</span></label>
                             
                             <select id="status" name="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                 <option value="">Select Status</option>
-                                <option value="Active">Active</option>
-                                <option value="InActive">InActive</option>
+                                <option value="Active" {{ old("status") == "Active" ? "selected" : "" }}>Active</option>
+                                <option value="InActive" {{ old("status") == "InActive" ? "selected" : "" }}>InActive</option>
+                                <option value="Vacation" {{ old("status") == "Vacation" ? "selected" : "" }}>Vacation</option>
                             </select>
 
                             @error("status")
@@ -89,9 +97,6 @@
                         <div class="col-span-2 sm:col-span-1 mb-8">
                             <label for="start_date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Start Date</label>
                             <input type="date" name="start_date" id="start_date" value="{{ old("start_date") }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                             @error("start_date")
-                                <span class="text-red-700 text-sm">{{ $message }}</span>
-                            @enderror
                         </div>
                     </div>
                     <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">

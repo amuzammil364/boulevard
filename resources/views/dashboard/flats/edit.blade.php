@@ -13,14 +13,14 @@
                     <input type="hidden" name="id" value="{{ $flat->id }}">
                     <div class="grid gap-4 mb-4 grid-cols-1">
                         <div class="col-span-1 sm:col-span-1">
-                            <label for="flat_number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Flat Number</label>
+                            <label for="flat_number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Flat Number <span class="text-red-600">*</span></label>
                             <input type="text" name="flat_number" id="first_name" value="{{ old("flat_number" , $flat->flat_number) }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Flat Number...">
                             @error("flat_number")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="col-span-1 sm:col-span-1">
-                            <label for="phase_number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phase Number</label>
+                            <label for="phase_number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phase Number <span class="text-red-600">*</span></label>
                             <input type="text" name="phase_number" id="last_name" value="{{ old("phase_number" , $flat->phase_number) }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Phase Number...">
                             @error("phase_number")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>

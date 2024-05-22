@@ -18,12 +18,19 @@ class ResidentsController extends Controller
     {
 
         $filters = new stdClass();
+        $filters->full_name = "";
         $filters->date = "";
         $filters->status = "";
         $filters->type = "";
+        $filters->flat_id = "";
 
         $residents = Resident::with('flat');
+        $flats = Flat::all();
 
+        if(isset($request->full_name) && !empty($request->full_name)){
+            $residents = $residents->where('full_name',$request->full_name);
+            $filters->full_name = $request->full_name;
+        }
 
         if(isset($request->status) && !empty($request->status)){
             $residents = $residents->where('status',$request->status);
@@ -35,8 +42,14 @@ class ResidentsController extends Controller
             $filters->type = $request->type;
         }
 
+        if(isset($request->flat_id) && !empty($request->flat_id)){
+            $residents = $residents->where('flat_id',$request->flat_id);
+            $filters->flat_id = $request->flat_id;
+        }
+
         $residents = $residents->get();
-        return view("dashboard.residents.listing", compact("residents" , "filters"));
+        $residents_count = $residents->count();
+        return view("dashboard.residents.listing", compact("residents" , "filters" , "flats", "residents_count"));
     }
 
     public function createPage()

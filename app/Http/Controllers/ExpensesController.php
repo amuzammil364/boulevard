@@ -56,8 +56,9 @@ class ExpensesController extends Controller
         $expenses = $expenses->orderby('id','DESC')->get();
 
         $total_amount = $expenses->sum('amount');
+        $expenses_count = $expenses->count();
 
-        return view("dashboard.expenses.listing", compact("expenses", "filters", "employees", "total_amount"));
+        return view("dashboard.expenses.listing", compact("expenses", "filters", "employees", "total_amount" , "expenses_count"));
     }
 
     public function createPage()
@@ -67,11 +68,11 @@ class ExpensesController extends Controller
 
 
         // $expenses = Expense::orderby('id','DESC')->get();
-        // $payment_id = 1;
+        // $receipt_id = 1;
         // if(sizeof($expenses)>0){
-        //     $payment_id = $expenses[0]->id + 1;
+        //     $receipt_id = $expenses[0]->id + 1;
         // }
-        // $payment_id = str_pad($payment_id, 4, '0', STR_PAD_LEFT);
+        // $receipt_id = str_pad($receipt_id, 4, '0', STR_PAD_LEFT);
         $payment_id = uniqid();
         return view("dashboard.expenses.add", compact("employees" , "residents", "payment_id"));
     }
@@ -136,6 +137,8 @@ class ExpensesController extends Controller
         $expense->payment_id = $request->payment_id;
         $expense->amount = $request->amount;
         $expense->mode_of_payment = $request->mode_of_payment;
+        $expense->expense_month = date('Y-m-d', strtotime($request->expense_month));
+        $expense->receipt_id = $request->receipt_id;
         $expense->due_date = $request->due_date;
         $expense->paid_date = $request->paid_date;
         $expense->reference = $request->reference;
@@ -217,6 +220,8 @@ class ExpensesController extends Controller
         $expense->payment_id = $request->payment_id;
         $expense->amount = $request->amount;
         $expense->mode_of_payment = $request->mode_of_payment;
+        $expense->expense_month = date('Y-m-d', strtotime($request->expense_month));
+        $expense->receipt_id = $request->receipt_id;
         $expense->due_date = $request->due_date;
         $expense->paid_date = $request->paid_date;
         $expense->reference = $request->reference;

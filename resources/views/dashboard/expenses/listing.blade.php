@@ -37,6 +37,7 @@
     @endif
 
     <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 rounded-md">
+        <p class="w-full text-right mb-3">Total : {{ $expenses_count }}</p>
 
     <div class="filters">
                 <form action="{{ route("expenses") }}" method="GET" class="space-y-4 mb-5">
@@ -92,6 +93,7 @@
                             <th scope="col" class="px-4 py-3">Type</th>
                             <th scope="col" class="px-4 py-3">Status</th>
                             <th scope="col" class="px-4 py-3">Amount</th>
+                            <th scope="col" class="px-4 py-3">Paid Date</th>
                             <th scope="col" class="px-4 py-3">
                                 <span class="sr-only">Actions</span>
                             </th>
@@ -115,6 +117,7 @@
                             <td class="px-4 py-3">{{ $expense->type }}</td>
                             <td class="px-4 py-3">{{ $expense->status }}</td>
                             <td class="px-4 py-3">{{ $expense->amount }}</td>
+                            <td class="px-4 py-3">{{ date("F j , Y" , strtotime(($expense->paid_date))) }}</td>
                             <td class="px-4 py-3 flex items-center justify-end">
                                 <span>
                                     <a href="{{ url("/dashboard/expenses/$expense->id") }}" class="px-3 py-2 text-xs font-medium text-center inline-flex items-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">

@@ -13,7 +13,7 @@
                     <input type="hidden" name="id" value="{{ $resident->id }}">
                     <div class="grid gap-4 mb-4 grid-cols-2">
                         <div class="col-span-2 sm:col-span-1">
-                            <label for="full_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Full Name</label>
+                            <label for="full_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Full Name <span class="text-red-600">*</span></label>
                             <input type="text" name="full_name" id="full_name" value="{{ old("full_name" , $resident->full_name) }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Full Name...">
                             @error("full_name")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>
@@ -21,7 +21,7 @@
                         </div>
 
                         <div class="col-span-2 sm:col-span-1">
-                            <label for="flat" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Flat</label>
+                            <label for="flat" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Flat <span class="text-red-600">*</span></label>
                             <select id="flat" name="flat_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                 <option value="">Select Flat</option>
                                 @foreach ($flats as $flat)
@@ -33,7 +33,7 @@
                             @enderror
                         </div>
                         <div class="col-span-2 sm:col-span-1">
-                            <label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type</label>
+                            <label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type <span class="text-red-600">*</span></label>
                             <select id="type" name="type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                 <option value="" >Select Type</option>
                                 <option value="Owner" {{ "Owner" == $resident->type ? 'selected' : '' }}>Owner</option>
@@ -46,13 +46,14 @@
                             @enderror
                         </div>
                         <div class="col-span-2 sm:col-span-1">
-                            <label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
+                            <label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status <span class="text-red-600">*</span></label>
                             <select id="status" name="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                 <option value="">Select Status</option>
                                 <option value="Active" {{ "Active" == $resident->status ? 'selected' : '' }}>Active</option>
                                 <option value="Vacant (Paid)" {{ "Vacant (Paid)" == $resident->status ? 'selected' : '' }}>Vacant (Paid)</option>
                                 <option value="Vacant (Arrears)" {{ "Vacant (Arrears)" == $resident->status ? 'selected' : '' }}>Vacant (Arrears)</option>
                                 <option value="Active (Arrears)" {{ "Active (Arrears)" == $resident->status ? 'selected' : '' }}>Active (Arrears)</option>
+                                <option value="Active (Rented)" {{ "Active (Rented)" == $resident->status ? 'selected' : '' }}>Active (Rented)</option>
                                 <option value="TBC" {{ "TBC" == $resident->status ? 'selected' : '' }}>TBC</option>
                                 <option value="Inactive" {{ "Inactive" == $resident->status ? 'selected' : '' }}>Inactive</option>
                             </select>

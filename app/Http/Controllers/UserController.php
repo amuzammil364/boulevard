@@ -16,12 +16,13 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $search = $request["email"] ?? "";
+        $users_count = User::count();
         if(!empty($search)){
             $users = User::where("email" , "LIKE" , "%$search%")->get();
         }else{
             $users = User::all();
         }
-        return view("dashboard.users.listing", compact("users" , "search"));
+        return view("dashboard.users.listing", compact("users" , "search" , "users_count"));
     }
 
     public function createPage(){

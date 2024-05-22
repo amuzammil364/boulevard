@@ -12,7 +12,7 @@
                     <div class="grid gap-4 mb-4 grid-cols-2">
 
                         <div class="col-span-2 sm:col-span-1">
-                            <label for="full_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Full Name</label>
+                            <label for="full_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Full Name <span class="text-red-600">*</span></label>
                             <input type="text" name="full_name" id="full_name" value="{{ old("full_name") }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Full Name...">
                             @error("full_name")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>
@@ -21,11 +21,11 @@
 
 
                         <div class="col-span-2 sm:col-span-1">
-                            <label for="flat" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Flat</label>
+                            <label for="flat" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Flat <span class="text-red-600">*</span></label>
                             <select id="flat" name="flat_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                 <option value="">Select Flat</option>
                                 @foreach ($flats as $flat)
-                                <option value="{{ $flat->id }}">{{ $flat->flat_number }} {{ " " }} ({{ $flat->phase_number }})</option>
+                                <option value="{{ $flat->id }}" {{ old("flat_id") == $flat->id ? "selected" : "" }} >{{ $flat->flat_number }} {{ " " }} ({{ $flat->phase_number }})</option>
                                 @endforeach
                             </select>
                             @error("flat_id")
@@ -33,28 +33,29 @@
                             @enderror
                         </div>
                         <div class="col-span-2 sm:col-span-1">
-                            <label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type</label>
+                            <label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type <span class="text-red-600">*</span></label>
                             <select id="type" name="type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                 <option value="">Select Type</option>
-                                <option value="Owner">Owner</option>
-                                <option value="Tenant">Tenant</option>
-                                <option value="Former Owner">Former Owner</option>
-                                <option value="Former Tenant">Former Tenant</option>
+                                <option value="Owner" {{ old("type") == "Owner" ? "selected" : "" }}>Owner</option>
+                                <option value="Tenant" {{ old("type") == "Tenant" ? "selected" : "" }}>Tenant</option>
+                                <option value="Former Owner" {{ old("type") == "Former Owner" ? "selected" : "" }}>Former Owner</option>
+                                <option value="Former Tenant" {{ old("type") == "Former Tenant" ? "selected" : "" }}>Former Tenant</option>
                             </select>
                             @error("type")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="col-span-2 sm:col-span-1">
-                            <label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
+                            <label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status <span class="text-red-600">*</span></label>
                             <select id="status" name="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                 <option value="">Select Status</option>
-                                <option value="Active">Active</option>
-                                <option value="Vacant (Paid)">Vacant (Paid)</option>
-                                <option value="Vacant (Arrears)">Vacant (Arrears)</option>
-                                <option value="Active (Arrears)">Active (Arrears)</option>
-                                <option value="TBC">TBC</option>
-                                <option value="Inactive">Inactive</option>
+                                <option value="Active" {{ old("status") == "Active" ? "selected" : "" }}>Active</option>
+                                <option value="Vacant (Paid)" {{ old("status") == "Vacant (Paid)" ? "selected" : "" }}>Vacant (Paid)</option>
+                                <option value="Vacant (Arrears)"> {{ old("status") == "Vacant (Arrears)" ? "selected" : "" }}Vacant (Arrears)</option>
+                                <option value="Active (Arrears)" {{ old("status") == "Active (Arrears)" ? "selected" : "" }}>Active (Arrears)</option>
+                                <option value="Active (Rented)" {{ old("status") == "Active (Rented)" ? "selected" : "" }}>Active (Rented)</option>
+                                <option value="TBC" {{ old("status") == "TBC" ? "selected" : "" }}>TBC</option>
+                                <option value="Inactive" {{ old("status") == "Inactive" ? "selected" : "" }}>Inactive</option>
                             </select>
                             @error("status")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>
