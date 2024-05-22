@@ -20,29 +20,26 @@
 
     <div class="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 gap-4">
         <div class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <h5 class="mb-3 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Residents</h5>
-            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"> <strong>Active</strong> {{ $resident_actives }} </p>
-            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"> <strong>Vacant</strong> {{ $resident_vacants }} </p>
-            {{-- <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Total number of Active Residents</p> --}}
+        <a href="{{ url("/dashboard/residents") }}" > <h5 class="mb-3 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Residents</h5></a>
+            <p class="font-normal text-gray-700 dark:text-gray-400"> <strong>Active</strong> - {{ $resident_actives }} </p>
+            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"> <strong>Vacant</strong> - {{ $resident_vacants }} </p>
         </div>
         <div class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <h5 class="mb-3 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Collections</h5>
-            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"><strong>Paid</strong>  PKR {{ $payments_paid }}</p>
-            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"><strong>Pending</strong> PKR {{ $payments_pending }}</p>
-            {{-- <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Total current month collections</p> --}}
+        <a href="{{ url("/dashboard/payments") }}" ><h5 class="mb-3 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Collections</h5></a>
+            <p class="font-normal text-gray-700 dark:text-gray-400"><strong>Paid</strong> - PKR {{ $payments_paid }}</p>
+            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"><strong>Pending</strong> - PKR {{ $payments_pending }}</p>
         </div>
         <div class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <h5 class="mb-3 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Expenses</h5>
-            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"><strong>Paid</strong> : PKR {{ $expenses_paid }}</p>
-            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"><strong>Pending</strong> : PKR {{ $expenses_pending }}</p>
-            {{-- <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Total current month expenses</p> --}}
+        <a href="{{ url("/dashboard/expenses") }}" ><h5 class="mb-3 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Expenses</h5></a>
+            <p class="font-normal text-gray-700 dark:text-gray-400"><strong>Paid</strong> - PKR {{ $expenses_paid }}</p>
+            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"><strong>Pending</strong> - PKR {{ $expenses_pending }}</p>
         </div>
 
     </div>
     <div class="rounded bg-gray-50 p-8 mt-5">
         <div class="flex items-center justify-between mb-6">
             <div>
-                <h3 class="font-bold text-3xl mb-2">Collections</h3>
+            <a href="{{ url("/dashboard/payments") }}" ><h3 class="font-bold text-3xl mb-2">Collections</h3></a>
                 <p class="">This is a list of Current Month Collections</p>
             </div>
         </div>
@@ -90,7 +87,7 @@
     <div class="rounded bg-gray-50 p-8 mt-5">
         <div class="flex items-center justify-between mb-6">
             <div>
-                <h3 class="font-bold text-3xl mb-2">Expenses</h3>
+            <a href="{{ url("/dashboard/expenses") }}" ><h3 class="font-bold text-3xl mb-2">Expenses</h3></a>
                 <p class="">This is a list of Current Month Expenses</p>
             </div>
         </div>

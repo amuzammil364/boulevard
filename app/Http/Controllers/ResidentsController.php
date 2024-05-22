@@ -28,7 +28,7 @@ class ResidentsController extends Controller
         $flats = Flat::all();
 
         if(isset($request->full_name) && !empty($request->full_name)){
-            $residents = $residents->where('full_name',$request->full_name);
+            $residents = $residents->where('full_name','LIKE','%'.$request->full_name.'%');
             $filters->full_name = $request->full_name;
         }
 
