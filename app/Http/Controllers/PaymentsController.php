@@ -26,8 +26,8 @@ class PaymentsController extends Controller
         $currentYear = Carbon::now()->year;
         $flats = Flat::all();
 
-        $payments_paid = Payment::where('status','Paid')->sum('amount');
-        $payments_pending = Payment::where('status','Pending')->sum('amount');
+        $payments_paid = Payment::where('status','Paid');
+        $payments_pending = Payment::where('status','Pending');
 
         
         $payments = Payment::with('flat');
@@ -38,31 +38,36 @@ class PaymentsController extends Controller
             $payments = $payments->whereMonth('payment_month', $currentMonth)->whereYear('payment_month', $currentYear);
             $filters->date = $request->payment_month;
 
-            $payments_paid = Payment::where('status','Paid')->whereMonth('payment_month', $currentMonth)
-            ->whereYear('payment_month', $currentYear)
-            ->sum('amount');
-            $payments_pending = Payment::where('status','Pending')->whereMonth('payment_month', $currentMonth)
-            ->whereYear('payment_month', $currentYear)
-            ->sum('amount');
-    
-
+            $payments_paid = $payments_paid->whereMonth('payment_month', $currentMonth)
+            ->whereYear('payment_month', $currentYear);
+            $payments_pending = $payments_pending->whereMonth('payment_month', $currentMonth)
+            ->whereYear('payment_month', $currentYear);
         }
 
         if(isset($request->status) && !empty($request->status)){
             $payments = $payments->where('status',$request->status);
+            $payments_paid = $payments_paid->where('status',$request->status);
+            $payments_pending = $payments_pending->where('status',$request->status);
             $filters->status = $request->status;
         }
 
         if(isset($request->type) && !empty($request->type)){
             $payments = $payments->where('type',$request->type);
+            $payments_paid = $payments_paid->where('type',$request->type);
+            $payments_pending = $payments_pending->where('type',$request->type);
             $filters->type = $request->type;
         }
 
         if(isset($request->flat_id) && !empty($request->flat_id)){
             $payments = $payments->where('flat_id',$request->flat_id);
+            $payments_paid = $payments_paid->where('flat_id',$request->flat_id);
+            $payments_pending = $payments_pending->where('flat_id',$request->flat_id);
+
             $filters->flat_id = $request->flat_id;
         }
 
+        $payments_paid = $payments_paid->sum('amount');
+        $payments_pending = $payments_pending->sum('amount');
         $payments = $payments->orderby('id', 'DESC')->get();
 
         $total_amount = $payments->sum('amount');
