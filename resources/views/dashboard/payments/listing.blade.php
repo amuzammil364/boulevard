@@ -10,11 +10,8 @@
        
         <div class="p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Total Collections</h5>
-            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"> 
-                @if (!$filters_is_empty)
-                    Filter > 
-                @endif
-                PKR {{ $total_amount }}</p>
+                <p class="font-normal text-gray-700 dark:text-gray-400"><strong>Paid</strong> - {{$payments_paid}}</p>
+                <p class="font-normal text-gray-700 dark:text-gray-400"><strong>Pending</strong> - {{$payments_pending}}</p>
         </div>
 
         </div>

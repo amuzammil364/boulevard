@@ -18,7 +18,7 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         // $flats = Flat::count();
-        $resident_actives = Resident::whereIn('status',['Active','Active (Arrears)' , 'Active (Rented)'])->count();
+        $resident_actives = Resident::whereIn('status',['Active','Active (Arrears)'])->count();
         $resident_vacants = Resident::whereIn('status' , ['Vacant (Paid)' , 'Vacant (Arrears)'])->count();
 
         $currentMonth = Carbon::now()->month;

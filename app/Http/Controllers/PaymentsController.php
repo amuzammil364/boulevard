@@ -25,8 +25,9 @@ class PaymentsController extends Controller
         $currentMonth = Carbon::now()->month;
         $currentYear = Carbon::now()->year;
         $flats = Flat::all();
-        $filters_is_empty = true;
 
+        $payments_paid = Payment::where('status','Paid')->sum('amount');
+        $payments_pending = Payment::where('status','Pending')->sum('amount');
 
         
         $payments = Payment::with('flat');
@@ -36,6 +37,15 @@ class PaymentsController extends Controller
             $currentYear = date('Y', strtotime($request->payment_month));
             $payments = $payments->whereMonth('payment_month', $currentMonth)->whereYear('payment_month', $currentYear);
             $filters->date = $request->payment_month;
+
+            $payments_paid = Payment::where('status','Paid')->whereMonth('payment_month', $currentMonth)
+            ->whereYear('payment_month', $currentYear)
+            ->sum('amount');
+            $payments_pending = Payment::where('status','Pending')->whereMonth('payment_month', $currentMonth)
+            ->whereYear('payment_month', $currentYear)
+            ->sum('amount');
+    
+
         }
 
         if(isset($request->status) && !empty($request->status)){
@@ -53,19 +63,11 @@ class PaymentsController extends Controller
             $filters->flat_id = $request->flat_id;
         }
 
-        if(isset($request->payment_month) && !empty($request->payment_month) 
-        || isset($request->status) && !empty($request->status)
-    || isset($request->type) && !empty($request->type)
-    || isset($request->flat_id) && !empty($request->flat_id)
-        ){
-            $filters_is_empty = false;
-        }
-
         $payments = $payments->orderby('id', 'DESC')->get();
 
         $total_amount = $payments->sum('amount');
         $payments_count = $payments->count();
-        return view("dashboard.payments.listing", compact("payments", "filters", "filters_is_empty", "flats", "total_amount" , "payments_count"));
+        return view("dashboard.payments.listing", compact("payments", "filters", "flats", "total_amount" , "payments_count", "payments_paid", "payments_pending"));
     }
 
     public function createPage()
