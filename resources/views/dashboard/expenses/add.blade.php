@@ -27,6 +27,14 @@
                                 <option value="Electrical Supplies" {{ (old("type") == "Electrical Supplies" ? "selected" : "") }}>Electrical Supplies</option>                                
                                 <option value="Plumbing Supplies" {{ (old("type") == "Plumbing Supplies" ? "selected" : "") }}>Plumbing Supplies</option>                                
                                 <option value="Goods Material" {{ (old("type") == "Goods Material" ? "selected" : "") }}>Goods Material</option>                                
+                                <option value="Waste Disposal" {{ (old("type") == "Waste Disposal" ? "selected" : "") }}>Waste Disposal</option>                                
+                                <option value="Tv Cable" {{ (old("type") == "Tv Cable" ? "selected" : "") }}>Tv Cable</option>                                
+                                <option value="Mosque / Prayer" {{ (old("type") == "Mosque / Prayer" ? "selected" : "") }}>Mosque / Prayer</option>                                
+                                <option value="Water Tanker" {{ (old("type") == "Water Tanker" ? "selected" : "") }}>Water Tanker</option>                                
+                                <option value="Mason / Brickwork" {{ (old("type") == "Mason / Brickwork" ? "selected" : "") }}>Mason / Brickwork</option>                                
+                                <option value="Repairs-Electric" {{ (old("type") == "Repairs-Electric" ? "selected" : "") }}>Repairs-Electric</option>                                
+                                <option value="Repairs-Plumbing" {{ (old("type") == "Repairs-Plumbing" ? "selected" : "") }}>Repairs-Plumbing</option>                                
+                                <option value="Repairs-Mason" {{ (old("type") == "Repairs-Mason" ? "selected" : "") }}>Repairs-Mason</option>                                
                             </select>
                             @error("type")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>
@@ -71,6 +79,9 @@
                         <div class="col-span-2 sm:col-span-1">
                             <label for="receipt_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Receipt Id</label>
                             <input type="number" name="receipt_id" id="receipt_id" value="{{ old("receipt_id") }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Receipt Id...">
+                            <div class="text-right mt-2">
+                                <button type="button" id="clear_receipt_id_btn" class="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Clear</button>
+                            </div>
                             @error("receipt_id")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>
                             @enderror
@@ -144,5 +155,15 @@
             </div>
     </section>
 </main>
+
+<script>
+
+let clear_receipt_id_btn = document.querySelector("#clear_receipt_id_btn");
+
+clear_receipt_id_btn.addEventListener("click" , () =>{
+    document.querySelector("#receipt_id").value = "";
+});
+
+</script>
 
 @endsection

@@ -28,7 +28,15 @@
                                 <option value="Office Supplies" {{ ($expense->type == "Office Supplies" ? "selected" : "") }}>Office Supplies</option>                                
                                 <option value="Electrical Supplies" {{ ($expense->type == "Electrical Supplies" ? "selected" : "") }}>Electrical Supplies</option>                                
                                 <option value="Plumbing Supplies" {{ ($expense->type == "Plumbing Supplies" ? "selected" : "") }}>Plumbing Supplies</option>                                
-                                <option value="Goods Material" {{ ($expense->type == "Goods Material" ? "selected" : "") }}>Goods Material</option>                             
+                                <option value="Goods Material" {{ ($expense->type == "Goods Material" ? "selected" : "") }}>Goods Material</option>
+                                <option value="Waste Disposal" {{ ($expense->type == "Waste Disposal" ? "selected" : "") }}>Waste Disposal</option>                                
+                                <option value="Tv Cable" {{ ($expense->type == "Tv Cable" ? "selected" : "") }}>Tv Cable</option>                                
+                                <option value="Mosque / Prayer" {{ ($expense->type == "Mosque / Prayer" ? "selected" : "") }}>Mosque / Prayer</option>                                
+                                <option value="Water Tanker" {{ ($expense->type == "Water Tanker" ? "selected" : "") }}>Water Tanker</option>                                
+                                <option value="Mason / Brickwork" {{ ($expense->type == "Mason / Brickwork" ? "selected" : "") }}>Mason / Brickwork</option>                                
+                                <option value="Repairs-Electric" {{ ($expense->type == "Repairs-Electric" ? "selected" : "") }}>Repairs-Electric</option>                                
+                                <option value="Repairs-Plumbing" {{ ($expense->type == "Repairs-Plumbing" ? "selected" : "") }}>Repairs-Plumbing</option>                                
+                                <option value="Repairs-Mason" {{ ($expense->type == "Repairs-Mason" ? "selected" : "") }}>Repairs-Mason</option>                          
 
                             </select>
                             @error("status")

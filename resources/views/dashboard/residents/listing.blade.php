@@ -48,6 +48,7 @@
                                 <option value="Vacant (Paid)" {{ $filters->status == "Vacant (Paid)"  ? "selected" : ""}}>Vacant (Paid)</option>
                                 <option value="Vacant (Arrears)" {{ $filters->status == "Vacant (Arrears)"  ? "selected" : ""}}>Vacant (Arrears)</option>
                                 <option value="Active (Arrears)" {{ $filters->status == "Active (Arrears)"  ? "selected" : ""}}>Active (Arrears)</option>
+                                <option value="Active (Rented)" {{ $filters->status == "Active (Rented)"  ? "selected" : ""}}>Active (Rented)</option>
                                 <option value="TBC" {{ $filters->status == "TBC"  ? "selected" : ""}}>TBC</option>
                                 <option value="Inactive" {{ $filters->status == "Inactive"  ? "selected" : ""}}>Inactive</option>
                             </select>
@@ -85,6 +86,7 @@
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
+                            <th scope="col" class="px-4 py-3">#</th>
                             <th scope="col" class="px-4 py-3">Full Name</th>
                             <th scope="col" class="px-4 py-3">Flat</th>
                             <th scope="col" class="px-4 py-3">Type</th>
@@ -108,6 +110,7 @@
                         @foreach ($residents as $index => $resident)
 
                         <tr class="border-b dark:border-gray-700">
+                            <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $index + 1 }}</th>
                             <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $resident->full_name }}</th>
                             <td class="px-4 py-3">{{ $resident->flat->flat_number }} {{ "" }} ({{ $resident->flat->phase_number }})</td>
                             <td class="px-4 py-3">{{ $resident->type }}</td>
