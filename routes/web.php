@@ -10,6 +10,7 @@ use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\ResidentsController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\SummaryController;
+use App\Http\Controllers\PrintReceiptController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -124,6 +125,11 @@ Route::middleware(["loggedIn"])->group(function () {
     // ==========================
     //-- Page View Routes
     Route::get('/dashboard/summary', [SummaryController::class, "index"])->middleware(["role:1"])->name("summary");
+
+    // ====== Print Receipt Routes ======
+    // ==========================
+    //-- Page View Routes
+    Route::get('/dashboard/print-receipt', [PrintReceiptController::class, "index"])->middleware(["role:1"]);
 
 
     // ====== Settings/options Routes ======
