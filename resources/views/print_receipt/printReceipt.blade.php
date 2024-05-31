@@ -27,37 +27,37 @@
                         <thead class="text-xs text-black uppercase ">
                             <tr>
                                 <th scope="col" class="font-bold">
-                                    Month
+                                    Month: {{ $data['month'] }}
                                 </th>
                                 <th scope="col" class="font-bold">
-                                    Date
+                                    Date: {{ $data['date'] }}
                                 </th>
                             </tr>
                         </thead>
                         <tbody class="inline-grid">
                             <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 mt-1 inline-block">
                                 <th scope="row" class=" font-bold text-black whitespace-nowrap uppercase">
-                                    Flat
+                                    Flat: {{ $data['flat'] }}
                                 </th>
                             </tr>
                             <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 mt-1 inline-block">
                                 <th scope="row" class=" font-bold text-black whitespace-nowrap uppercase">
-                                    Phase
+                                    Phase: {{ $data['phase'] }}
                                 </th>
                             </tr>
                             <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 mt-1 inline-block">
                                 <th scope="row" class=" font-bold text-black whitespace-nowrap uppercase">
-                                    Resident
+                                    Resident: {{ $data['resident'] }}
                                 </th>
                             </tr>
                             <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 mt-1 inline-block">
                                 <th scope="row" class=" font-bold text-black whitespace-nowrap uppercase">
-                                    Contact
+                                    Contact: {{ $data['contact'] }}
                                 </th>
                             </tr>
                             <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 mt-1 inline-block">
                                 <th scope="row" class=" font-bold text-black whitespace-nowrap uppercase">
-                                    Payment Id
+                                    Payment Id: {{ $data['payment_id'] }}
                                 </th>
                             </tr>
                         </tbody>
@@ -77,12 +77,15 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($data['receipt_items'] as $key=>$value )
+                                
+                            @endforeach
                             <tr class="bg-white">
                                 <th scope="row" class="px-6 font-bold text-gray-900 whitespace-nowrap dark:text-white border border-gray-500">
-                                    Maintenance Free <span class="font-medium">(May'24)</span>
+                                    {{ $key }} <span class="font-medium"></span>
                                 </th>
                                 <td class="px-6 py-1 border border-gray-500 text-gray-900">
-                                    4000.00 PKR
+                                    {{ $value }} PKR
                                 </td>
                             </tr>
                              <tr class="bg-white">
@@ -90,7 +93,7 @@
                                     Total
                                 </th>
                                 <td class="px-6 py-1 border border-gray-500 text-gray-900">
-                                    4000.00 PKR
+                                    {{ $total }} PKR
                                 </td>
                             </tr>
                         </tbody>
@@ -105,4 +108,11 @@
 </div>
 
 </html>
+<script>
+    document.addEventListener('DOMContentLoaded',()=>{
+        window.print();
+    })
+
+
+</script>
 </body>
