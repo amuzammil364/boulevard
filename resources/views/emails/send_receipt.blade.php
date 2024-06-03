@@ -11,7 +11,7 @@
 
 <div style="width: 100%; max-width: 600px; margin: 0 auto; padding: 2.5rem;">
     <div style="border-bottom: 2px solid #E5E7EB; text-align: center; padding-bottom: 0.75rem;">
-        <img src="{{URL::asset('/images/logo-vertical.png')}}" width="150" alt="Logo" style="max-width: 100%; height: auto;">
+        <img src="https://portal.stackhub.pro/images/logo-vertical.png" width="150" alt="Logo" style="max-width: 100%; height: auto;">
         <p style="font-weight: bold; font-size: 1.25rem; margin-top: 0.5rem; margin-bottom: 0; font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; text-transform: uppercase;">Residents Welfare Association</p>
         <p style="font-size: 0.875rem; line-height: 1.25rem; margin: 0; font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">(Reg.No. Karachi-700/1999)</p>
         <p style="font-size: 0.875rem; line-height: 1.25rem; margin: 0; font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">Scheme No.36 Fl-11/12, Block 15, Gulistan-e-jauhar</p>

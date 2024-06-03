@@ -42,7 +42,7 @@ class MailController extends Controller
 
         $total = 0;
         foreach ($data['receipt_items'] as $key => $value) {
-            $total+=$value;
+            $total +=$value;
         }
 
         $payment_id = $payment->payment_id;
@@ -50,7 +50,7 @@ class MailController extends Controller
         $recipient = $payment->flat->residents[0]->email; 
 
         Mail::to($recipient)->send(new SendReceiptEmail($data , $total , $payment_id));
-        return redirect()->back();
+        return redirect()->back()->with("success" , "Receipt has been sent successfully");
 
     }
 }
