@@ -37,6 +37,7 @@
                                 <option value="Repairs-Electric" {{ ($expense->type == "Repairs-Electric" ? "selected" : "") }}>Repairs-Electric</option>                                
                                 <option value="Repairs-Plumbing" {{ ($expense->type == "Repairs-Plumbing" ? "selected" : "") }}>Repairs-Plumbing</option>                                
                                 <option value="Repairs-Mason" {{ ($expense->type == "Repairs-Mason" ? "selected" : "") }}>Repairs-Mason</option>                          
+                                <option value="Decorative Goods" {{ ($expense->type == "Decorative Goods" ? "selected" : "") }}>Decorative Goods</option>                          
 
                             </select>
                             @error("status")

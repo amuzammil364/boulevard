@@ -77,6 +77,7 @@
                                 <option value="Repairs-Electric" {{ ($filters->type == "Repairs-Electric" ? "selected" : "") }}>Repairs-Electric</option>                                
                                 <option value="Repairs-Plumbing" {{ ($filters->type == "Repairs-Plumbing" ? "selected" : "") }}>Repairs-Plumbing</option>                                
                                 <option value="Repairs-Mason" {{ ($filters->type == "Repairs-Mason" ? "selected" : "") }}>Repairs-Mason</option> 
+                                <option value="Decorative Goods" {{ ($filters->type == "Decorative Goods" ? "selected" : "") }}>Decorative Goods</option> 
                             </select>
                         </div>
 

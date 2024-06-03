@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\ExpensesController;
 use App\Http\Controllers\FlatController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\OptionsController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\ResidentsController;
@@ -31,6 +32,7 @@ use Illuminate\Support\Facades\Route;
 // Login Routes
 Route::get('/', [AuthenticationController::class, 'index'])->middleware("isLoggedIn");
 Route::post("/login", [AuthenticationController::class, "login"])->name("login")->middleware("isLoggedIn");
+Route::get('/dashboard/view-receipt', [PrintReceiptController::class, "index2"]);
 
 
 // ====== Private Routes ======
@@ -130,6 +132,9 @@ Route::middleware(["loggedIn"])->group(function () {
     // ==========================
     //-- Page View Routes
     Route::get('/dashboard/print-receipt', [PrintReceiptController::class, "index"])->middleware(["role:1"]);
+
+
+    Route::post('send-receipt-mail', [MailController::class, 'index'])->name('sendReceiptMail');
 
 
     // ====== Settings/options Routes ======

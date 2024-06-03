@@ -116,11 +116,4 @@
 </div>
 
 </html>
-<script>
-    document.addEventListener('DOMContentLoaded',()=>{
-        window.print();
-    })
-
-
-</script>
 </body>

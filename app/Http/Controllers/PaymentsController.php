@@ -117,7 +117,7 @@ class PaymentsController extends Controller
     public function singlePage($id)
     {
         if ($id) {
-            $payment = Payment::with("flat")->find($id);
+            $payment = Payment::with("flat.residents")->find($id);
             $payment->due_date = Carbon::parse($payment->due_date);
             $payment->paid_date = Carbon::parse($payment->paid_date);
             return view("dashboard.payments.single", compact("payment"));

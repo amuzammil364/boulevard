@@ -63,7 +63,7 @@
                             </select>
                         </div>
                         <div class="col-span-1 sm:col-span-1">
-                            <select id="flat" name="flat_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                            <select id="flat" name="flat_id" class="bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                 <option value="">Select Flat</option>
                                 @foreach ($flats as $flat)
                                 <option value="{{ $flat->id }}" {{ $filters->flat_id == $flat->id  ? "selected" : "" }}>{{ $flat->flat_number }} ({{ $flat->phase_number }})</option>
@@ -154,6 +154,18 @@
     @include("components.confirmationModal.confirmation" , ["route" => "delete_resident"])
 
 </main>
+<script>
+        document.addEventListener('DOMContentLoaded',()=>{
+            new TomSelect('#flat', {
+                create: false,
+                sortField: {
+                    field: 'text',
+                    direction: 'asc'
+                }
+            });
+        })
+
+</script>
 
 
 @endsection
