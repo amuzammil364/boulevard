@@ -9,14 +9,90 @@
 
 <body>
 
-<div style="width: 100%; max-width: 600px; margin: 0 auto; padding: 10px;">
-    <div style="border-bottom: 2px solid #333; text-align: center; padding-bottom: 20px;">
-        <img src="https://portal.stackhub.pro/images/logo-vertical.png" alt="Logo" style="max-width: 100%; height: auto;">
-        <p style="font-weight: bold; font-size: 1.5rem; margin-top: 10px;">Residents Welfare Association</p>
-        <p style="font-size: 0.8rem;">(Reg.No. Karachi-700/1999)</p>
-        <p style="font-size: 0.8rem;">Scheme No.36 Fl-11/12, Block 15, Gulistan-e-jauhar</p>
+<div style="width: 100%; max-width: 600px; margin: 0 auto; padding: 2.5rem;">
+    <div style="border-bottom: 2px solid #E5E7EB; text-align: center; padding-bottom: 0.75rem;">
+        <img src="https://portal.stackhub.pro/images/logo-vertical.png" width="150" alt="Logo" style="max-width: 100%; height: auto;">
+        <p style="font-weight: bold; font-size: 1.25rem; margin-top: 0.5rem; margin-bottom: 0; font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; text-transform: uppercase;">Residents Welfare Association</p>
+        <p style="font-size: 0.875rem; line-height: 1.25rem; margin: 0; font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">(Reg.No. Karachi-700/1999)</p>
+        <p style="font-size: 0.875rem; line-height: 1.25rem; margin: 0; font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">Scheme No.36 Fl-11/12, Block 15, Gulistan-e-jauhar</p>
     </div>
-    <div style="padding-top: 30px; padding-left: 20px;">
+    <div style="padding-top: 2.25rem; padding-left: 3rem; padding-right: 3rem;">
+    <table style="font-size: 0.875rem; line-height: 1.25rem; text-align: left; width: 100%; border-collapse: collapse; font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">
+        <thead style="color: #000; text-transform: uppercase;">
+            <tr>
+                <th scope="col" class="">
+                    <strong style="font-weight: bolder;">Month:</strong> May 2024
+                </th>
+                <th scope="col" class="">
+                    <strong style="font-weight: bolder;">Date:</strong> 28 May 2024
+                </th>
+            </tr>
+            <tr>
+                <th scope="col" class="">
+                    <strong style="font-weight: bolder;">Flat:</strong> 789
+                </th>
+                <th scope="col" class="">
+                    <strong style="font-weight: bolder;">Receipt ID:</strong> 0001
+                </th>
+            </tr>
+            <tr class="">
+                <th scope="col" class="">
+                    <strong style="font-weight: bolder;">Phase:</strong>658
+                </th>
+                <th scope="col" class="">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?data=http://localhost:8000/dashboard/view-receipt?pid=6655c46f045cf&amp;size=100x100" alt="" title="">
+                </th>
+            </tr>
+        </thead>
+        <tbody style="display: inline-grid">
+            <tr style="display: inline-block; margin-top: 0.25rem;">
+                <th style="text-transform: uppercase; white-space: nowrap;">
+                <strong style="font-weight: bolder;">Resident:</strong>
+                    Abdul Saqib
+                </th>
+            </tr>
+            <tr style="display: inline-block; margin-top: 0.25rem;">
+                <th style="text-transform: uppercase; white-space: nowrap;">
+                <strong style="font-weight: bolder;">Contact:</strong>
+                    34343434
+                </th>
+            </tr>
+            <tr style="display: inline-block; margin-top: 0.25rem;">
+                <th style="text-transform: uppercase; white-space: nowrap;">
+                <strong style="font-weight: bolder;">Payment Id:</strong>
+                    6655c46f045cf
+                </th>
+            </tr>
+        </tbody>
+    </table>
+    <table style="margin-top: 1rem; font-size: 0.875rem; line-height: 1.25rem;text-align: left; width: 100%; border-collapse: collapse; font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">
+        <thead style="text-transform: uppercase; font-size: 0.75rem; line-height: 1rem;">
+            <tr>
+                <th style="padding-top: 0.75rem; padding-bottom: 0.75rem; padding-left: 1.5rem; padding-right: 1.5rem; border: 1px solid rgb(107 114 128 / 1)"></th>
+                <th style="padding-top: 0.75rem; padding-bottom: 0.75rem; padding-left: 1.5rem; padding-right: 1.5rem; border: 1px solid rgb(107 114 128 / 1)"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th style="font-weight: 700; padding-left: 1.5rem; padding-right: 1.5rem; white-space: nowrap; border: 1px solid rgb(107 114 128 / 1);">
+                    Maintenance
+                    <span style="font-weight: 500;"><small>( May 2024 )</small></span>
+                </th>
+                <td style="padding-top: 0.25rem; padding-bottom: 0.25rem; padding-left: 1.5rem; padding-right: 1.5rem; border: 1px solid rgb(107 114 128 / 1);">5000 PKR</td>
+            </tr>
+             <tr>
+                <th style="font-weight: 700; padding-left: 1.5rem; padding-right: 1.5rem; white-space: nowrap;">
+                    Total
+                </th>
+                <td style="padding-top: 0.25rem; padding-bottom: 0.25rem; padding-left: 1.5rem; padding-right: 1.5rem; border: 1px solid rgb(107 114 128 / 1);">5000 PKR</td>
+            </tr>
+        </tbody>
+    </table>
+    <div style="margin-top: 5rem; text-align: center; border-top: 2px solid #E5E7EB; border-bottom: 2px solid #E5E7EB;">
+        <p style="margin: 0; color: rgb(31 41 55 / 1); font-size: 0.875rem; line-height: 1.25rem; padding-top: 0.5rem; padding-bottom: 0.5rem; font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">This is a digitally generated receipt, does not require signature</p>
+    </div>
+    </div>
+    {{-- <div style="padding-top: 30px; padding-left: 20px;">
         <p><strong>Month:</strong> {{ $data['month'] }}</p>
         <p><strong>Date:</strong> {{ $data['date'] }}</p>
         <p><strong>Flat:</strong> {{ $data['flat'] }}</p>
@@ -48,7 +124,7 @@
     </div>
     <div style="padding-top: 20px; text-align: center; border-top: 2px solid #333; border-bottom: 2px solid #333;">
         <p style="font-size: 0.8rem; padding: 10px 0;">This is a digitally generated receipt, does not require signature</p>
-    </div>
+    </div> --}}
 </div>
 
 </body>

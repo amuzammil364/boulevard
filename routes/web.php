@@ -143,6 +143,7 @@ Route::middleware(["loggedIn"])->group(function () {
     //-- Data Management Routes
     Route::post("/dashboard/settings/add", [OptionsController::class, "store"])->name("add_options")->middleware(["role:1"]);
 
+    Route::get("/dashboard/send-receipt" , [MailController::class, "index"]);
 
     Route::get("/logout", [AuthenticationController::class, "logout"]);
 });
