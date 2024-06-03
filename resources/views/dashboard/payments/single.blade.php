@@ -5,6 +5,12 @@
 <main class="p-4 sm:ml-64 md:ml-64 h-auto pt-20">
     <h1 class="font-bold text-3xl mb-8">Collection Data</h1>
 
+    @if (Session::has("success"))
+        <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+            <span class="font-medium">{{ Session::get("success") }}</span>
+        </div>
+    @endif
+
         <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 rounded-md">
             <div class="overflow-x-auto">
                 <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
