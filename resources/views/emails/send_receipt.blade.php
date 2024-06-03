@@ -21,23 +21,23 @@
         <thead style="color: #000; text-transform: uppercase;">
             <tr>
                 <th scope="col" class="">
-                    <strong style="font-weight: bolder;">Month:</strong> May 2024
+                    <strong style="font-weight: bolder;">Month:</strong> {{ $data['month'] }}
                 </th>
                 <th scope="col" class="">
-                    <strong style="font-weight: bolder;">Date:</strong> 28 May 2024
+                    <strong style="font-weight: bolder;">Date:</strong> {{ $data['date'] }}
                 </th>
             </tr>
             <tr>
                 <th scope="col" class="">
-                    <strong style="font-weight: bolder;">Flat:</strong> 789
+                    <strong style="font-weight: bolder;">Flat:</strong> {{ $data['flat'] }}
                 </th>
                 <th scope="col" class="">
-                    <strong style="font-weight: bolder;">Receipt ID:</strong> 0001
+                    <strong style="font-weight: bolder;">Receipt ID:</strong> {{ $data['receipt_id'] }}
                 </th>
             </tr>
             <tr class="">
                 <th scope="col" class="">
-                    <strong style="font-weight: bolder;">Phase:</strong>658
+                    <strong style="font-weight: bolder;">Phase:</strong>  {{ $data['phase'] }}
                 </th>
                 <th scope="col" class="">
                     <img src="https://api.qrserver.com/v1/create-qr-code/?data=http://localhost:8000/dashboard/view-receipt?pid=6655c46f045cf&amp;size=100x100" alt="" title="">
@@ -48,19 +48,19 @@
             <tr style="display: inline-block; margin-top: 0.25rem;">
                 <th style="text-transform: uppercase; white-space: nowrap;">
                 <strong style="font-weight: bolder;">Resident:</strong>
-                    Abdul Saqib
+                    {{ $data['resident'] }}
                 </th>
             </tr>
             <tr style="display: inline-block; margin-top: 0.25rem;">
                 <th style="text-transform: uppercase; white-space: nowrap;">
                 <strong style="font-weight: bolder;">Contact:</strong>
-                    34343434
+                    {{ $data['contact'] }}
                 </th>
             </tr>
             <tr style="display: inline-block; margin-top: 0.25rem;">
                 <th style="text-transform: uppercase; white-space: nowrap;">
                 <strong style="font-weight: bolder;">Payment Id:</strong>
-                    6655c46f045cf
+                    {{ $data['payment_id'] }}
                 </th>
             </tr>
         </tbody>
@@ -68,23 +68,24 @@
     <table style="margin-top: 1rem; font-size: 0.875rem; line-height: 1.25rem;text-align: left; width: 100%; border-collapse: collapse; font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">
         <thead style="text-transform: uppercase; font-size: 0.75rem; line-height: 1rem;">
             <tr>
-                <th style="padding-top: 0.75rem; padding-bottom: 0.75rem; padding-left: 1.5rem; padding-right: 1.5rem; border: 1px solid rgb(107 114 128 / 1)"></th>
-                <th style="padding-top: 0.75rem; padding-bottom: 0.75rem; padding-left: 1.5rem; padding-right: 1.5rem; border: 1px solid rgb(107 114 128 / 1)"></th>
+                <th style="padding-top: 0.40rem; padding-bottom: 0.40rem; padding-left: 1.5rem; padding-right: 1.5rem; border: 1px solid rgb(107 114 128 / 1)">Item</th>
+                <th style="padding-top: 0.40rem; padding-bottom: 0.40rem; padding-left: 1.5rem; padding-right: 1.5rem; border: 1px solid rgb(107 114 128 / 1)">Amount</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th style="font-weight: 700; padding-left: 1.5rem; padding-right: 1.5rem; white-space: nowrap; border: 1px solid rgb(107 114 128 / 1);">
-                    Maintenance
-                    <span style="font-weight: 500;"><small>( May 2024 )</small></span>
-                </th>
-                <td style="padding-top: 0.25rem; padding-bottom: 0.25rem; padding-left: 1.5rem; padding-right: 1.5rem; border: 1px solid rgb(107 114 128 / 1);">5000 PKR</td>
-            </tr>
+                @foreach ($data['receipt_items'] as $key=>$value)
+                <tr>
+                    <th style="font-weight: 700; padding-left: 1.5rem; padding-right: 1.5rem; white-space: nowrap; border: 1px solid rgb(107 114 128 / 1);">
+                        {{ $key }}
+                    </th>
+                    <td style="padding-top: 0.25rem; padding-bottom: 0.25rem; padding-left: 1.5rem; padding-right: 1.5rem; border: 1px solid rgb(107 114 128 / 1);">{{ $value }} PKR</td>
+                </tr>
+                @endforeach
              <tr>
                 <th style="font-weight: 700; padding-left: 1.5rem; padding-right: 1.5rem; white-space: nowrap;">
                     Total
                 </th>
-                <td style="padding-top: 0.25rem; padding-bottom: 0.25rem; padding-left: 1.5rem; padding-right: 1.5rem; border: 1px solid rgb(107 114 128 / 1);">5000 PKR</td>
+                <td style="padding-top: 0.25rem; padding-bottom: 0.25rem; padding-left: 1.5rem; padding-right: 1.5rem; border: 1px solid rgb(107 114 128 / 1);">{{ $value }} PKR</td>
             </tr>
         </tbody>
     </table>
