@@ -49,9 +49,8 @@ class MailController extends Controller
 
         $recipient = $payment->flat->residents[0]->email; 
 
-        // Mail::to($recipient)->send(new SendReceiptEmail($data));
-        // return redirect()->back();
+        Mail::to($recipient)->send(new SendReceiptEmail($data , $total , $payment_id));
+        return redirect()->back();
 
-        return view("emails.send_receipt" , compact('data'));
     }
 }

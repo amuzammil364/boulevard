@@ -15,12 +15,16 @@ class SendReceiptEmail extends Mailable
     use Queueable, SerializesModels;
 
     public $data;
+    public $total;
+    public $payment_id;
     /**
      * Create a new message instance.
      */
-    public function __construct($data)
+    public function __construct($data , $total , $payment_id)
     {
         $this->data = $data;
+        $this->total = $total;
+        $this->payment_id = $payment_id;
     }
 
     /**
