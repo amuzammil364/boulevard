@@ -96,9 +96,11 @@
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" class="px-4 py-3">#</th>
-                            <th scope="col" class="px-4 py-3">Payment Id</th>
+                            <th scope="col" class="px-4 py-3">Employee</th>
+                            <th scope="col" class="px-4 py-3">Type</th>
                             <th scope="col" class="px-4 py-3">Status</th>
                             <th scope="col" class="px-4 py-3">Amount</th>
+                            <th scope="col" class="px-4 py-3">Paid Date</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -115,9 +117,11 @@
 
                         <tr class="border-b dark:border-gray-700">
                             <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $index + 1 }}</th>
-                            <td class="px-4 py-3">{{ $expense->payment_id }}</td>
+                            <td class="px-4 py-3">{{ $expense->employee?$expense->employee->name:"" }}</td>
+                            <td class="px-4 py-3">{{ $expense->type }}</td>
                             <td class="px-4 py-3">{{ $expense->status }}</td>
                             <td class="px-4 py-3">{{ $expense->amount }}</td>
+                            <td class="px-4 py-3">{{ date("F j , Y" , strtotime(($expense->paid_date))) }}</td>
                         </tr>
 
                         @endforeach
