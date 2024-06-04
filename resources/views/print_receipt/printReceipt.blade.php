@@ -45,14 +45,14 @@
                                 <th scope="col" class="">
                                     <strong>Phase:</strong>{{ $data['phase'] }}
                                 </th>
-                                <th scope="col" class="">
-                                    <img src='https://api.qrserver.com/v1/create-qr-code/?data={{ url("/dashboard/view-receipt?pid=$payment_id") }}&amp;size=100x100' alt="" title="" />
+                                <th scope="col" class="" style="position: relative;">
+                                    <img style="position: absolute;top:10px" src='https://api.qrserver.com/v1/create-qr-code/?data={{ url("/dashboard/view-receipt?pid=$payment_id") }}&amp;size=100x100' alt="" title="" />
                                 </th>
 
                             </tr>
 
                         </thead>
-                        <tbody class="inline-grid">
+                        <tbody class="inline-grid mb-5">
                             <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 mt-1 inline-block">
                                 <th scope="row" class="text-black whitespace-nowrap uppercase">
                                     <strong>Resident:</strong>{{ $data['resident'] }}
