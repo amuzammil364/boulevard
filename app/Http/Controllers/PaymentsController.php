@@ -174,16 +174,16 @@ class PaymentsController extends Controller
 
         $payment->save();
 
-        $transaction = new Transaction();
+        // $transaction = new Transaction();
 
-        $transaction->payment_id = $payment->id;
-        $transaction->expense_id = null;
-        $transaction->type = "Credit";
-        $transaction->amount = $payment->amount;
+        // $transaction->payment_id = $payment->id;
+        // $transaction->expense_id = null;
+        // $transaction->type = "Credit";
+        // $transaction->amount = $payment->amount;
 
-        $transaction->save();
-
-        if ($payment && $transaction) {
+        // $transaction->save();
+        // && $transaction
+        if ($payment) {
             return redirect("/dashboard/payments")->with("success", "Payment Created SuccessFully!");
         } else {
             return redirect("/dashboard/payments")->with("fail", "Something Went Wrong!");
@@ -315,14 +315,14 @@ class PaymentsController extends Controller
         $payment->save();
 
 
-        $transaction->payment_id = $payment->id;
-        $transaction->expense_id = null;
-        $transaction->type = "Credit";
-        $transaction->amount = $payment->amount;
+        // $transaction->payment_id = $payment->id;
+        // $transaction->expense_id = null;
+        // $transaction->type = "Credit";
+        // $transaction->amount = $payment->amount;
 
-        $transaction->save();
-
-        if ($payment && $transaction) {
+        // $transaction->save();
+        // && $transaction
+        if ($payment) {
             return redirect("/dashboard/payments")->with("success", "Payment Updated SuccessFully!");
         } else {
             return redirect("/dashboard/payments")->with("fail", "Something Went Wrong!");

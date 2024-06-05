@@ -146,16 +146,17 @@ class ExpensesController extends Controller
 
         $expense->save();
 
-        $transaction = new Transaction();
+        // $transaction = new Transaction();
 
-        $transaction->payment_id = null;
-        $transaction->expense_id = $expense->id;
-        $transaction->type = "Debit";
-        $transaction->amount = $expense->amount;
+        // $transaction->payment_id = null;
+        // $transaction->expense_id = $expense->id;
+        // $transaction->type = "Debit";
+        // $transaction->amount = $expense->amount;
 
-        $transaction->save();
+        // $transaction->save();
+        // && $transaction
 
-        if($expense && $transaction){
+        if($expense){
             return redirect("/dashboard/expenses")->with("success" , "Expense Created SuccessFully!");
         }else{
             return redirect("/dashboard/expenses")->with("fail" , "Something Went Wrong!");
@@ -229,14 +230,15 @@ class ExpensesController extends Controller
 
         $expense->save();
 
-        $transaction->payment_id = null;
-        $transaction->expense_id = $expense->id;
-        $transaction->type = "Debit";
-        $transaction->amount = $expense->amount;
+        // $transaction->payment_id = null;
+        // $transaction->expense_id = $expense->id;
+        // $transaction->type = "Debit";
+        // $transaction->amount = $expense->amount;
 
-        $transaction->save();
+        // $transaction->save();
+        // && $transaction
 
-        if ($expense && $transaction) {
+        if ($expense) {
             return redirect("/dashboard/expenses")->with("success", "Expense Updated SuccessFully!");
         } else {
             return redirect("/dashboard/expenses")->with("fail", "Something Went Wrong!");
