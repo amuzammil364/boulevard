@@ -32,6 +32,7 @@
                                 <option value="Welfare" {{ $payment->type == "Welfare" ? "selected" : "" }}>Welfare</option>
                                 <option value="Misc" {{ $payment->type == "Misc" ? "selected" : "" }}>Misc</option>
                                 <option value="Eid-ul-Adha Provision" {{ $payment->type == "Eid-ul-Adha Provision" ? "selected" : "" }}>Eid-ul-Adha Provision</option>
+                                <option value="Paint Renovation" {{ $payment->type == "Paint Renovation" ? "selected" : "" }}>Paint Renovation</option>
                             </select>
                             @error("status")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>

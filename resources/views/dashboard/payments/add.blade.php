@@ -30,6 +30,7 @@
                                 <option value="Welfare" {{ old("type") == "Welfare" ? "selected" : "" }}>Welfare</option>
                                 <option value="Misc" {{ old("type") == "Misc" ? "selected" : "" }}>Misc</option>
                                 <option value="Eid-ul-Adha Provision" {{ old("type") == "Eid-ul-Adha Provision" ? "selected" : "" }}>Eid-ul-Adha Provision</option>
+                                <option value="Paint Renovation" {{ old("type") == "Paint Renovation" ? "selected" : "" }}>Paint Renovation</option>
                             </select>
                             @error("type")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>
