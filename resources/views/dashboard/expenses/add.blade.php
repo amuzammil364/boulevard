@@ -36,6 +36,7 @@
                                 <option value="Repairs-Plumbing" {{ (old("type") == "Repairs-Plumbing" ? "selected" : "") }}>Repairs-Plumbing</option>                                
                                 <option value="Repairs-Mason" {{ (old("type") == "Repairs-Mason" ? "selected" : "") }}>Repairs-Mason</option>                                
                                 <option value="Decorative Goods" {{ (old("type") == "Decorative Goods" ? "selected" : "") }}>Decorative Goods</option>                                
+                                <option value="CCTV Maintenance" {{ (old("type") == "CCTV Maintenance" ? "selected" : "") }}>CCTV Maintenance</option>                                
                             </select>
                             @error("type")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>

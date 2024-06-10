@@ -90,10 +90,10 @@ class ExpensesController extends Controller
     public function singlePage($id)
     {
         if ($id) {
-            $payment = Expense::with("employee")->find($id);
-            $payment->due_date = Carbon::parse($payment->due_date);
-            $payment->paid_date = Carbon::parse($payment->paid_date);
-            return view("dashboard.expenses.single", compact("payment"));
+            $expense = Expense::with("employee")->find($id);
+            $expense->due_date = Carbon::parse($expense->due_date);
+            $expense->paid_date = Carbon::parse($expense->paid_date);
+            return view("dashboard.expenses.single", compact("expense"));
         }
     }
 

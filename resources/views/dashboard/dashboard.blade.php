@@ -115,14 +115,14 @@
 
                         @foreach ($expenses_data as $index => $expense)
 
-                        <tr class="border-b dark:border-gray-700">
-                            <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $index + 1 }}</th>
-                            <td class="px-4 py-3">{{ $expense->employee?$expense->employee->name:"" }}</td>
-                            <td class="px-4 py-3">{{ $expense->type }}</td>
-                            <td class="px-4 py-3">{{ $expense->status }}</td>
-                            <td class="px-4 py-3">{{ $expense->amount }}</td>
-                            <td class="px-4 py-3">{{ date("F j , Y" , strtotime(($expense->paid_date))) }}</td>
-                        </tr>
+                            <tr class="border-b dark:border-gray-700">
+                                <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $index + 1 }}</th>
+                                <td class="px-4 py-3">{{ $expense->employee?$expense->employee->name:"" }}</td>
+                                <td class="px-4 py-3">{{ $expense->type }}</td>
+                                <td class="px-4 py-3">{{ $expense->status }}</td>
+                                <td class="px-4 py-3">{{ $expense->amount }}</td>
+                                <td class="px-4 py-3">{{ date("F j , Y" , strtotime(($expense->paid_date))) }}</td>
+                            </tr>
 
                         @endforeach
 

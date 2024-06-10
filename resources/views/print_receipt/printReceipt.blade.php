@@ -27,23 +27,23 @@
                         <thead class="text-black uppercase ">
                             <tr>
                                 <th scope="col" class="">
-                                    <strong>Month:</strong> {{ $data['month'] }}
-                                </th>
+                                    <strong style="color: rgba(25, 182, 175, 1)">Month: </strong> {{ $data['month'] }}
+                                </th> 
                                 <th scope="col" class="">
-                                    <strong>Date:</strong> {{ $data['date'] }}
-                                </th>
-                            </tr>
-                            <tr class="">
-                                <th scope="col" class="">
-                                    <strong>Flat:</strong> {{ $data['flat'] }}
-                                </th>
-                                <th scope="col" class="">
-                                    <strong>Receipt ID:</strong> {{ $data['receipt_id'] }}
+                                    <strong style="color: rgba(25, 182, 175, 1)">Date: </strong> {{ $data['date'] }}
                                 </th>
                             </tr>
                             <tr class="">
                                 <th scope="col" class="">
-                                    <strong>Phase:</strong>{{ $data['phase'] }}
+                                    <strong style="color: rgba(25, 182, 175, 1)">Flat: </strong> {{ $data['flat'] }}
+                                </th>
+                                <th scope="col" class="">
+                                    <strong style="color: rgba(25, 182, 175, 1)">Receipt ID: </strong> {{ $data['receipt_id'] }}
+                                </th>
+                            </tr>
+                            <tr class="">
+                                <th scope="col" class="">
+                                    <strong style="color: rgba(25, 182, 175, 1)">Phase: </strong>{{ $data['phase'] }}
                                 </th>
                                 <th scope="col" class="" style="position: relative;">
                                     <img style="position: absolute;top:10px" src='https://api.qrserver.com/v1/create-qr-code/?data={{ url("/dashboard/view-receipt?pid=$payment_id") }}&amp;size=100x100' alt="" title="" />
@@ -55,17 +55,17 @@
                         <tbody class="inline-grid mb-5">
                             <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 mt-1 inline-block">
                                 <th scope="row" class="text-black whitespace-nowrap uppercase">
-                                    <strong>Resident:</strong>{{ $data['resident'] }}
+                                    <strong style="color: rgba(25, 182, 175, 1)">Resident: </strong>{{ $data['resident'] }}
                                 </th>
                             </tr>
                             <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 mt-1 inline-block">
                                 <th scope="row" class="text-black whitespace-nowrap uppercase">
-                                    <strong>Contact:</strong>{{ $data['contact'] }}
+                                    <strong style="color: rgba(25, 182, 175, 1)">Contact: </strong>{{ $data['contact'] }}
                                 </th>
                             </tr>
                             <tr class="bg-white dark:bg-gray-800 dark:border-gray-700 mt-1 inline-block">
                                 <th scope="row" class="text-black whitespace-nowrap uppercase">
-                                    <strong>Payment ID:</strong>{{ $data['payment_id'] }}
+                                    <strong style="color: rgba(25, 182, 175, 1)">Payment ID: </strong>{{ $data['payment_id'] }}
                                 </th>
                             </tr>
                         </tbody>
@@ -77,10 +77,9 @@
                     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase ">
                             <tr>
-                                <th scope="col" class="px-6 py-3 border border-gray-500">
-                                </th>
-                                <th scope="col" class="px-6 py-3 border border-gray-500">
-                                    
+                                <th scope="col" class="px-6 py-2 border border-gray-500">Item</th>
+                                <th scope="col" class="px-6 py-2 border border-gray-500">
+                                    Amount
                                 </th>
                             </tr>
                         </thead>
@@ -89,18 +88,18 @@
                                 
                             @endforeach
                             <tr class="bg-white">
-                                <th scope="row" class="px-6 font-bold text-gray-900 whitespace-nowrap dark:text-white border border-gray-500">
+                                <th scope="row" class="px-6 py-2 font-bold text-gray-900 whitespace-nowrap dark:text-white border border-gray-500">
                                     {{ $key }} <span class="font-medium"> <small>( {{ $data['month'] }} )</small>  </span>
                                 </th>
-                                <td class="px-6 py-1 border border-gray-500 text-gray-900">
+                                <td class="px-6 py-2 border border-gray-500 text-gray-900">
                                     {{ $value }} PKR
                                 </td>
                             </tr>
                              <tr class="bg-white">
-                                <th scope="row" class="px-6 font-bold text-gray-900 whitespace-nowrap dark:text-white">
-                                    Total
+                                <th scope="row" class="px-6 py-2 font-bold text-gray-900 whitespace-nowrap dark:text-white">
+                                    Total Amount Received
                                 </th>
-                                <td class="px-6 py-1 border border-gray-500 text-gray-900">
+                                <td class="px-6 py-2 border border-gray-500 text-gray-900">
                                     {{ $total }} PKR
                                 </td>
                             </tr>
