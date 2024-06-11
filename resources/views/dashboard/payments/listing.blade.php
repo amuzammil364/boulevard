@@ -66,6 +66,8 @@
                                 <option value="Welfare" {{ $filters->type == "Welfare"  ? "selected" : ""}}>Welfare</option>
                                 <option value="Misc" {{ $filters->type == "Misc"  ? "selected" : ""}}>Misc</option>
                                 <option value="Eid-ul-Adha Provision" {{ $filters->type == "Eid-ul-Adha Provision"  ? "selected" : ""}}>Eid-ul-Adha Provision</option>
+                                <option value="Paint Renovation" {{ $filters->type == "Paint Renovation" ? "selected" : "" }}>Paint Renovation</option>
+                            
                             </select>
                         </div>
 

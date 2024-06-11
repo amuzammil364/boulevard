@@ -33,8 +33,17 @@ class ExpensesController extends Controller
         if( isset($request->payment_month) && !empty($request->payment_month) ){
             $currentMonth = date('m', strtotime($request->payment_month));
             $currentYear = date('Y', strtotime($request->payment_month));
-            $expenses = $expenses->whereMonth('paid_date', $currentMonth)->whereYear('paid_date', $currentYear);
-            $filters->date = $request->payment_month;
+
+
+            if($request->type == "Salary"){
+                $expenses = $expenses->whereMonth('expense_month', $currentMonth)->whereYear('expense_month', $currentYear);
+                $filters->date = $request->payment_month;
+            }else{
+                $expenses = $expenses->whereMonth('paid_date', $currentMonth)->whereYear('paid_date', $currentYear);
+                $filters->date = $request->payment_month;    
+            }
+
+
         }
 
 

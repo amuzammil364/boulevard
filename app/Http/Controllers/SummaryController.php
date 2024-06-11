@@ -56,7 +56,7 @@ class SummaryController extends Controller
         ];
 
         foreach($expenses_types as $index => $expenses_type){
-            $amount = Expense::whereMonth('expense_month', $currentMonth)->where('type', $expenses_type['type'])->where('amount', '!=', 0)->sum('amount');
+            $amount = Expense::whereMonth('expense_month', $currentMonth)->where('type', $expenses_type['type'])->where('amount', '!=', 0)->where('status' , 'Paid')->sum('amount');
             $expenses_types[$index]['amount'] = $amount;
             $expenses_types_total_amount += $amount;
         }
