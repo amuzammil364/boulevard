@@ -35,7 +35,7 @@ class PrintReceiptController extends Controller
         // $payment = Payment::with('flat.residents')->find($request->id);
         $payment = Payment::with('flat.residents')->where('payment_id',$request->pid)->first();
         $data['month'] = date('M Y', strtotime($payment->payment_month)); 
-        $data['date'] = date('d M Y', strtotime($payment->payment_month)); 
+        $data['date'] = date('d M Y', strtotime($payment->paid_date)); 
         $data['flat'] = $payment->flat->flat_number; 
         $data['phase'] = $payment->flat->phase_number; 
         $data['resident'] = $payment->flat->residents[0]->full_name; 
@@ -81,7 +81,7 @@ class PrintReceiptController extends Controller
         // $payment = Payment::with('flat.residents')->find($request->id);
         $payment = Payment::with('flat.residents')->where('payment_id',$request->pid)->first();
         $data['month'] = date('M Y', strtotime($payment->payment_month)); 
-        $data['date'] = date('d M Y', strtotime($payment->payment_month)); 
+        $data['date'] = date('d M Y', strtotime($payment->paid_date)); 
         $data['flat'] = $payment->flat->flat_number; 
         $data['phase'] = $payment->flat->phase_number; 
         $data['resident'] = $payment->flat->residents[0]->full_name; 
