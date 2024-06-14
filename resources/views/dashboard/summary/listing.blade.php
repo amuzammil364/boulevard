@@ -21,10 +21,11 @@
     <div class="flex flex-col md:flex-row justify-between flex-wrap space-y-3 md:space-y-0 py-4">
 
       <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 rounded-md w-full md:w-1/2">
-        <h3 class="font-medium text-2xl mb-6">Expenses</h3>
             <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
             <div class="overflow-x-auto">
-                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <h3 class="font-medium text-2xl mb-6 p-4">Expenses</h3>
+
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" class="px-4 py-3">#</th>
@@ -64,10 +65,11 @@
         </div>
     </section>
      <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 rounded-md w-full md:w-1/2">
-        <h3 class="font-medium text-2xl mb-6">Collections</h3>
-            <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+        <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
             <div class="overflow-x-auto">
-                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <h3 class="font-medium text-2xl mb-6 p-4">Collections</h3>
+
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" class="px-4 py-3">#</th>
@@ -105,8 +107,52 @@
             </div>
             <p class="mt-6 mb-6 px-5 text-md text-gray-700 uppercase bg-white dark:bg-gray-700 dark:text-gray-400"><b>Total : {{ $collection_types_total_amount }}</b></p>
         </div>
+
+        <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden mt-5">
+            <h3 class="font-medium text-2xl mb-6 p-4">Arrears</h3>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-4 py-3">#</th>
+                            <th scope="col" class="px-4 py-3">Type</th>
+                            <th scope="col" class="px-4 py-3">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @if (count($collection_types_arrears) === 0)
+
+                        <tr class="border-b dark:border-gray-700">
+                            <td colspan="5" scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center">No Data</th>
+                        </tr>
+
+                        @else
+
+                        @foreach ($collection_types_arrears as $index => $collection_type )
+                        
+                            @if($collection_type["amount"] != 0)
+                            
+                            <tr class="border-b dark:border-gray-700">
+                                <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $index+1 }}</th>
+                                <td class="px-4 py-3">{{ $collection_type["type"] }}</td>
+                                <td class="px-4 py-3">{{ $collection_type["amount"] }}</td>
+                            </tr>
+                                
+                            @endif
+
+                        @endforeach
+                        @endif
+
+                    </tbody>
+                </table>
+            </div>
+            <p class="mt-6 mb-6 px-5 text-md text-gray-700 uppercase bg-white dark:bg-gray-700 dark:text-gray-400"><b>Total : {{ $collection_types_total_amount_arrears }}</b></p>
+        </div>
+
     </section>
-    <p style="margin-top: 20px;" class="w-full md:w-full py-6 px-6 text-md text-gray-700 uppercase bg-white dark:bg-gray-700 dark:text-gray-400 shadow-md sm:rounded-lg"><b>Cash in Hand : {{ $collection_types_total_amount - $expenses_types_total_amount }}</b></p>
+    <p style="margin-top: 20px;" class="w-full md:w-full py-6 px-6 text-md text-gray-700 uppercase bg-white dark:bg-gray-700 dark:text-gray-400 shadow-md sm:rounded-lg"><b>Cash in Hand : {{ $collection_types_total_amount +  $collection_types_total_amount_arrears - $expenses_types_total_amount }}</b></p>
     </div>
 
 </main>

@@ -46,6 +46,8 @@ class SummaryController extends Controller
             ["type" => "Repairs-Electric", "amount" => 0],
             ["type" => "Repairs-Plumbing", "amount" => 0],
             ["type" => "Repairs-Mason", "amount" => 0],
+            ["type" => "Decorative Goods", "amount" => 0],
+            ["type" => "CCTV Maintenance", "amount" => 0],
         ];
 
         $collection_types_total_amount = 0;
@@ -53,7 +55,20 @@ class SummaryController extends Controller
             ["type" => "Maintenance", "amount" => 0],
             ["type" => "Welfare", "amount" => 0],
             ["type" => "Misc", "amount" => 0],
+            ["type" => "Eid-ul-Adha Provision", "amount" => 0],
+            ["type" => "Paint Renovation", "amount" => 0],
         ];
+
+        $collection_types_total_amount_arrears = 0;
+        $collection_types_arrears = [
+            ["type" => "Maintenance", "amount" => 0],
+            ["type" => "Welfare", "amount" => 0],
+            ["type" => "Misc", "amount" => 0],
+            ["type" => "Eid-ul-Adha Provision", "amount" => 0],
+            ["type" => "Paint Renovation", "amount" => 0],
+        ];
+
+
 
         foreach($expenses_types as $index => $expenses_type){
             $amount = Expense::whereMonth('expense_month', $currentMonth)->where('type', $expenses_type['type'])->where('amount', '!=', 0)->where('status' , 'Paid')->sum('amount');
@@ -67,9 +82,16 @@ class SummaryController extends Controller
             $collection_types[$index]['amount'] = $amount;
             $collection_types_total_amount += $amount;
         }
-        
 
-        return view("dashboard.summary.listing" , compact("expenses_types" , "expenses_types_total_amount" , "collection_types" , "collection_types_total_amount" , "date"));
+        foreach($collection_types_arrears as $index => $collection_type){
+            $payments = Payment::whereMonth('payment_month' ,'!=', $currentMonth)->where('type' , $collection_type['type'])->where('amount' , '!=' , 0);
+            $amount = $payments->whereMonth('paid_date' , $currentMonth)->where('status' , 'Paid')->sum('amount');
+            $collection_types_arrears[$index]['amount'] = $amount;
+            $collection_types_total_amount_arrears += $amount;
+        }
+
+
+        return view("dashboard.summary.listing" , compact("collection_types_arrears", "collection_types_total_amount_arrears", "expenses_types" , "expenses_types_total_amount" , "collection_types" , "collection_types_total_amount" , "date"));
     }
 
     /**
