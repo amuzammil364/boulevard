@@ -50,13 +50,14 @@ class SummaryController extends Controller
             ["type" => "CCTV Maintenance", "amount" => 0],
         ];
 
-        $collection_types_total_amount = 0;
+        $paid_collection_types_total_amount = 0;
+        $pending_collection_types_total_amount = 0;
         $collection_types = [
-            ["type" => "Maintenance", "amount" => 0],
-            ["type" => "Welfare", "amount" => 0],
-            ["type" => "Misc", "amount" => 0],
-            ["type" => "Eid-ul-Adha Provision", "amount" => 0],
-            ["type" => "Paint Renovation", "amount" => 0],
+            ["type" => "Maintenance", "amount_paid" => 0 , "amount_pending" => 0],
+            ["type" => "Welfare", "amount_paid" => 0 , "amount_pending" => 0],
+            ["type" => "Misc", "amount_paid" => 0 , "amount_pending" => 0],
+            ["type" => "Eid-ul-Adha Provision", "amount_paid" => 0 , "amount_pending" => 0],
+            ["type" => "Paint Renovation", "amount_paid" => 0 , "amount_pending" => 0],
         ];
 
         $collection_types_total_amount_arrears = 0;
@@ -78,9 +79,12 @@ class SummaryController extends Controller
 
 
         foreach($collection_types as $index => $collection_type){
-            $amount = Payment::whereMonth('payment_month' , $currentMonth)->where('type' , $collection_type['type'])->where('amount' , '!=' , 0)->where('status' , 'Paid')->sum('amount');
-            $collection_types[$index]['amount'] = $amount;
-            $collection_types_total_amount += $amount;
+            $amount_paid = Payment::whereMonth('payment_month' , $currentMonth)->where('type' , $collection_type['type'])->where('amount' , '!=' , 0)->where('status' , 'Paid')->sum('amount');
+            $collection_types[$index]['amount_paid'] = $amount_paid;
+            $paid_collection_types_total_amount += $amount_paid;
+            $amount_pending = Payment::whereMonth('payment_month' , $currentMonth)->where('type' , $collection_type['type'])->where('amount' , '!=' , 0)->where('status' , 'Pending')->sum('amount');
+            $collection_types[$index]['amount_pending'] = $amount_pending;
+            $pending_collection_types_total_amount += $amount_pending;
         }
 
         foreach($collection_types_arrears as $index => $collection_type){
@@ -91,7 +95,7 @@ class SummaryController extends Controller
         }
 
 
-        return view("dashboard.summary.listing" , compact("collection_types_arrears", "collection_types_total_amount_arrears", "expenses_types" , "expenses_types_total_amount" , "collection_types" , "collection_types_total_amount" , "date"));
+        return view("dashboard.summary.listing" , compact("collection_types_arrears", "collection_types_total_amount_arrears", "expenses_types" , "expenses_types_total_amount" , "collection_types" , "paid_collection_types_total_amount" , "pending_collection_types_total_amount", "date"));
     }
 
     /**
@@ -101,7 +105,7 @@ class SummaryController extends Controller
     {
         //
     }
-    
+
     /**
      * Store a newly created resource in storage.
      */

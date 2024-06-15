@@ -12,7 +12,7 @@ class OptionsController extends Controller
      */
     public function index()
     {
-        
+
         $maintenance_amount = Option::where('key','maintenance_amount')->first();
         if($maintenance_amount){
             $maintenance_amount = $maintenance_amount->value;
@@ -33,7 +33,21 @@ class OptionsController extends Controller
             $collection_due_day = "";
         }
 
-        return view("dashboard.settings.settings", compact("collection_due_day" ,"maintenance_amount","currency"));
+        $receipt_reminder_email = Option::where('key','receipt_reminder_email')->first();
+        if($receipt_reminder_email){
+            $receipt_reminder_email = $receipt_reminder_email->value;
+        }else{
+            $receipt_reminder_email = "";
+        }
+
+        $receipt_email = Option::where('key','receipt_email')->first();
+        if($receipt_email){
+            $receipt_email = $receipt_email->value;
+        }else{
+            $receipt_email = "";
+        }
+
+        return view("dashboard.settings.settings", compact("collection_due_day" ,"maintenance_amount","currency" , "receipt_email" , "receipt_reminder_email"));
 
     }
 
@@ -49,8 +63,8 @@ class OptionsController extends Controller
             $option = Option::firstOrNew(['key' => $key]);
             $option->value = $value;
             $option->save();
-        }        
-        
+        }
+
 
         return redirect("/dashboard/settings")->with("success" , "Settings Updated Successfully!");
 
