@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendReceiptEmail;
+use App\Mail\SendReminderEmail;
 use App\Models\Payment;
+use App\Models\Resident;
+use App\Models\Option;
 use Illuminate\Http\Request;
 
 class MailController extends Controller
@@ -51,6 +54,22 @@ class MailController extends Controller
 
         Mail::to($recipient)->send(new SendReceiptEmail($data , $total , $payment_id));
         return redirect()->back()->with("success" , "Receipt has been sent successfully");
+
+    }
+
+    public function reminder_mail(Request $request) {
+        
+        $current_month = date("m");
+        $current_year = date("Y");
+        $receipt_reminder_email = Option::where("key" , "receipt_reminder_email")->first();
+        $payments = Payment::with('flat.residents')->whereMonth("payment_month" , $current_month)->whereYear('payment_month', $current_year);
+
+        foreach($payments as $index => $payment){
+            $data = $payment->flat->residents[$index];
+            Mail::to($data->email)->send( new SendReminderEmail($data));
+        }
+
+        return redirect()->back()->with("success" , "Reminder has been sent successfully");
 
     }
 }

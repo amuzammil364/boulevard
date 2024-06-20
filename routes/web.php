@@ -135,6 +135,7 @@ Route::middleware(["loggedIn"])->group(function () {
 
 
     Route::post('send-receipt-mail', [MailController::class, 'index'])->name('sendReceiptMail');
+    Route::post('send-reminder-mail', [MailController::class, 'reminder_mail'])->name('sendReminderMail');
 
 
     // ====== Settings/options Routes ======
