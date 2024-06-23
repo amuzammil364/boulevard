@@ -73,6 +73,14 @@ class SummaryController extends Controller
             ["type" => "Paint Renovation", "amount" => 0],
         ];
 
+        $collection_types_total_amount_advance = 0;
+        $collection_types_advance = [
+            ["type" => "Maintenance", "amount" => 0],
+            ["type" => "Welfare", "amount" => 0],
+            ["type" => "Misc", "amount" => 0],
+            ["type" => "Eid-ul-Adha Provision", "amount" => 0],
+            ["type" => "Paint Renovation", "amount" => 0],
+        ];
 
 
         foreach($expenses_types as $index => $expenses_type){
@@ -98,8 +106,16 @@ class SummaryController extends Controller
             $collection_types_total_amount_arrears += $amount;
         }
 
+        foreach($collection_types_advance as $index => $collection_type){
+            $payments = Payment::whereMonth('payment_month' ,'>', $currentMonth)->where('type' , $collection_type['type'])->where('amount' , '!=' , 0);
+            $amount = $payments->whereMonth('paid_date' , $currentMonth)->where('status' , 'Paid')->sum('amount');
+            $collection_types_advance[$index]['amount'] = $amount;
+            $collection_types_total_amount_advance += $amount;
+        }
 
-        return view("dashboard.summary.listing" , compact("collection_types_arrears", "collection_types_total_amount_arrears", "expenses_types" , "expenses_types_total_amount" , "collection_types" , "paid_collection_types_total_amount" , "pending_collection_types_total_amount", "date", "opening_balance"));
+
+
+        return view("dashboard.summary.listing" , compact("collection_types_advance", "collection_types_total_amount_advance","collection_types_arrears", "collection_types_total_amount_arrears", "expenses_types" , "expenses_types_total_amount" , "collection_types" , "paid_collection_types_total_amount" , "pending_collection_types_total_amount", "date", "opening_balance"));
     }
 
     /**

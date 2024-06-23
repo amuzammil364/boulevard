@@ -227,8 +227,52 @@
             <p class="mt-6 mb-6 px-5 text-md text-gray-700 uppercase bg-white dark:bg-gray-700 dark:text-gray-400"><b>Total : {{ $collection_types_total_amount_arrears }}</b></p>
         </div>
 
+        <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden mt-5">
+            <h3 class="font-medium text-2xl mb-6 p-4">Advance</h3>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-4 py-3">#</th>
+                            <th scope="col" class="px-4 py-3">Type</th>
+                            <th scope="col" class="px-4 py-3">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @if (count($collection_types_advance) === 0)
+
+                        <tr class="border-b dark:border-gray-700">
+                            <td colspan="5" scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center">No Data</th>
+                        </tr>
+
+                        @else
+
+                        @foreach ($collection_types_advance as $index => $collection_type )
+
+                            @if($collection_type["amount"] != 0)
+
+                            <tr class="border-b dark:border-gray-700">
+                                <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $index+1 }}</th>
+                                <td class="px-4 py-3">{{ $collection_type["type"] }}</td>
+                                <td class="px-4 py-3">{{ $collection_type["amount"] }}</td>
+                            </tr>
+
+                            @endif
+
+                        @endforeach
+                        @endif
+
+                    </tbody>
+                </table>
+            </div>
+            <p class="mt-6 mb-6 px-5 text-md text-gray-700 uppercase bg-white dark:bg-gray-700 dark:text-gray-400"><b>Total : {{ $collection_types_total_amount_advance }}</b></p>
+        </div>
+
+
     </section>
-    <p style="margin-top: 20px;" class="w-full md:w-full py-6 px-6 text-md text-gray-700 uppercase bg-white dark:bg-gray-700 dark:text-gray-400 shadow-md sm:rounded-lg"><b>Cash in Hand : {{ $opening_balance + $paid_collection_types_total_amount +  $collection_types_total_amount_arrears - $expenses_types_total_amount }}</b></p>
+    <p style="margin-top: 20px;" class="w-full md:w-full py-6 px-6 text-md text-gray-700 uppercase bg-white dark:bg-gray-700 dark:text-gray-400 shadow-md sm:rounded-lg"><b>Cash in Hand : {{ $opening_balance + $collection_types_total_amount_advance + $paid_collection_types_total_amount +  $collection_types_total_amount_arrears - $expenses_types_total_amount }}</b></p>
     </div>
 
 </main>
