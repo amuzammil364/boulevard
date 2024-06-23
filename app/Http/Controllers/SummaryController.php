@@ -17,7 +17,11 @@ class SummaryController extends Controller
 
         $currentMonth = Carbon::now()->month;
         $date = date('Y-m');
-
+        $opening_balance = 0;
+        if(isset($request->opening_balance) && $request->opening_balance != ""){
+            $opening_balance = $request->opening_balance;
+        }
+        
         if(isset($request->summary_month) && $request->summary_month != ""){
             $currentMonth = date("m" , strtotime($request->summary_month));
             $date = $request->summary_month;
@@ -95,7 +99,7 @@ class SummaryController extends Controller
         }
 
 
-        return view("dashboard.summary.listing" , compact("collection_types_arrears", "collection_types_total_amount_arrears", "expenses_types" , "expenses_types_total_amount" , "collection_types" , "paid_collection_types_total_amount" , "pending_collection_types_total_amount", "date"));
+        return view("dashboard.summary.listing" , compact("collection_types_arrears", "collection_types_total_amount_arrears", "expenses_types" , "expenses_types_total_amount" , "collection_types" , "paid_collection_types_total_amount" , "pending_collection_types_total_amount", "date", "opening_balance"));
     }
 
     /**
