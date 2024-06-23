@@ -272,7 +272,13 @@
 
 
     </section>
-    <p style="margin-top: 20px;" class="w-full md:w-full py-6 px-6 text-md text-gray-700 uppercase bg-white dark:bg-gray-700 dark:text-gray-400 shadow-md sm:rounded-lg"><b>Cash in Hand : {{ $opening_balance + $collection_types_total_amount_advance + $paid_collection_types_total_amount +  $collection_types_total_amount_arrears - $expenses_types_total_amount }}</b></p>
+    <p style="margin-top: 20px;" class="w-full md:w-full py-6 px-6 text-md text-gray-700 uppercase bg-white dark:bg-gray-700 dark:text-gray-400 shadow-md sm:rounded-lg">
+        <b>Total Income : {{ $opening_balance + $collection_types_total_amount_advance + $paid_collection_types_total_amount +  $collection_types_total_amount_arrears}}</b>
+        <br>
+        <b>Total Expense : {{$expenses_types_total_amount }}</b>
+        <br>
+        <b>Cash in Hand : {{ $opening_balance + $collection_types_total_amount_advance + $paid_collection_types_total_amount +  $collection_types_total_amount_arrears - $expenses_types_total_amount }}</b>
+    </p>
     </div>
 
 </main>
