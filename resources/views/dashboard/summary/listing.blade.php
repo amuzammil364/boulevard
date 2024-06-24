@@ -7,6 +7,9 @@
         margin: 20px;
     }
         @media print {
+            #collection_pending{
+                display: none;
+            }
             nav{
                 display: none;
             }
@@ -265,7 +268,7 @@
             </div>
             <p class="mt-6 mb-6 px-5 text-md text-gray-700 uppercase bg-white dark:bg-gray-700 dark:text-gray-400"><b>Total : {{ $collection_types_total_amount_advance }}</b></p>
         </div>
-                        <div class="bg-white dark:bg-gray-800 relative shadow-md mt-5 sm:rounded-lg overflow-hidden">
+        <div id="collection_pending" class="bg-white dark:bg-gray-800 relative shadow-md mt-5 sm:rounded-lg overflow-hidden">
             <div class="overflow-x-auto">
             <h3 class="font-medium text-2xl mb-6 p-2">Collections <span class="text-base text-blue-600"> (Pending)</span></h3>
 
@@ -310,19 +313,20 @@
 
 
     </section>
-        <table class="border border-black total-calculation-table" style="margin-top: 24px;">
+        <table class="border border-black total-calculation-table text-left w-full" style="margin-top: 24px;">
         <thead>
             <tr>
-                <th class="border border-black py-2 px-3">Total Income</th>
-                <td class="border border-black py-2 px-3">{{ $opening_balance + $collection_types_total_amount_advance + $paid_collection_types_total_amount +  $collection_types_total_amount_arrears}}</td>
+                <th class="border border-black py-1 px-3 w-full">Opening Balance</th>
+                <td class="border border-black py-1 px-3 w-full">{{ $opening_balance }}</td>
+            </tr>
+
+            <tr>
+                <th class="border border-black py-1 px-3">Total Income</th>
+                <td class="border border-black py-1 px-3">{{ $opening_balance + $collection_types_total_amount_advance + $paid_collection_types_total_amount +  $collection_types_total_amount_arrears}}</td>
             </tr>
              <tr>
                 <th class="border border-black py-2 px-3">Total Expense</th>
                 <td class="border border-black py-2 px-3">{{$expenses_types_total_amount }}</td>
-            </tr>
-            <tr>
-                <th class="border border-black py-2 px-3">Opening Balance</th>
-                <td class="border border-black py-2 px-3">{{ $opening_balance }}</td>
             </tr>
             <tr>
                 <th class="border border-black py-2 px-3">Closing Balance</th>
