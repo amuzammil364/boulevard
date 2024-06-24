@@ -37,13 +37,19 @@
                 flex-direction: row;
             }
 
-            .logo{
+            .logo-container{
                 display: block;
             }
 
             h3{
                 padding-bottom: 0 !important;
                 margin-bottom: 0 !important;
+            }
+
+            .total-calculation-table th,
+            .total-calculation-table td{
+                padding: 6px 10px;
+                margin: 0;
             }
         }
     </style>
@@ -73,8 +79,15 @@
         </div>
     </form>
 
-    <div class="logo hidden mb-3">
-        <img class="h-auto" width="250" src="{{URL::asset('/images/logo-horizontal.png')}}" alt="image description">
+    <div class="logo-container hidden mb-3">
+        <div class="top-container border-b-2 text-center">
+            <div class="login-logo-container mb-3">
+                <img class="h-auto mx-auto" width="150" src="{{URL::asset('/images/logo-vertical.png')}}" alt="image description">
+                <p class="font-bold text-xl mt-2 uppercase">Residents Welfare Association</p>
+                <p class="text-sm">(Reg.No. Karachi-700/1999)</p>
+                <p class="text-sm">Scheme No.36 Fl-11/12, Block 15, Gulistan-e-jauhar</p>
+            </div>
+        </div>
     </div>
 
     <div class="flex flex-col md:flex-row justify-between flex-wrap space-y-3 md:space-y-0 py-4" id="printable-section">
@@ -82,7 +95,7 @@
       <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 rounded-md w-full md:w-1/2">
             <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
             <div class="overflow-x-auto">
-            <h3 class="font-medium text-2xl mb-6 p-4">Expenses</h3>
+            <h3 class="font-medium text-2xl mb-6 p-2">Expenses</h3>
 
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -126,7 +139,7 @@
      <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 rounded-md w-full md:w-1/2">
         <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
             <div class="overflow-x-auto">
-            <h3 class="font-medium text-2xl mb-6 p-4">Collections <span class="text-base text-blue-600"> (Paid)</span></h3>
+            <h3 class="font-medium text-2xl mb-6 p-2">Collections <span class="text-base text-blue-600"> (Paid)</span></h3>
 
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -166,51 +179,9 @@
             </div>
             <p class="mt-6 mb-6 px-5 text-md text-gray-700 uppercase bg-white dark:bg-gray-700 dark:text-gray-400"><b>Total : {{ $paid_collection_types_total_amount }}</b></p>
         </div>
-                <div class="bg-white dark:bg-gray-800 relative shadow-md mt-5 sm:rounded-lg overflow-hidden">
-            <div class="overflow-x-auto">
-            <h3 class="font-medium text-2xl mb-6 p-4">Collections <span class="text-base text-blue-600"> (Pending)</span></h3>
-
-            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                        <tr>
-                            <th scope="col" class="px-4 py-3">#</th>
-                            <th scope="col" class="px-4 py-3">Type</th>
-                            <th scope="col" class="px-4 py-3">Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        @if (count($collection_types) === 0)
-
-                        <tr class="border-b dark:border-gray-700">
-                            <td colspan="5" scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center">No Data</th>
-                        </tr>
-
-                        @else
-
-                        @foreach ($collection_types as $index => $collection_type )
-
-                            @if($collection_type["amount_pending"] != 0)
-
-                            <tr class="border-b dark:border-gray-700">
-                                <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $index+1 }}</th>
-                                <td class="px-4 py-3">{{ $collection_type["type"] }}</td>
-                                <td class="px-4 py-3">{{ $collection_type["amount_pending"] }}</td>
-                            </tr>
-
-                            @endif
-
-                        @endforeach
-                        @endif
-
-                    </tbody>
-                </table>
-            </div>
-            <p class="mt-6 mb-6 px-5 text-md text-gray-700 uppercase bg-white dark:bg-gray-700 dark:text-gray-400"><b>Total : {{ $pending_collection_types_total_amount }}</b></p>
-        </div>
 
         <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden mt-5">
-            <h3 class="font-medium text-2xl mb-6 p-4">Arrears</h3>
+            <h3 class="font-medium text-2xl mb-6 p-2">Arrears</h3>
 
             <div class="overflow-x-auto">
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -253,7 +224,7 @@
         </div>
 
         <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden mt-5">
-            <h3 class="font-medium text-2xl mb-6 p-4">Advance</h3>
+            <h3 class="font-medium text-2xl mb-6 p-2">Advance</h3>
 
             <div class="overflow-x-auto">
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -294,16 +265,71 @@
             </div>
             <p class="mt-6 mb-6 px-5 text-md text-gray-700 uppercase bg-white dark:bg-gray-700 dark:text-gray-400"><b>Total : {{ $collection_types_total_amount_advance }}</b></p>
         </div>
+                        <div class="bg-white dark:bg-gray-800 relative shadow-md mt-5 sm:rounded-lg overflow-hidden">
+            <div class="overflow-x-auto">
+            <h3 class="font-medium text-2xl mb-6 p-2">Collections <span class="text-base text-blue-600"> (Pending)</span></h3>
+
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-4 py-3">#</th>
+                            <th scope="col" class="px-4 py-3">Type</th>
+                            <th scope="col" class="px-4 py-3">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @if (count($collection_types) === 0)
+
+                        <tr class="border-b dark:border-gray-700">
+                            <td colspan="5" scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center">No Data</th>
+                        </tr>
+
+                        @else
+
+                        @foreach ($collection_types as $index => $collection_type )
+
+                            @if($collection_type["amount_pending"] != 0)
+
+                            <tr class="border-b dark:border-gray-700">
+                                <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $index+1 }}</th>
+                                <td class="px-4 py-3">{{ $collection_type["type"] }}</td>
+                                <td class="px-4 py-3">{{ $collection_type["amount_pending"] }}</td>
+                            </tr>
+
+                            @endif
+
+                        @endforeach
+                        @endif
+
+                    </tbody>
+                </table>
+            </div>
+            <p class="mt-6 mb-6 px-5 text-md text-gray-700 uppercase bg-white dark:bg-gray-700 dark:text-gray-400"><b>Total : {{ $pending_collection_types_total_amount }}</b></p>
+        </div>
 
 
     </section>
-    <p style="margin-top: 20px;" class="w-full md:w-full py-6 px-6 text-md text-gray-700 uppercase bg-white dark:bg-gray-700 dark:text-gray-400 shadow-md sm:rounded-lg">
-        <b>Total Income : {{ $opening_balance + $collection_types_total_amount_advance + $paid_collection_types_total_amount +  $collection_types_total_amount_arrears}}</b>
-        <br>
-        <b>Total Expense : {{$expenses_types_total_amount }}</b>
-        <br>
-        <b>Cash in Hand : {{ $opening_balance + $collection_types_total_amount_advance + $paid_collection_types_total_amount +  $collection_types_total_amount_arrears - $expenses_types_total_amount }}</b>
-    </p>
+        <table class="border border-black total-calculation-table" style="margin-top: 24px;">
+        <thead>
+            <tr>
+                <th class="border border-black py-2 px-3">Total Income</th>
+                <td class="border border-black py-2 px-3">{{ $opening_balance + $collection_types_total_amount_advance + $paid_collection_types_total_amount +  $collection_types_total_amount_arrears}}</td>
+            </tr>
+             <tr>
+                <th class="border border-black py-2 px-3">Total Expense</th>
+                <td class="border border-black py-2 px-3">{{$expenses_types_total_amount }}</td>
+            </tr>
+            <tr>
+                <th class="border border-black py-2 px-3">Opening Balance</th>
+                <td class="border border-black py-2 px-3">{{ $opening_balance }}</td>
+            </tr>
+            <tr>
+                <th class="border border-black py-2 px-3">Closing Balance</th>
+                <td class="border border-black py-2 px-3">{{ $opening_balance + $collection_types_total_amount_advance + $paid_collection_types_total_amount +  $collection_types_total_amount_arrears - $expenses_types_total_amount }}</td>
+            </tr>
+        </thead>
+    </table>
     </div>
 
 </main>

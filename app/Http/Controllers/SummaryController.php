@@ -91,7 +91,7 @@ class SummaryController extends Controller
 
 
         foreach($collection_types as $index => $collection_type){
-            $amount_paid = Payment::whereMonth('payment_month' , $currentMonth)->where('type' , $collection_type['type'])->where('amount' , '!=' , 0)->where('status' , 'Paid')->sum('amount');
+            $amount_paid = Payment::whereMonth('payment_month' , $currentMonth)->whereMonth('paid_date' , $currentMonth)->where('type' , $collection_type['type'])->where('amount' , '!=' , 0)->where('status' , 'Paid')->sum('amount');
             $collection_types[$index]['amount_paid'] = $amount_paid;
             $paid_collection_types_total_amount += $amount_paid;
             $amount_pending = Payment::whereMonth('payment_month' , $currentMonth)->where('type' , $collection_type['type'])->where('amount' , '!=' , 0)->where('status' , 'Pending')->sum('amount');
