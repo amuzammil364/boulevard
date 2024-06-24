@@ -3,6 +3,9 @@
 @section("dashboard/dashboard")
 
 <style>
+    @page{
+        margin: 20px;
+    }
         @media print {
             nav{
                 display: none;
@@ -23,6 +26,24 @@
 
             h1{
                 display: none;
+            }
+
+            .md\:w-1\/2{
+                width: 50%;
+                padding: 0.75rem;
+            }
+
+            .md\:flex-row{
+                flex-direction: row;
+            }
+
+            .logo{
+                display: block;
+            }
+
+            h3{
+                padding-bottom: 0 !important;
+                margin-bottom: 0 !important;
             }
         }
     </style>
@@ -51,6 +72,10 @@
             </div>
         </div>
     </form>
+
+    <div class="logo hidden mb-3">
+        <img class="h-auto" width="250" src="{{URL::asset('/images/logo-horizontal.png')}}" alt="image description">
+    </div>
 
     <div class="flex flex-col md:flex-row justify-between flex-wrap space-y-3 md:space-y-0 py-4" id="printable-section">
 
