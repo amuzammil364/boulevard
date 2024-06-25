@@ -68,9 +68,9 @@
                     </a>
                 </li> -->
                 <li>
-                    <a href="{{ url("/dashboard/summary") }}" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <a href="{{ url("/dashboard/reports") }}" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                         <img class="h-auto" width="20" src="{{URL::asset('/icons/transactions.png')}}" alt="image description">
-                        <span class="ml-3">Summary</span>
+                        <span class="ml-3">Reports</span>
                     </a>
                 </li>
                 @endif

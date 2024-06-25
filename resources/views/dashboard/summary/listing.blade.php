@@ -184,7 +184,7 @@
         </div>
 
         <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden mt-5">
-            <h3 class="font-medium text-2xl mb-6 p-2">Arrears</h3>
+            <h3 class="font-medium text-2xl mb-6 p-2">Arrears <span class="text-base text-blue-600"> (Paid)</span></h3>
 
             <div class="overflow-x-auto">
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -227,7 +227,7 @@
         </div>
 
         <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden mt-5">
-            <h3 class="font-medium text-2xl mb-6 p-2">Advance</h3>
+            <h3 class="font-medium text-2xl mb-6 p-2">Advance <span class="text-base text-blue-600"> (Paid)</span></h3>
 
             <div class="overflow-x-auto">
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -313,24 +313,24 @@
 
 
     </section>
-        <table class="border border-black total-calculation-table text-left w-full" style="margin-top: 24px;">
+        <table class="border border-black total-calculation-table text-left w-96 ml-auto mr-auto" style="margin-top: 24px;">
         <thead>
             <tr>
-                <th class="border border-black py-1 px-3 w-full">Opening Balance</th>
-                <td class="border border-black py-1 px-3 w-full">{{ $opening_balance }}</td>
+                <th class="border border-black py-2 px-6 w-2/4">Opening Balance</th>
+                <td class="border border-black py-2 px-6 w-2/4">{{ $opening_balance }}</td>
             </tr>
 
             <tr>
-                <th class="border border-black py-1 px-3">Total Income</th>
-                <td class="border border-black py-1 px-3">{{ $opening_balance + $collection_types_total_amount_advance + $paid_collection_types_total_amount +  $collection_types_total_amount_arrears}}</td>
+                <th class="border border-black py-2 px-6 w-2/4">Total Income</th>
+                <td class="border border-black py-2 px-6 w-2/4">{{ $opening_balance + $collection_types_total_amount_advance + $paid_collection_types_total_amount +  $collection_types_total_amount_arrears}}</td>
             </tr>
              <tr>
-                <th class="border border-black py-2 px-3">Total Expense</th>
-                <td class="border border-black py-2 px-3">{{$expenses_types_total_amount }}</td>
+                <th class="border border-black py-2 px-6 w-2/4">Total Expense</th>
+                <td class="border border-black py-2 px-6 w-2/4">{{$expenses_types_total_amount }}</td>
             </tr>
             <tr>
-                <th class="border border-black py-2 px-3">Closing Balance</th>
-                <td class="border border-black py-2 px-3">{{ $opening_balance + $collection_types_total_amount_advance + $paid_collection_types_total_amount +  $collection_types_total_amount_arrears - $expenses_types_total_amount }}</td>
+                <th class="border border-black py-2 px-6 w-2/4">Closing Balance</th>
+                <td class="border border-black py-2 px-6 w-2/4">{{ $opening_balance + $collection_types_total_amount_advance + $paid_collection_types_total_amount +  $collection_types_total_amount_arrears - $expenses_types_total_amount }}</td>
             </tr>
         </thead>
     </table>
