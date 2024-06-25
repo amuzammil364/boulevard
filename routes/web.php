@@ -12,6 +12,7 @@ use App\Http\Controllers\ResidentsController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\SummaryController;
 use App\Http\Controllers\ReportsController;
+use App\Http\Controllers\DefaultersController;
 use App\Http\Controllers\PrintReceiptController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -133,6 +134,11 @@ Route::middleware(["loggedIn"])->group(function () {
     // ==========================
     //-- Page View Routes
     Route::get('/dashboard/reports', [ReportsController::class, "index"])->middleware(["role:1"]);
+
+    // ====== Defaulters Routes ======
+    // ==========================
+    //-- Page View Routes
+    Route::get('/dashboard/defaulters', [DefaultersController::class, "index"])->middleware(["role:1"])->name("defaulters");
 
     // ====== Print Receipt Routes ======
     // ==========================

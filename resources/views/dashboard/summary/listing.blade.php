@@ -54,6 +54,10 @@
                 padding: 6px 10px;
                 margin: 0;
             }
+
+            .printable_summary_date{
+                display: block;
+            }
         }
     </style>
 
@@ -91,6 +95,10 @@
                 <p class="text-sm">Scheme No.36 Fl-11/12, Block 15, Gulistan-e-jauhar</p>
             </div>
         </div>
+    </div>
+
+    <div class="printable_summary_date hidden mt-8">
+        <h2 class="font-bold text-xl text-center">{{ date("F , Y" , strtotime($date)) }}</h2>
     </div>
 
     <div class="flex flex-col md:flex-row justify-between flex-wrap space-y-3 md:space-y-0 py-4" id="printable-section">
