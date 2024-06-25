@@ -325,20 +325,20 @@
         <thead>
             <tr>
                 <th class="border border-black py-2 px-6 w-2/4">Opening Balance</th>
-                <td class="border border-black py-2 px-6 w-2/4">{{ number_format($opening_balance) }}</td>
+                <td class="border border-black py-2 px-6 w-2/4">{{ number_format($opening_balance) }} PKR</td>
             </tr>
 
             <tr>
                 <th class="border border-black py-2 px-6 w-2/4">Total Income</th>
-                <td class="border border-black py-2 px-6 w-2/4">{{ number_format($opening_balance + $collection_types_total_amount_advance + $paid_collection_types_total_amount +  $collection_types_total_amount_arrears)}}</td>
+                <td class="border border-black py-2 px-6 w-2/4">{{ number_format($opening_balance + $collection_types_total_amount_advance + $paid_collection_types_total_amount +  $collection_types_total_amount_arrears)}} PKR</td>
             </tr>
              <tr>
                 <th class="border border-black py-2 px-6 w-2/4">Total Expense</th>
-                <td class="border border-black py-2 px-6 w-2/4">{{ number_format($expenses_types_total_amount) }}</td>
+                <td class="border border-black py-2 px-6 w-2/4">{{ number_format($expenses_types_total_amount) }} PKR</td>
             </tr>
             <tr>
                 <th class="border border-black py-2 px-6 w-2/4">Closing Balance</th>
-                <td class="border border-black py-2 px-6 w-2/4">{{ number_format($opening_balance + $collection_types_total_amount_advance + $paid_collection_types_total_amount +  $collection_types_total_amount_arrears - $expenses_types_total_amount) }}</td>
+                <td class="border border-black py-2 px-6 w-2/4">{{ number_format($opening_balance + $collection_types_total_amount_advance + $paid_collection_types_total_amount +  $collection_types_total_amount_arrears - $expenses_types_total_amount) }} PKR</td>
             </tr>
         </thead>
     </table>
