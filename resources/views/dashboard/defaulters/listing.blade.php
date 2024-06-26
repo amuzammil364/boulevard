@@ -84,6 +84,31 @@
             </div>
         </div>
         @endforeach
+
+    </section>
+    <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 rounded-md mt-8">
+        <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-4 py-3">{{ $type }}</th>
+                            <th scope="col" class="px-4 py-3">#</th>
+                            <th scope="col" class="px-4 py-3">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($collectionTypesTotal as $collectionType)
+                            <tr class="border-b dark:border-gray-700">
+                                <td class="px-4 py-3">{{ $collectionType['month'] }}</td>
+                                <td class="px-4 py-3">{{ $collectionType['number_of_rows'] }}</td>
+                                <td class="px-4 py-3">{{ number_format($collectionType['amount']) }} PKR</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </section>
 
 </main>
