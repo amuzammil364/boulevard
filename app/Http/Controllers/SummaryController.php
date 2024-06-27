@@ -119,7 +119,8 @@ class SummaryController extends Controller
 
 
 
-        return view("dashboard.summary.listing" , compact("collection_types_advance", "collection_types_total_amount_advance","collection_types_arrears", "collection_types_total_amount_arrears", "expenses_types" , "expenses_types_total_amount" , "collection_types" , "paid_collection_types_total_amount" , "pending_collection_types_total_amount", "date", "opening_balance"));
+        return $currentYear;
+        // return view("dashboard.summary.listing" , compact("collection_types_advance", "collection_types_total_amount_advance","collection_types_arrears", "collection_types_total_amount_arrears", "expenses_types" , "expenses_types_total_amount" , "collection_types" , "paid_collection_types_total_amount" , "pending_collection_types_total_amount", "date", "opening_balance"));
     }
 
     /**
