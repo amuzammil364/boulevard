@@ -15,6 +15,8 @@ class SummaryController extends Controller
     public function index(Request $request)
     {
 
+        // ->whereYear("payment_month" , '<=' , $currentYear)
+
         $currentMonth = Carbon::now()->month;
         $currentYear = Carbon::now()->year;
         $date = date('Y-m');
@@ -102,7 +104,7 @@ class SummaryController extends Controller
         }
 
         foreach($collection_types_arrears as $index => $collection_type){
-            $payments = Payment::whereMonth('payment_month' ,'<', $currentMonth)->whereYear("payment_month" , '<=' , $currentYear)->where('type' , $collection_type['type'])->where('amount' , '!=' , 0);
+            $payments = Payment::whereMonth('payment_month' ,'<', $currentMonth)->where('type' , $collection_type['type'])->where('amount' , '!=' , 0);
             $amount = $payments->whereMonth('paid_date' , $currentMonth)->where('status' , 'Paid')->sum('amount');
             $collection_types_arrears[$index]['amount'] = $amount;
             $collection_types_total_amount_arrears += $amount;
