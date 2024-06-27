@@ -49,7 +49,7 @@ class DefaultersController extends Controller
         $toDate = Carbon::createFromFormat('Y-m', $to_date)->endOfMonth();
         
         $flats = Flat::with(['payments' => function($query) use ($fromDate, $toDate , $type) { 
-            $query->whereBetween('payment_month', [$fromDate, $toDate])->where("type" , $type)->where('status', 'Pending');}, 'residents'])->get();
+            $query->whereBetween('payment_month', [$fromDate, $toDate])->where("type" , $type)->where('status', 'Pending')->orderBy("payment_month" , "DESC");}, 'residents'])->get();
 
         $flats = $flats->filter(function($flat) {
             $totalAmount = $flat->payments->sum('amount');

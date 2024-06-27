@@ -23,6 +23,7 @@ class PaymentsController extends Controller
         $filters->status = "";
         $filters->type = "";
         $filters->flat_id = "";
+        $filters->receipt_id = "";
         $currentMonth = Carbon::now()->month;
         $currentYear = Carbon::now()->year;
         $flats = Flat::all();
@@ -65,6 +66,11 @@ class PaymentsController extends Controller
             $payments_pending = $payments_pending->where('flat_id',$request->flat_id);
 
             $filters->flat_id = $request->flat_id;
+        }
+
+        if(isset($request->receipt_id) && !empty($request->receipt_id)){
+            $payments = $payments->where('receipt_id',$request->receipt_id);
+            $filters->receipt_id = $request->receipt_id;
         }
 
         $payments_paid = $payments_paid->sum('amount');
