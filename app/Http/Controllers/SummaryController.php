@@ -15,8 +15,6 @@ class SummaryController extends Controller
     public function index(Request $request)
     {
 
-        // ->whereYear("payment_month" , '<=' , $currentYear)
-
         $currentMonth = Carbon::now()->month;
         $currentYear = Carbon::now()->year;
         $date = date('Y-m');
@@ -27,7 +25,7 @@ class SummaryController extends Controller
         
         if(isset($request->summary_month) && $request->summary_month != ""){
             $currentMonth = date("m" , strtotime($request->summary_month));
-            $currentYear = date("y" , strtotime($request->summary_month));
+            $currentYear = date("Y" , strtotime($request->summary_month));
             $date = $request->summary_month;
         }
 
@@ -104,7 +102,7 @@ class SummaryController extends Controller
         }
 
         foreach($collection_types_arrears as $index => $collection_type){
-            $payments = Payment::whereMonth('payment_month' ,'<', $currentMonth)->where('type' , $collection_type['type'])->where('amount' , '!=' , 0);
+            $payments = Payment::whereMonth('payment_month' ,'<', $currentMonth)->whereYear("payment_month" , '<=' , $currentYear)->where('type' , $collection_type['type'])->where('amount' , '!=' , 0);
             $amount = $payments->whereMonth('paid_date' , $currentMonth)->where('status' , 'Paid')->sum('amount');
             $collection_types_arrears[$index]['amount'] = $amount;
             $collection_types_total_amount_arrears += $amount;
@@ -117,10 +115,7 @@ class SummaryController extends Controller
             $collection_types_total_amount_advance += $amount;
         }
 
-
-
-        return $currentYear;
-        // return view("dashboard.summary.listing" , compact("collection_types_advance", "collection_types_total_amount_advance","collection_types_arrears", "collection_types_total_amount_arrears", "expenses_types" , "expenses_types_total_amount" , "collection_types" , "paid_collection_types_total_amount" , "pending_collection_types_total_amount", "date", "opening_balance"));
+        return view("dashboard.summary.listing" , compact("collection_types_advance", "collection_types_total_amount_advance","collection_types_arrears", "collection_types_total_amount_arrears", "expenses_types" , "expenses_types_total_amount" , "collection_types" , "paid_collection_types_total_amount" , "pending_collection_types_total_amount", "date", "opening_balance"));
     }
 
     /**
