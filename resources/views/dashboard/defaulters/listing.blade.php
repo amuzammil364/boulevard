@@ -122,6 +122,11 @@
     </div>
 
         <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 rounded-md">
+
+            @if($flats->isEmpty())
+                <p class="text-center">Flats is not available!</p>
+            @endif
+
             @foreach ($flats as $index => $flat)
             <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden mb-10 border border-gray-400" id="flat">
             <div class="overflow-x-auto">
@@ -162,7 +167,8 @@
         @endforeach
 
     </section>
-    <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 rounded-md mt-8" id="dates-amount-calculation">
+    @if($flats->isNotEmpty())
+            <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 rounded-md mt-8" id="dates-amount-calculation">
         <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -188,6 +194,7 @@
             </div>
         </div>
     </section>
+    @endif
 
 </main>
 
