@@ -145,16 +145,16 @@
                                 <th scope="col" class="px-4 py-3 text-lg">Resident</th>
                                 <td scope="col" class="px-4 py-3 text-lg">{{ !empty($flat->residents[0])?$flat->residents[0]->full_name:"" }} </th>
                             </tr>
-                                <tr class="bg-gray-200" id="payment">
+                                <tr class="bg-gray-100" id="payment">
                                     <th scope="col" class="px-4 py-3 text-base border border-gray-400">Period</th>
                                     <th scope="col" class="px-4 py-3 text-base border border-gray-400">Amount</th>
                                     @foreach ($flat->payments as $payment)
-                                    <tr class="bg-gray-200" id="payment">
+                                    <tr class="bg-gray-100" id="payment">
                                         <th scope="col" class="px-4 py-3 text-base">{{ date('M Y' , strtotime($payment->payment_month)) }}</th>
                                         <th scope="col" class="px-4 py-3 text-base">{{ number_format($payment->amount) }} PKR</th>
                                     </tr>
                                     @endforeach
-                                    <tr class="bg-gray-200" id="payment">
+                                    <tr class="bg-gray-100" id="payment">
                                         <th scope="col" class="px-4 py-3 text-lg border border-gray-300">Total</th>
                                         <th scope="col" class="px-4 py-3 text-lg border border-gray-300">{{ number_format($flat->totalAmount) }} PKR</th>
                                     </tr>
