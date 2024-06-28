@@ -6,6 +6,7 @@ use App\Models\Flat;
 use App\Models\Option;
 use App\Models\Payment;
 use App\Models\Transaction;
+use App\Models\RecordCollection;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use stdClass;
@@ -184,6 +185,70 @@ class PaymentsController extends Controller
         }
 
         return redirect("/dashboard/payments/add");
+    }
+
+    public function generate_payments(Request $request){
+
+        $check_record_collection = RecordCollection::whereMonth("payment_month" , date('m'))->first();
+
+        if(!$check_record_collection){
+
+            $record_collection = new RecordCollection();
+
+            $record_collection->recorded = true;
+            $record_collection->payment_month = date('Y-m-d');
+
+            $record_collection->save();
+            
+            $global_maintenance = Option::where('key','maintenance_amount')->first();
+            $flats = Flat::all();
+            
+            $collection_due_day = Option::where('key','collection_due_day')->first();
+            if($collection_due_day){
+                $collection_due_day = $collection_due_day->value;
+            }else{
+                $collection_due_day = '01';
+            }
+            $due_date = date('Y-m-'.$collection_due_day);
+            
+            $payments = Payment::orderby('id','DESC')->get();
+            $receipt_id = 1;
+            if(sizeof($payments) > 0){
+                $receipt_id = $payments[0]->receipt_id + 1;
+            }
+            $receipt_id = str_pad($receipt_id, 4, '0', STR_PAD_LEFT);
+
+            foreach($flats as $index => $flat){
+
+                $payment = Payment::where("flat_id" , $flat->id)->where("payment_month" , date("m"))->get();
+
+                if(!count($payment) > 0){                
+                    $payment_id = uniqid();
+
+                    $payment = new Payment();
+                    $payment->flat_id = $flat->id;
+                    $payment->type = "Maintenance";
+                    $payment->status = "Pending";
+                    $payment->payment_id = $payment_id;
+                    $payment->amount = $global_maintenance->value;
+                    $payment->mode_of_payment = "Cash";
+                    $payment->receipt_id = $receipt_id;
+                    $payment->payment_month = date("Y-m-d");
+                    $payment->due_date = $due_date;
+
+                    $payment->save();
+
+                    $receipt_id++;
+                    $receipt_id = str_pad($receipt_id, 4, '0', STR_PAD_LEFT);
+                }
+            }
+        return redirect("/dashboard/payments")->with("success" , "SuccessFully Collections Generated!");
+
+        }
+        else{
+            return redirect("/dashboard/payments")->with("fail" , "Collections are Already Generated!");
+        }
+
     }
 
     /**

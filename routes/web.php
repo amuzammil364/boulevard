@@ -85,6 +85,7 @@ Route::middleware(["loggedIn"])->group(function () {
     Route::get('/dashboard/payments/{id}', [PaymentsController::class, "singlePage"])->middleware(["role:1"]);
     //-- Data Management Routes
     Route::post("/dashboard/payments/add", [PaymentsController::class, "store"])->name("add_payment")->middleware(["role:1"]);
+    Route::post("/dashboard/payments/generate", [PaymentsController::class, "generate_payments"])->name("generate_payment")->middleware(["role:1"]);
     Route::delete("/dashboard/payments/delete", [PaymentsController::class, "destroy"])->name("delete_payment")->middleware(["role:1"]);
     Route::put("/dashboard/payments/edit", [PaymentsController::class, "update"])->name("edit_payment")->middleware(["role:1"]);
 
