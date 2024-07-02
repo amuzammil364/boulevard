@@ -54,6 +54,8 @@ class SummaryController extends Controller
             ["type" => "Repairs-Mason", "amount" => 0],
             ["type" => "Decorative Goods", "amount" => 0],
             ["type" => "CCTV Maintenance", "amount" => 0],
+            ["type" => "Eid ul Adha Provision" , "amount" => 0],
+            ["type" => "Eid ul Fitr Provision" , "amount" => 0]
         ];
 
         $paid_collection_types_total_amount = 0;
@@ -90,6 +92,10 @@ class SummaryController extends Controller
             $expenses_types[$index]['amount'] = $amount;
             $expenses_types_total_amount += $amount;
         }
+
+        usort($expenses_types, function($a, $b) {
+            return $b['amount'] <=> $a['amount'];
+        });
 
 
         foreach($collection_types as $index => $collection_type){

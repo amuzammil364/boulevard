@@ -78,7 +78,9 @@
                                 <option value="Repairs-Plumbing" {{ ($filters->type == "Repairs-Plumbing" ? "selected" : "") }}>Repairs-Plumbing</option>                                
                                 <option value="Repairs-Mason" {{ ($filters->type == "Repairs-Mason" ? "selected" : "") }}>Repairs-Mason</option> 
                                 <option value="Decorative Goods" {{ ($filters->type == "Decorative Goods" ? "selected" : "") }}>Decorative Goods</option> 
-                                <option value="CCTV Maintenance" {{ ($filters->type == "CCTV Maintenance" ? "selected" : "") }}>CCTV Maintenance</option>                                
+                                <option value="CCTV Maintenance" {{ ($filters->type == "CCTV Maintenance" ? "selected" : "") }}>CCTV Maintenance</option>  
+                                <option value="Eid ul Adha Provision" {{ ($filters->type == "Eid ul Adha Provision" ? "selected" : "") }}>Eid ul Adha Provision</option>                                
+                                <option value="Eid ul Fitr Provision" {{ ($filters->type == "Eid ul Fitr Provision" ? "selected" : "") }}>Eid ul Fitr Provision</option>                                                              
                             </select>
                         </div>
 

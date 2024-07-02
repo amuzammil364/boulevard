@@ -37,6 +37,8 @@
                                 <option value="Repairs-Mason" {{ (old("type") == "Repairs-Mason" ? "selected" : "") }}>Repairs-Mason</option>                                
                                 <option value="Decorative Goods" {{ (old("type") == "Decorative Goods" ? "selected" : "") }}>Decorative Goods</option>                                
                                 <option value="CCTV Maintenance" {{ (old("type") == "CCTV Maintenance" ? "selected" : "") }}>CCTV Maintenance</option>                                
+                                <option value="Eid ul Adha Provision" {{ (old("type") == "Eid ul Adha Provision" ? "selected" : "") }}>Eid ul Adha Provision</option>                                
+                                <option value="Eid ul Fitr Provision" {{ (old("type") == "Eid ul Fitr Provision" ? "selected" : "") }}>Eid ul Fitr Provision</option>                                
                             </select>
                             @error("type")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>

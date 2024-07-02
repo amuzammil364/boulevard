@@ -39,7 +39,8 @@
                                 <option value="Repairs-Mason" {{ ($expense->type == "Repairs-Mason" ? "selected" : "") }}>Repairs-Mason</option>                          
                                 <option value="Decorative Goods" {{ ($expense->type == "Decorative Goods" ? "selected" : "") }}>Decorative Goods</option>                          
                                 <option value="CCTV Maintenance" {{ ($expense->type == "CCTV Maintenance" ? "selected" : "") }}>CCTV Maintenance</option>                          
-
+                                <option value="Eid ul Adha Provision" {{ ($expense->type == "Eid ul Adha Provision" ? "selected" : "") }}>Eid ul Adha Provision</option>                                
+                                <option value="Eid ul Fitr Provision" {{ ($expense->type == "Eid ul Fitr Provision" ? "selected" : "") }}>Eid ul Fitr Provision</option>                                
                             </select>
                             @error("status")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>
