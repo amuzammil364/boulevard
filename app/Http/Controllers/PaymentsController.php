@@ -104,7 +104,7 @@ class PaymentsController extends Controller
         }
         $due_date = date('Y-m-'.$collection_due_day);
 
-        $flats = Flat::all();
+        $flats = Flat::with('residents')->get();
 
         $payments = Payment::orderby('id','DESC')->get();
         $receipt_id = 1;
@@ -200,9 +200,9 @@ class PaymentsController extends Controller
 
     public function generate_payments(Request $request){
 
-        $check_record_collection = RecordCollection::whereMonth("payment_month" , date('m' , strtotime($request->payment_month)))->first();
+        $check_record_collection = RecordCollection::whereMonth("payment_month" , date('m' , strtotime($request->payment_month)))->whereYear("payment_month" , date('Y'))->first();
 
-        // if(!$check_record_collection){
+        if(!$check_record_collection){
 
             $record_collection = new RecordCollection();
 
@@ -254,10 +254,10 @@ class PaymentsController extends Controller
             }
         return redirect("/dashboard/payments")->with("success" , "SuccessFully Collections Generated!");
 
-        // }
-        // else{
-        //     return redirect("/dashboard/payments")->with("fail" , "Collections are Already Generated!");
-        // }
+        }
+        else{
+            return redirect("/dashboard/payments")->with("fail" , "Collections are Already Generated!");
+        }
 
     }
 

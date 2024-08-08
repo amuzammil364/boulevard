@@ -3,10 +3,41 @@
 @section("dashboard/dashboard")
 
 <style>
+
+body{
+    width: 100%;
+    height: 100%;
+}
+
+body .bg-monogram{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("/images/logo-vertical.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+    opacity: 0.1;
+    display: none;
+}
+
     @page{
-        margin: 20px;
+        margin: 20px 12px;
     }
         @media print {
+
+            body{
+                width: 100%;
+                height: 100%;
+            }
+
+            body .bg-monogram{
+                display: block;
+            }
+
             #collection_pending{
                 display: none;
             }
@@ -21,6 +52,8 @@
             #main{
                 padding: 0 !important;
                 margin: 0 !important;
+                position: relative;
+                z-index: 6;
             }
 
             form{
@@ -40,13 +73,13 @@
                 flex-direction: row;
             }
 
-            .logo-container{
-                display: block;
-            }
-
             h3{
                 padding-bottom: 0 !important;
                 margin-bottom: 0 !important;
+            }
+
+            .total-calculation-table{
+                width: 100%;
             }
 
             .total-calculation-table th,
@@ -58,8 +91,59 @@
             .printable_summary_date{
                 display: block;
             }
+
+            #printable-section section{
+                background-color: transparent;
+            }
+
+            table thead{
+                background-color: transparent !important;
+                font-size: 10px !important;
+            }
+
+            table tbody td,
+            table tbody th{
+                font-weight: 500;
+                color: #000;
+                padding: 8px 16px !important;
+            }
+
+            table tbody td{
+                font-size: 16px;
+            }
+
+            #table-sec{
+                border: 1px solid #000;
+            }
+
+            #printable-section section:nth-child(1){
+                padding-left: 0;
+            }
+
+            #printable-section section:nth-child(2){
+                padding-right: 0;
+                padding-top: 0;
+            }
+
+            #table-sec p{
+                margin: 20px 0 !important;
+            }
+
+            .total-calculation-table tr th{
+                font-size: 18px;
+                font-weight: bold;
+            }
+
+            .total-calculation-table tr td{
+                font-size: 18px;
+            }
+
         }
     </style>
+
+    <div class="bg-monogram">
+
+    </div>
 
 <main class="p-4 sm:ml-64 md:ml-64 h-auto pt-20" id="main">
     <h1 class="font-bold text-3xl mb-8">Summary</h1>
@@ -86,7 +170,7 @@
         </div>
     </form>
 
-    <div class="logo-container hidden mb-3">
+    {{-- <div class="logo-container hidden mb-3">
         <div class="top-container border-b-2 text-center">
             <div class="login-logo-container mb-3">
                 <img class="h-auto mx-auto" width="150" src="{{URL::asset('/images/logo-vertical.png')}}" alt="image description">
@@ -95,7 +179,7 @@
                 <p class="text-sm">Scheme No.36 Fl-11/12, Block 15, Gulistan-e-jauhar</p>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <div class="printable_summary_date hidden mt-8">
         <h2 class="font-bold text-xl text-center">{{ date("F , Y" , strtotime($date)) }}</h2>
@@ -104,7 +188,7 @@
     <div class="flex flex-col md:flex-row justify-between flex-wrap space-y-3 md:space-y-0 py-4" id="printable-section">
 
       <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 rounded-md w-full md:w-1/2">
-            <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+            <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden" id="table-sec">
             <div class="overflow-x-auto">
             <h3 class="font-medium text-2xl mb-6 p-2">Expenses</h3>
 
@@ -148,7 +232,7 @@
         </div>
     </section>
      <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 rounded-md w-full md:w-1/2">
-        <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+        <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden" id="table-sec">
             <div class="overflow-x-auto">
             <h3 class="font-medium text-2xl mb-6 p-2">Collections <span class="text-base text-blue-600"> (Paid)</span></h3>
 
@@ -191,7 +275,7 @@
             <p class="mt-6 mb-6 px-5 text-md text-gray-700 uppercase bg-white dark:bg-gray-700 dark:text-gray-400"><b>Total : {{ $paid_collection_types_total_amount }}</b></p>
         </div>
 
-        <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden mt-5">
+        <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden mt-5" id="table-sec">
             <h3 class="font-medium text-2xl mb-6 p-2">Arrears <span class="text-base text-blue-600"> (Paid)</span></h3>
 
             <div class="overflow-x-auto">
@@ -234,7 +318,7 @@
             <p class="mt-6 mb-6 px-5 text-md text-gray-700 uppercase bg-white dark:bg-gray-700 dark:text-gray-400"><b>Total : {{ $collection_types_total_amount_arrears }}</b></p>
         </div>
 
-        <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden mt-5">
+        <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden mt-5" id="table-sec">
             <h3 class="font-medium text-2xl mb-6 p-2">Advance <span class="text-base text-blue-600"> (Paid)</span></h3>
 
             <div class="overflow-x-auto">

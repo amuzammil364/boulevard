@@ -15,9 +15,43 @@
                             <select id="flat_searchable" name="flat_id" class="bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                 <option value="">Select Flat</option>
                                 @foreach ($flats as $flat)
-                                <option value="{{ $flat->id }}" {{ old("flat_id") == $flat->id ? "selected" : "" }} >{{ $flat->flat_number }} ({{$flat->phase_number}})</option>
+                                <option value="{{ $flat->id }}" {{ old("flat_id") == $flat->id ? "selected" : "" }} >{{ $flat->flat_number }} ({{$flat->phase_number}}) 
+
+                                    @php
+                                        $tenantFound = false;
+                                    @endphp
+
+                                    @foreach ($flat->residents as $resident)
+                                        @if($resident->type == "Tenant" && $resident->status == "Active" 
+                                        || $resident->status == "Vacant (Paid)"
+                                        || $resident->status == "Vacant (Arrears)"
+                                        || $resident->status == "Active (Arrears)"
+                                        || $resident->status == "Active (Rented)"
+                                        )
+                                            <p>({{$resident->full_name}})</p>
+                                            @php
+                                                $tenantFound = true;
+                                            @endphp
+                                            @break
+                                        @endif
+                                    @endforeach
+
+                                    @if(!$tenantFound)
+                                        @foreach ($flat->residents as $resident)
+                                            @if($resident->type == "Owner" && $resident->status == "Active"
+                                            || $resident->status == "TBC"
+                                            || $resident->status == "Inactive"
+                                            )
+                                                <p>({{$resident->full_name}})</p>
+                                                @break
+                                            @endif
+                                        @endforeach
+                                    @endif
+
+                                </option>
                                 @endforeach
                             </select>
+
                             @error("flat_id")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>
                             @enderror
