@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Employee;
 use App\Models\Expense;
 use App\Models\Resident;
+use App\Models\ExpenseType;
 use App\Models\Transaction;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -25,7 +26,7 @@ class ExpensesController extends Controller
         $filters->type = "";
         $filters->employee_id = "";
         $employees = Employee::all();
-
+        $expense_types = ExpenseType::all();
 
         $expenses = Expense::with('employee');
 
@@ -67,13 +68,14 @@ class ExpensesController extends Controller
         $total_amount = $expenses->sum('amount');
         $expenses_count = $expenses->count();
 
-        return view("dashboard.expenses.listing", compact("expenses", "filters", "employees", "total_amount" , "expenses_count"));
+        return view("dashboard.expenses.listing", compact("expenses", "filters", "employees", "total_amount" , "expenses_count" , "expense_types"));
     }
 
     public function createPage()
     {
         $employees = Employee::all();
         $residents = Resident::all();
+        $expense_types = ExpenseType::all();
 
 
         // $expenses = Expense::orderby('id','DESC')->get();
@@ -83,7 +85,7 @@ class ExpensesController extends Controller
         // }
         // $receipt_id = str_pad($receipt_id, 4, '0', STR_PAD_LEFT);
         $payment_id = uniqid();
-        return view("dashboard.expenses.add", compact("employees" , "residents", "payment_id"));
+        return view("dashboard.expenses.add", compact("employees" , "residents", "payment_id" , "expense_types"));
     }
 
     public function editPage($id)
@@ -91,8 +93,9 @@ class ExpensesController extends Controller
         if ($id) {
             $employees = Employee::all();
             $residents = Resident::all();
+            $expense_types = ExpenseType::all();
             $expense = Expense::find($id);
-            return view("dashboard.expenses.edit", compact("employees", "residents", "expense"));
+            return view("dashboard.expenses.edit", compact("employees", "residents", "expense" , "expense_types"));
         }
     }
 

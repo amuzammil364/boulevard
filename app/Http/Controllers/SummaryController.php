@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Expense;
 use App\Models\Payment;
+use App\Models\ExpenseType;
 use Carbon\Carbon;
 
 class SummaryController extends Controller
@@ -30,33 +31,7 @@ class SummaryController extends Controller
         }
 
         $expenses_types_total_amount = 0;
-        $expenses_types = [
-            ["type" => "Salary", "amount" => 0],
-            ["type" => "Utility", "amount" => 0],
-            ["type" => "Repairs", "amount" => 0],
-            ["type" => "Welfare", "amount" => 0],
-            ["type" => "Misc", "amount" => 0],
-            ["type" => "KElectric", "amount" => 0],
-            ["type" => "KWSB", "amount" => 0],
-            ["type" => "SSGC", "amount" => 0],
-            ["type" => "Cleaning Supplies", "amount" => 0],
-            ["type" => "Office Supplies", "amount" => 0],
-            ["type" => "Electrical Supplies", "amount" => 0],
-            ["type" => "Plumbing Supplies", "amount" => 0],
-            ["type" => "Goods Material", "amount" => 0],
-            ["type" => "Waste Disposal", "amount" => 0],
-            ["type" => "Tv Cable", "amount" => 0],
-            ["type" => "Mosque / Prayer", "amount" => 0],
-            ["type" => "Water Tanker", "amount" => 0],
-            ["type" => "Mason / Brickwork", "amount" => 0],
-            ["type" => "Repairs-Electric", "amount" => 0],
-            ["type" => "Repairs-Plumbing", "amount" => 0],
-            ["type" => "Repairs-Mason", "amount" => 0],
-            ["type" => "Decorative Goods", "amount" => 0],
-            ["type" => "CCTV Maintenance", "amount" => 0],
-            ["type" => "Eid ul Adha Provision" , "amount" => 0],
-            ["type" => "Eid ul Fitr Provision" , "amount" => 0]
-        ];
+        $expenses_types = ExpenseType::all();
 
         $paid_collection_types_total_amount = 0;
         $pending_collection_types_total_amount = 0;
@@ -87,15 +62,19 @@ class SummaryController extends Controller
         ];
 
 
-        foreach($expenses_types as $index => $expenses_type){
-            $amount = Expense::whereMonth('paid_date', $currentMonth)->where('type', $expenses_type['type'])->where('amount', '!=', 0)->where('status' , 'Paid')->sum('amount');
-            $expenses_types[$index]['amount'] = $amount;
+        foreach($expenses_types as $expenses_type){
+            $amount = Expense::whereMonth('paid_date', $currentMonth)->where('type', $expenses_type->name)->where('amount', '!=', 0)->where('status' , 'Paid')->sum('amount');
+            $expenses_type->amount = $amount;
             $expenses_types_total_amount += $amount;
         }
 
-        usort($expenses_types, function($a, $b) {
+        $expenses_types_array = $expenses_types->toArray();
+
+        usort($expenses_types_array, function($a, $b) {
             return $b['amount'] <=> $a['amount'];
         });
+
+        $sorted_expenses_types = collect($expenses_types_array);
 
 
         foreach($collection_types as $index => $collection_type){
@@ -133,7 +112,7 @@ class SummaryController extends Controller
             $collection_types_total_amount_advance += $amount;
         }
 
-        return view("dashboard.summary.listing" , compact("collection_types_advance", "collection_types_total_amount_advance","collection_types_arrears", "collection_types_total_amount_arrears", "expenses_types" , "expenses_types_total_amount" , "collection_types" , "paid_collection_types_total_amount" , "pending_collection_types_total_amount", "date", "opening_balance"));
+        return view("dashboard.summary.listing" , compact("collection_types_advance", "collection_types_total_amount_advance","collection_types_arrears", "collection_types_total_amount_arrears", "sorted_expenses_types" , "expenses_types_total_amount" , "collection_types" , "paid_collection_types_total_amount" , "pending_collection_types_total_amount", "date", "opening_balance"));
     }
 
     /**

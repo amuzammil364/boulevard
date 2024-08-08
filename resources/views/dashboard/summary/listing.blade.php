@@ -202,7 +202,7 @@ body .bg-monogram{
                     </thead>
                     <tbody>
 
-                        @if (count($expenses_types) === 0)
+                        @if (count($sorted_expenses_types) === 0)
 
                         <tr class="border-b dark:border-gray-700">
                             <td colspan="5" scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center">No Data</th>
@@ -210,13 +210,13 @@ body .bg-monogram{
 
                         @else
 
-                        @foreach ($expenses_types as $index => $expense_type )
+                        @foreach ($sorted_expenses_types as $index => $expense_type )
 
                             @if($expense_type["amount"] != 0)
 
                             <tr class="border-b dark:border-gray-700">
                                 <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $index+1 }}</th>
-                                <td class="px-4 py-3">{{ $expense_type["type"] }}</td>
+                                <td class="px-4 py-3">{{ $expense_type["name"] }}</td>
                                 <td class="px-4 py-3">{{ $expense_type["amount"] }}</td>
                             </tr>
 

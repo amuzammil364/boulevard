@@ -14,31 +14,9 @@
                             <label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type <span class="text-red-600">*</span></label>
                             <select id="type" name="type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                 <option value="">Select Type</option>
-                                <option value="Salary" {{ (old("type") == "Salary" ? "selected" : "") }}>Salary</option>
-                                <option value="Utility" {{ (old("type") == "Utility" ? "selected" : "") }}>Utility</option>
-                                <option value="Repairs" {{ (old("type") == "Repairs" ? "selected" : "") }}>Repairs</option>
-                                <option value="Welfare" {{ (old("type") == "Welfare" ? "selected" : "") }}>Welfare</option>
-                                <option value="Misc" {{ (old("type") == "Misc" ? "selected" : "") }}>Misc</option>                                
-                                <option value="KElectric" {{ (old("type") == "KElectric" ? "selected" : "") }}>KElectric</option>                                
-                                <option value="KWSB" {{ (old("type") == "KWSB" ? "selected" : "") }}>KWSB</option>                                
-                                <option value="SSGC" {{ (old("type") == "SSGC" ? "selected" : "") }}>SSGC</option>                                
-                                <option value="Cleaning Supplies" {{ (old("type") == "Cleaning Supplies" ? "selected" : "") }}>Cleaning Supplies</option>                                
-                                <option value="Office Supplies" {{ (old("type") == "Office Supplies" ? "selected" : "") }}>Office Supplies</option>                                
-                                <option value="Electrical Supplies" {{ (old("type") == "Electrical Supplies" ? "selected" : "") }}>Electrical Supplies</option>                                
-                                <option value="Plumbing Supplies" {{ (old("type") == "Plumbing Supplies" ? "selected" : "") }}>Plumbing Supplies</option>                                
-                                <option value="Goods Material" {{ (old("type") == "Goods Material" ? "selected" : "") }}>Goods Material</option>                                
-                                <option value="Waste Disposal" {{ (old("type") == "Waste Disposal" ? "selected" : "") }}>Waste Disposal</option>                                
-                                <option value="Tv Cable" {{ (old("type") == "Tv Cable" ? "selected" : "") }}>Tv Cable</option>                                
-                                <option value="Mosque / Prayer" {{ (old("type") == "Mosque / Prayer" ? "selected" : "") }}>Mosque / Prayer</option>                                
-                                <option value="Water Tanker" {{ (old("type") == "Water Tanker" ? "selected" : "") }}>Water Tanker</option>                                
-                                <option value="Mason / Brickwork" {{ (old("type") == "Mason / Brickwork" ? "selected" : "") }}>Mason / Brickwork</option>                                
-                                <option value="Repairs-Electric" {{ (old("type") == "Repairs-Electric" ? "selected" : "") }}>Repairs-Electric</option>                                
-                                <option value="Repairs-Plumbing" {{ (old("type") == "Repairs-Plumbing" ? "selected" : "") }}>Repairs-Plumbing</option>                                
-                                <option value="Repairs-Mason" {{ (old("type") == "Repairs-Mason" ? "selected" : "") }}>Repairs-Mason</option>                                
-                                <option value="Decorative Goods" {{ (old("type") == "Decorative Goods" ? "selected" : "") }}>Decorative Goods</option>                                
-                                <option value="CCTV Maintenance" {{ (old("type") == "CCTV Maintenance" ? "selected" : "") }}>CCTV Maintenance</option>                                
-                                <option value="Eid ul Adha Provision" {{ (old("type") == "Eid ul Adha Provision" ? "selected" : "") }}>Eid ul Adha Provision</option>                                
-                                <option value="Eid ul Fitr Provision" {{ (old("type") == "Eid ul Fitr Provision" ? "selected" : "") }}>Eid ul Fitr Provision</option>                                
+                                @foreach ($expense_types as $expense_type)
+                                    <option value="{{ $expense_type->name }}" {{ (old("type") == $expense_type->name ? "selected" : "") }}>{{ $expense_type->name }}</option>
+                                @endforeach
                             </select>
                             @error("type")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>

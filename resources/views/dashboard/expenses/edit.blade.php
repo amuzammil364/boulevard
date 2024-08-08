@@ -16,33 +16,11 @@
                             <label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type <span class="text-red-600">*</span></label>
                             <select id="type" name="type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                 <option value="">Select Type</option>
-                                <option value="Salary" {{ $expense->type == "Salary" ? "selected" : "" }}>Salary</option>
-                                <option value="Utility" {{ $expense->type == "Utility" ? "selected" : "" }}>Utility</option>
-                                <option value="Repairs" {{ $expense->type == "Repairs" ? "selected" : "" }}>Repairs</option>
-                                <option value="Welfare" {{ $expense->type == "Welfare" ? "selected" : "" }}>Welfare</option>
-                                <option value="Misc" {{ $expense->type == "Misc" ? "selected" : "" }}>Misc</option>   
-                                <option value="KElectric" {{ ($expense->type == "KElectric" ? "selected" : "") }}>KElectric</option>                                
-                                <option value="KWSB" {{ ($expense->type == "KWSB" ? "selected" : "") }}>KWSB</option>                                
-                                <option value="SSGC" {{ ($expense->type == "SSGC" ? "selected" : "") }}>SSGC</option>                                
-                                <option value="Cleaning Supplies" {{ ($expense->type == "Cleaning Supplies" ? "selected" : "") }}>Cleaning Supplies</option>                                
-                                <option value="Office Supplies" {{ ($expense->type == "Office Supplies" ? "selected" : "") }}>Office Supplies</option>                                
-                                <option value="Electrical Supplies" {{ ($expense->type == "Electrical Supplies" ? "selected" : "") }}>Electrical Supplies</option>                                
-                                <option value="Plumbing Supplies" {{ ($expense->type == "Plumbing Supplies" ? "selected" : "") }}>Plumbing Supplies</option>                                
-                                <option value="Goods Material" {{ ($expense->type == "Goods Material" ? "selected" : "") }}>Goods Material</option>
-                                <option value="Waste Disposal" {{ ($expense->type == "Waste Disposal" ? "selected" : "") }}>Waste Disposal</option>                                
-                                <option value="Tv Cable" {{ ($expense->type == "Tv Cable" ? "selected" : "") }}>Tv Cable</option>                                
-                                <option value="Mosque / Prayer" {{ ($expense->type == "Mosque / Prayer" ? "selected" : "") }}>Mosque / Prayer</option>                                
-                                <option value="Water Tanker" {{ ($expense->type == "Water Tanker" ? "selected" : "") }}>Water Tanker</option>                                
-                                <option value="Mason / Brickwork" {{ ($expense->type == "Mason / Brickwork" ? "selected" : "") }}>Mason / Brickwork</option>                                
-                                <option value="Repairs-Electric" {{ ($expense->type == "Repairs-Electric" ? "selected" : "") }}>Repairs-Electric</option>                                
-                                <option value="Repairs-Plumbing" {{ ($expense->type == "Repairs-Plumbing" ? "selected" : "") }}>Repairs-Plumbing</option>                                
-                                <option value="Repairs-Mason" {{ ($expense->type == "Repairs-Mason" ? "selected" : "") }}>Repairs-Mason</option>                          
-                                <option value="Decorative Goods" {{ ($expense->type == "Decorative Goods" ? "selected" : "") }}>Decorative Goods</option>                          
-                                <option value="CCTV Maintenance" {{ ($expense->type == "CCTV Maintenance" ? "selected" : "") }}>CCTV Maintenance</option>                          
-                                <option value="Eid ul Adha Provision" {{ ($expense->type == "Eid ul Adha Provision" ? "selected" : "") }}>Eid ul Adha Provision</option>                                
-                                <option value="Eid ul Fitr Provision" {{ ($expense->type == "Eid ul Fitr Provision" ? "selected" : "") }}>Eid ul Fitr Provision</option>                                
+                                @foreach ($expense_types as $expense_type)
+                                    <option value="{{ $expense_type->name }}" {{ ($expense->type == $expense_type->name ? "selected" : "") }}>{{ $expense_type->name }}</option>
+                                @endforeach
                             </select>
-                            @error("status")
+                            @error("type")
                                 <span class="text-red-700 text-sm">{{ $message }}</span>
                             @enderror
                         </div>

@@ -56,31 +56,9 @@
                         <div class="col-span-1 sm:col-span-1">
                             <select id="type" name="type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                 <option value="">Select Type</option>
-                                <option value="Salary" {{ $filters->type == "Salary"  ? "selected" : ""}}>Salary</option>
-                                <option value="Utility" {{ $filters->type == "Utility"  ? "selected" : ""}}>Utility</option>
-                                <option value="Repairs" {{ $filters->type == "Repairs"  ? "selected" : ""}}>Repairs</option>
-                                <option value="Welfare" {{ $filters->type == "Welfare"  ? "selected" : ""}}>Welfare</option>
-                                <option value="Misc" {{ $filters->type == "Misc"  ? "selected" : ""}}>Misc</option>
-                                <option value="KElectric" {{ ($filters->type == "KElectric" ? "selected" : "") }}>KElectric</option>                                
-                                <option value="KWSB" {{ ($filters->type == "KWSB" ? "selected" : "") }}>KWSB</option>                                
-                                <option value="SSGC" {{ ($filters->type == "SSGC" ? "selected" : "") }}>SSGC</option>                                
-                                <option value="Cleaning Supplies" {{ ($filters->type == "Cleaning Supplies" ? "selected" : "") }}>Cleaning Supplies</option>                                
-                                <option value="Office Supplies" {{ ($filters->type == "Office Supplies" ? "selected" : "") }}>Office Supplies</option>                                
-                                <option value="Electrical Supplies" {{ ($filters->type == "Electrical Supplies" ? "selected" : "") }}>Electrical Supplies</option>                                
-                                <option value="Plumbing Supplies" {{ ($filters->type == "Plumbing Supplies" ? "selected" : "") }}>Plumbing Supplies</option>                                
-                                <option value="Goods Material" {{ ($filters->type == "Goods Material" ? "selected" : "") }}>Goods Material</option>
-                                <option value="Waste Disposal" {{ ($filters->type == "Waste Disposal" ? "selected" : "") }}>Waste Disposal</option>                                
-                                <option value="Tv Cable" {{ ($filters->type == "Tv Cable" ? "selected" : "") }}>Tv Cable</option>                                
-                                <option value="Mosque / Prayer" {{ ($filters->type == "Mosque / Prayer" ? "selected" : "") }}>Mosque / Prayer</option>                                
-                                <option value="Water Tanker" {{ ($filters->type == "Water Tanker" ? "selected" : "") }}>Water Tanker</option>                                
-                                <option value="Mason / Brickwork" {{ ($filters->type == "Mason / Brickwork" ? "selected" : "") }}>Mason / Brickwork</option>                                
-                                <option value="Repairs-Electric" {{ ($filters->type == "Repairs-Electric" ? "selected" : "") }}>Repairs-Electric</option>                                
-                                <option value="Repairs-Plumbing" {{ ($filters->type == "Repairs-Plumbing" ? "selected" : "") }}>Repairs-Plumbing</option>                                
-                                <option value="Repairs-Mason" {{ ($filters->type == "Repairs-Mason" ? "selected" : "") }}>Repairs-Mason</option> 
-                                <option value="Decorative Goods" {{ ($filters->type == "Decorative Goods" ? "selected" : "") }}>Decorative Goods</option> 
-                                <option value="CCTV Maintenance" {{ ($filters->type == "CCTV Maintenance" ? "selected" : "") }}>CCTV Maintenance</option>  
-                                <option value="Eid ul Adha Provision" {{ ($filters->type == "Eid ul Adha Provision" ? "selected" : "") }}>Eid ul Adha Provision</option>                                
-                                <option value="Eid ul Fitr Provision" {{ ($filters->type == "Eid ul Fitr Provision" ? "selected" : "") }}>Eid ul Fitr Provision</option>                                                              
+                                @foreach ($expense_types as $expense_type)
+                                    <option value="{{ $expense_type->name }}" {{ ($filters->type == $expense_type->name ? "selected" : "") }}>{{ $expense_type->name }}</option>
+                                @endforeach
                             </select>
                         </div>
 

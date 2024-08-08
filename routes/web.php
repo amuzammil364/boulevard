@@ -15,6 +15,7 @@ use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\DefaultersController;
 use App\Http\Controllers\PrintReceiptController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ExpenseTypeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -107,6 +108,16 @@ Route::middleware(["loggedIn"])->group(function () {
     Route::post("/dashboard/expenses/add", [ExpensesController::class, "store"])->name("add_expense")->middleware(["role:1"]);
     Route::delete("/dashboard/expenses/delete", [ExpensesController::class, "destroy"])->name("delete_expense")->middleware(["role:1"]);
     Route::put("/dashboard/expenses/edit", [ExpensesController::class, "update"])->name("edit_expense")->middleware(["role:1"]);
+
+     // ====== Expense Types Routes ======
+    // ==========================
+    //-- Page View Routes
+    Route::get('/dashboard/expense-types', [ExpenseTypeController::class, "index"])->middleware(["role:1"]);
+    Route::get('/dashboard/expense-types/add', [ExpenseTypeController::class, "createPage"])->middleware(["role:1"]);
+    Route::get('/dashboard/expense-types/edit/{id}', [ExpenseTypeController::class, "editPage"])->middleware(["role:1"]);
+    //-- Data Management Routes
+    Route::post("/dashboard/expense-types/add", [ExpenseTypeController::class, "store"])->name("add_expense_type")->middleware(["role:1"]);
+    Route::put("/dashboard/expense-types/edit", [ExpenseTypeController::class, "update"])->name("edit_expense_type")->middleware(["role:1"]);
 
     // ====== Employees Routes ======
     // ==========================

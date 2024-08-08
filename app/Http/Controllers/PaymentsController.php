@@ -200,16 +200,16 @@ class PaymentsController extends Controller
 
     public function generate_payments(Request $request){
 
-        $check_record_collection = RecordCollection::whereMonth("payment_month" , date('m' , strtotime($request->payment_month)))->whereYear("payment_month" , date('Y'))->first();
+        // $check_record_collection = RecordCollection::whereMonth("payment_month" , date('m' , strtotime($request->payment_month)))->whereYear("payment_month" , date('Y'))->first();
 
-        if(!$check_record_collection){
+        // if(!$check_record_collection){
 
-            $record_collection = new RecordCollection();
+            // $record_collection = new RecordCollection();
 
-            $record_collection->recorded = true;
-            $record_collection->payment_month = date('Y-m-d');
+            // $record_collection->recorded = true;
+            // $record_collection->payment_month = date('Y-m-d');
 
-            $record_collection->save();
+            // $record_collection->save();
             
             $flats = Flat::all();
             
@@ -228,11 +228,12 @@ class PaymentsController extends Controller
             }
             $receipt_id = str_pad($receipt_id, 4, '0', STR_PAD_LEFT);
 
-            foreach($flats as $index => $flat){
+            foreach ($flats as $index => $flat) {
+                $paymentExists = Payment::where("flat_id", $flat->id)
+                    ->where("payment_month", date("Y-m"))
+                    ->exists();
 
-                $payment = Payment::where("flat_id" , $flat->id)->where("payment_month" , date("m"))->get();
-
-                // if(!count($payment) > 0){                
+                if (!$paymentExists) {
                     $payment_id = uniqid();
 
                     $payment = new Payment();
@@ -243,21 +244,22 @@ class PaymentsController extends Controller
                     $payment->amount = $request->amount;
                     $payment->mode_of_payment = "Cash";
                     $payment->receipt_id = $receipt_id;
-                    $payment->payment_month = date("Y-m-d" , strtotime($request->payment_month));
+                    $payment->payment_month = date("Y-m-d", strtotime($request->payment_month));
                     $payment->due_date = $due_date;
 
                     $payment->save();
 
                     $receipt_id++;
                     $receipt_id = str_pad($receipt_id, 4, '0', STR_PAD_LEFT);
-                // }
+                }
             }
+            
         return redirect("/dashboard/payments")->with("success" , "SuccessFully Collections Generated!");
 
-        }
-        else{
-            return redirect("/dashboard/payments")->with("fail" , "Collections are Already Generated!");
-        }
+        // }
+        // else{
+        //     return redirect("/dashboard/payments")->with("fail" , "Collections are Already Generated!");
+        // }
 
     }
 
