@@ -413,8 +413,8 @@ body .bg-monogram{
             </tr>
 
             <tr>
-                <th class="border border-black py-2 px-6 w-2/4">Total Income</th>
-                <td class="border border-black py-2 px-6 w-2/4">{{ number_format($opening_balance + $collection_types_total_amount_advance + $paid_collection_types_total_amount +  $collection_types_total_amount_arrears)}} PKR</td>
+                <th class="border border-black py-2 px-6 w-2/4">Total Collection</th>
+                <td class="border border-black py-2 px-6 w-2/4">{{ number_format($collection_types_total_amount_advance + $paid_collection_types_total_amount +  $collection_types_total_amount_arrears)}} PKR</td>
             </tr>
              <tr>
                 <th class="border border-black py-2 px-6 w-2/4">Total Expense</th>
