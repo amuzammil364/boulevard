@@ -10,6 +10,11 @@
             <span class="font-medium">{{ Session::get("success") }}</span>
         </div>
     @endif
+    @if (Session::has("error"))
+        <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+            <span class="font-medium">{{ Session::get("error") }}</span>
+        </div>
+    @endif
 
         <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 rounded-md">
             <div class="overflow-x-auto">

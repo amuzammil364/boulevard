@@ -11,10 +11,10 @@ body{
 
 body .bg-monogram{
     position: absolute;
-    top: 0;
+    top: 17%;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 58%;
     background-image: url("/images/logo-vertical.png");
     background-size: cover;
     background-position: center;
