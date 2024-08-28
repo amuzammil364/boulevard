@@ -17,30 +17,22 @@
         <p style="font-size: 0.875rem; line-height: 1.25rem; margin: 0; font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; color: #000;">Scheme No.36 Fl-11/12, Block 15, Gulistan-e-jauhar</p>
     </div>
     <div style="padding-top: 2.25rem; padding-left: 3rem; padding-right: 3rem;">
-    <table style="font-size: 0.875rem; line-height: 1.25rem; text-align: left; width: 100%; border-collapse: collapse; font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">
+    <div style="display: flex; align-items: flex-start;">    
+    <table style="font-size: 0.875rem; line-height: 1.25rem; text-align: left; width: 50%; border-collapse: collapse; font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">
         <thead style="color: #000; text-transform: uppercase;">
             <tr>
                 <th scope="col" class="" style="color: #000;">
                     <strong style="font-weight: bolder; color: rgba(25, 182, 175, 1);">Month:</strong> {{ $data['month'] }}
-                </th>
-                <th scope="col" class="" style="color: #000;">
-                    <strong style="font-weight: bolder; color: rgba(25, 182, 175, 1);">Date:</strong> {{ $data['date'] }}
                 </th>
             </tr>
             <tr>
                 <th scope="col" class="" style="color: #000;">
                     <strong style="font-weight: bolder; color: rgba(25, 182, 175, 1);">Flat:</strong> {{ $data['flat'] }}
                 </th>
-                <th scope="col" class="" style="color: #000;">
-                    <strong style="font-weight: bolder; color: rgba(25, 182, 175, 1);">Receipt ID:</strong> {{ $data['receipt_id'] }}
-                </th>
             </tr>
             <tr class="">
-                <th scope="col" class="" style="color: #000;">
+                <th scope="col" class="" style="color: #000; vertical-align: top; padding-bottom: 0; margin-bottom: 0;">
                     <strong style="font-weight: bolder; color: rgba(25, 182, 175, 1);">Phase:</strong>  {{ $data['phase'] }}
-                </th>
-                <th scope="col" class="" style="color: #000;">
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?data={{ url("/dashboard/view-receipt?pid=$payment_id") }}&amp;size=100x100" alt="" title="">
                 </th>
             </tr>
         </thead>
@@ -65,6 +57,26 @@
             </tr>
         </tbody>
     </table>
+    <table style="font-size: 0.875rem; line-height: 1.25rem; text-align: left; width: 50%; border-collapse: collapse; font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; padding-left: 46px; display: inline-block;">
+        <thead style="color: #000; text-transform: uppercase;">
+            <tr>
+                <th scope="col" class="" style="color: #000;">
+                    <strong style="font-weight: bolder; color: rgba(25, 182, 175, 1);">Date:</strong> {{ $data['date'] }}
+                </th>
+            </tr>
+            <tr>
+                <th scope="col" class="" style="color: #000;">
+                    <strong style="font-weight: bolder; color: rgba(25, 182, 175, 1);">Receipt ID:</strong> {{ $data['receipt_id'] }}
+                </th>
+            </tr>
+            <tr class="">
+                <th scope="col" class="" style="color: #000; vertical-align: top; height: 100px; padding-bottom: 0; margin-bottom: 0; margin-top: 10px; display: inline-block;">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?data={{ url('/dashboard/view-receipt?pid=$payment_id') }}&amp;size=100x100" alt="" title="" style="height: 100px; width: 100px; padding-bottom: 0; margin-bottom: 0;">
+                </th>
+            </tr>
+        </thead>
+    </table>
+    </div>
     <table style="margin-top: 1rem; font-size: 0.875rem; line-height: 1.25rem;text-align: left; width: 100%; border-collapse: collapse; font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">
         <thead>
             <tr>
@@ -81,7 +93,7 @@
                 @foreach ($data['receipt_items'] as $key=>$value)
                 <tr>
                     <th style="text-transform: uppercase; font-weight: 700; font-size: 0.75rem; line-height: 1rem; padding-top: 0.5rem; padding-bottom: 0.5rem; padding-left: 1.5rem; padding-right: 1.5rem; border: 1px solid #6B7280; color: #000;">
-                        {{ $key }}
+                        <strong>{{ $key }}</strong> <span style="font-weight: 500;"> <small>( {{ $data['month'] }} )</small>  </span>
                     </th>
                     <td style="text-transform: uppercase; font-size: 0.75rem; line-height: 1rem; padding-top: 0.5rem; padding-bottom: 0.5rem; padding-left: 1.5rem; padding-right: 1.5rem; border: 1px solid #6B7280; color: #000;">{{ $value }} PKR</td>
                 </tr>

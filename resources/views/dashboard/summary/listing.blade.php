@@ -84,8 +84,9 @@ body .bg-monogram{
 
             .total-calculation-table th,
             .total-calculation-table td{
-                padding: 6px 10px;
+                padding: 4px 10px;
                 margin: 0;
+                text-align: center;
             }
 
             .printable_summary_date{
@@ -130,12 +131,13 @@ body .bg-monogram{
             }
 
             .total-calculation-table tr th{
-                font-size: 18px;
+                font-size: 22px;
                 font-weight: bold;
             }
 
             .total-calculation-table tr td{
-                font-size: 18px;
+                font-size: 22px;
+                font-weight: bold;
             }
 
         }
@@ -182,7 +184,8 @@ body .bg-monogram{
     </div> --}}
 
     <div class="printable_summary_date hidden mt-8">
-        <h2 class="font-bold text-xl text-center">{{ date("F , Y" , strtotime($date)) }}</h2>
+        <h2 class="font-bold text-2xl text-center">Safari Boulevard Data Management System</h2>
+        <h2 class="font-bold text-2xl text-center">Balance Sheet for {{ date("F  Y" , strtotime($date)) }}</h2>
     </div>
 
     <div class="flex flex-col md:flex-row justify-between flex-wrap space-y-3 md:space-y-0 py-4" id="printable-section">

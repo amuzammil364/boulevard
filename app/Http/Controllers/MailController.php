@@ -50,17 +50,17 @@ class MailController extends Controller
 
         $payment_id = $payment->payment_id;
 
-        // if (!isset($payment->flat->residents[0])) {
-        //     return redirect()->back()->with("error", "Resident information is missing.");
-        // }
+        if (!isset($payment->flat->residents[0])) {
+            return redirect()->back()->with("error", "Resident information is missing.");
+        }
 
         $recipient = $payment->flat->residents[0]->email;
 
-        // if (empty($recipient)) {
-        //     return redirect()->back()->with("error", "Recipient email address is missing.");
-        // }
+        if (empty($recipient)) {
+            return redirect()->back()->with("error", "Recipient email address is missing.");
+        }
 
-        Mail::to("abdulsaqib2111d@aptechsite.net")->send(new SendReceiptEmail($data, $total, $payment_id));
+        Mail::to($recipient)->send(new SendReceiptEmail($data, $total, $payment_id));
         return redirect()->back()->with("success", "Receipt has been sent successfully");
     }
 
