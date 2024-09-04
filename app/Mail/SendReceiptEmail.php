@@ -34,7 +34,7 @@ class SendReceiptEmail extends Mailable
     {
         return new Envelope(
             subject: 'Boulevard Receipt',
-            from: new Address('admin@divistack.com', 'Boulevard Receipt'),
+            from: new Address('no-reply@safariboulevard.pk', 'Boulevard Receipt'),
         );
     }
 
