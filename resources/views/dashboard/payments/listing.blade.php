@@ -119,7 +119,7 @@
                         @if ($payments->isEmpty())
 
                         <tr class="border-b dark:border-gray-700">
-                            <td colspan="5" scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center">No Data</th>
+                            <td colspan="8" scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center">No Data</th>
                         </tr>
 
                         @else
