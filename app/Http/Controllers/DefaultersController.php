@@ -26,7 +26,7 @@ class DefaultersController extends Controller
 
         $monthRange = CarbonPeriod::create($startMonth, '1 month', $endMonth);
 
-        foreach($monthRange as $month){
+        foreach ($monthRange as $month) {
             $key = $month->format("M Y");
 
             if (!isset($collectionTypesTotal[$key])) {
@@ -37,27 +37,28 @@ class DefaultersController extends Controller
                 ];
             }
 
-            $amount = Payment::whereMonth("payment_month", $month->format("m"))->where("type", $type)->where('status', 'Pending')->sum("amount");
-            
-            $count = Payment::whereMonth("payment_month", $month->format("m"))->where("type", $type)->where('status', 'Pending')->count();
-            
+            $amount = Payment::whereMonth("payment_month", $month->format("m"))->whereYear("payment_month", $month->format("Y"))->where("type", $type)->where('status', 'Pending')->sum("amount");
+
+            $count = Payment::whereMonth("payment_month", $month->format("m"))->whereYear("payment_month", $month->format("Y"))->where("type", $type)->where('status', 'Pending')->count();
+
             $collectionTypesTotal[$key]['amount'] += $amount;
             $collectionTypesTotal[$key]['number_of_rows'] += $count;
         }
 
         $fromDate = Carbon::createFromFormat('Y-m', $from_date)->startOfMonth();
         $toDate = Carbon::createFromFormat('Y-m', $to_date)->endOfMonth();
-        
-        $flats = Flat::with(['payments' => function($query) use ($fromDate, $toDate , $type) { 
-            $query->whereBetween('payment_month', [$fromDate, $toDate])->where("type" , $type)->where('status', 'Pending')->orderBy("payment_month" , "DESC");}, 'residents'])->get();
 
-        $flats = $flats->filter(function($flat) {
+        $flats = Flat::with(['payments' => function ($query) use ($fromDate, $toDate, $type) {
+            $query->whereBetween('payment_month', [$fromDate, $toDate])->where("type", $type)->where('status', 'Pending')->orderBy("payment_month", "DESC");
+        }, 'residents'])->get();
+
+        $flats = $flats->filter(function ($flat) {
             $totalAmount = $flat->payments->sum('amount');
             $flat->totalAmount = $totalAmount;
             return $totalAmount > 0;
         });
 
-        return view("dashboard.defaulters.listing" , compact("from_date" , "to_date" , "flats" , "type" , "collectionTypesTotal"));
+        return view("dashboard.defaulters.listing", compact("from_date", "to_date", "flats", "type", "collectionTypesTotal"));
     }
 
 
